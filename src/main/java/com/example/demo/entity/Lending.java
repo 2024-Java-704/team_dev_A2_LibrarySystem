@@ -30,11 +30,11 @@ public class Lending {
 	@Column(name = "returned_date")
 	private LocalDate returnedDate;
 	@ManyToOne
-	@JoinColumn(name = "resavation_id")
-	private Resavation resavation;
+	@JoinColumn(name = "reservation_id")
+	private Reservation reservation;
 	@ManyToOne
 	@JoinColumn(name = "staff_id")
-	private Staff staff;
+	private LibraryStaff staff;
 
 	public Lending() {
 
@@ -45,13 +45,13 @@ public class Lending {
 		this.book = book;
 	}
 
-	public Lending(Integer id, User user, Book book, LocalDate lendDate, LocalDate returnedDate, Resavation resavation,
-			Staff staff) {
+	public Lending(Integer id, User user, Book book, LocalDate lendDate, LocalDate returnedDate, Reservation reservation,
+			LibraryStaff staff) {
 		this.user = user;
 		this.book = book;
 		this.lendDate = lendDate;
 		this.returnedDate = returnedDate;
-		this.resavation = resavation;
+		this.reservation = reservation;
 		this.staff = staff;
 
 	}
@@ -80,11 +80,11 @@ public class Lending {
 		return returnedDate;
 	}
 
-	public Resavation getResavation() {
-		return resavation;
+	public Reservation getResavation() {
+		return reservation;
 	}
 
-	public Staff getStaff() {
+	public LibraryStaff getStaff() {
 		return staff;
 	}
 }

@@ -61,11 +61,11 @@ public class Book {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Categories getCategories() {
-		return categories;
+	public Category getCategories() {
+		return category;
 	}
-	public void setCategories(Categories categories) {
-		this.categories = categories;
+	public void setCategories(Category category) {
+		this.category = category;
 	}
 	public String getTitle() {
 		return title;
