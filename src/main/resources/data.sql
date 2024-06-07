@@ -25,9 +25,9 @@ INSERT INTO status(name) VALUES('貸出済み');
 INSERT INTO condition(name) VALUES('貸出可');
 INSERT INTO condition(name) VALUES('貸出不可');
 --利用者テーブルデータ
-INSERT INTO user(name,email,address,tel,password) VALUES('田中太郎','tanaka@mail.com','東京都大田区','090-1111-5555','aaa');
-INSERT INTO user(name,email,address,tel,password) VALUES('橋本一郎','hasimoto@mail.com','東京都港区','090-1111-6666','bbb');
-INSERT INTO user(name,email,address,tel,password) VALUES('佐藤二郎','satou@mail.com','東京都文京区','090-1111-7777','ccc');
+INSERT INTO users(name,email,address,tel,password) VALUES('田中太郎','tanaka@mail.com','東京都大田区','090-1111-5555','aaa');
+INSERT INTO users(name,email,address,tel,password) VALUES('橋本一郎','hasimoto@mail.com','東京都港区','090-1111-6666','bbb');
+INSERT INTO users(name,email,address,tel,password) VALUES('佐藤二郎','satou@mail.com','東京都文京区','090-1111-7777','ccc');
 --図書館職員テーブルデータ
 INSERT INTO library_staff(library_id,name,email,password) VALUES(1,'田中花子','tanaka@mail.com','ddd');
 INSERT INTO library_staff(library_id,name,email,password) VALUES(2,'加藤三郎','katou@mail.com','eee');
