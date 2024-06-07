@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>利用者編集</title>
+</head>
+<body>
+	<h1>利用者編集フォーム</h1>
+	<form>
+		<table border="1">
+			<tr>
+				<th>利用者ID</th>
+				<td>
+					userテーブルからIDを出力
+				</td>
+			</tr>
+			<tr>
+				<th>名前</th>
+				<td>
+					<input type="text" name="">
+					th:valueでテーブルからnameを出力
+				</td>
+			</tr>
+			<tr>
+				<th>メールアドレス</th>
+				<td>
+					<input type="text" name="">
+					th:valueでテーブルからemailを出力
+				</td>
+			</tr>
+			<tr>
+				<th>住所</th>
+				<td>
+					<input type="text" name="">
+					th:valueでテーブルからaddressを出力
+				</td>
+			</tr>
+			<tr>
+				<th>電話番号</th>
+				<td>
+					<input type="text" name="">
+					th:valueでテーブルからtelを出力
+				</td>
+			</tr>
+			<tr>
+				<th>パスワード</th>
+				<td>
+					<input type="text" name="">
+					th:valueでテーブルからpasswordを出力
+				</td>
+			</tr>
+		</table>
+		<button>更新へ</button>
+		（更新完了のポップアップ表示後userList.htmlを表示）
+	</form>
+	<a href="">戻る(userList.htmlへ）</a>
+</body>
+</html>
