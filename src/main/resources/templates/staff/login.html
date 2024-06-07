@@ -6,6 +6,9 @@
 </head>
 <body>
 	<h1>ログイン</h1>
+	<a th:if="${errorList1}">
+		<ul th:each="error:${errorList1}" th:text="${error}"></ul>
+	</a>
 	<form action="/staff/login" method="post">
 		<input type="text" name="email" placeholder="メールアドレス">
 		<br>
