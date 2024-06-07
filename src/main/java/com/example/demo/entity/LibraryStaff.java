@@ -1,7 +1,5 @@
 package com.example.demo.entity;
 
-import org.apache.tomcat.jni.Library;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
