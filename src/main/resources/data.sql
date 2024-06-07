@@ -16,3 +16,14 @@ INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,li
 --図書館テーブルデータ
 INSERT INTO library(name,address,tel) VALUES('港区図書館','東京都港区','03-1111-2222');
 INSERT INTO library(name,address,tel) VALUES('品川区図書館','東京都品川区','03-1111-3333');
+INSERT INTO library(name,address,tel) VALUES('千代田区図書館','東京都千代田区','03-1111-4444');
+--ステータステーブルデータ
+INSERT INTO status(name) VALUES('予約中');
+INSERT INTO status(name) VALUES('予約キャンセル');
+INSERT INTO status(name) VALUES('貸出済み');
+--状態テーブルデータ
+INSERT INTO condition(name) VALUES('貸出可');
+INSERT INTO condition(name) VALUES('貸出不可');
+--利用者テーブルデータ
+INSERT INTO user(name,email,address,tel,password) VALUES('田中太郎','tanaka@mail.com','東京都大田区','090-1111-5555','aaa');
+INSERT INTO user(name,email,address,tel,password) VALUES('佐藤一郎','tanaka@mail.com','東京都大田区','090-1111-5555','aaa');
