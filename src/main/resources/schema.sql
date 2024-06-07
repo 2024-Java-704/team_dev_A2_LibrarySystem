@@ -78,6 +78,6 @@ CREATE TABLE reservation
    book_id INTEGER,
    reservation_date DATE,
    scheduled_date DATE,
-   returned_id INTEGER,
+   reservation_library_id INTEGER,
    status_id INTEGER
 );

@@ -26,4 +26,17 @@ INSERT INTO condition(name) VALUES('貸出可');
 INSERT INTO condition(name) VALUES('貸出不可');
 --利用者テーブルデータ
 INSERT INTO user(name,email,address,tel,password) VALUES('田中太郎','tanaka@mail.com','東京都大田区','090-1111-5555','aaa');
-INSERT INTO user(name,email,address,tel,password) VALUES('佐藤一郎','tanaka@mail.com','東京都大田区','090-1111-5555','aaa');
+INSERT INTO user(name,email,address,tel,password) VALUES('橋本一郎','hasimoto@mail.com','東京都港区','090-1111-6666','bbb');
+INSERT INTO user(name,email,address,tel,password) VALUES('佐藤二郎','satou@mail.com','東京都文京区','090-1111-7777','ccc');
+--図書館職員テーブルデータ
+INSERT INTO library_staff(library_id,name,email,password) VALUES(1,'田中花子','tanaka@mail.com','ddd');
+INSERT INTO library_staff(library_id,name,email,password) VALUES(2,'加藤三郎','katou@mail.com','eee');
+INSERT INTO library_staff(library_id,name,email,password) VALUES(3,'斎藤四郎','saitou@mail.com','fff');
+--図書館管理者テーブルデータ
+INSERT INTO library_manager(name,email,password) VALUES('山田太郎','yamada@mail.com','ggg');
+--貸出テーブルデータ
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,returned_date,reservation_id,staff_id) VALUES(1,1,'2024/05/03','2024/05/10','2024/05/07',1,1);
+--予約テーブルデータ
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,reservation_library_id,status_id) VALUES(1,2,'2024/05/07','2024/05/12',1,1);
+
+
