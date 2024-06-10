@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>職員一覧</title>
+	<meta charset="UTF-8">
+	<title>職員一覧</title>
 </head>
+
 <body>
-		<h1>職員一覧</h1>
-	<a href="/">TOPに戻る</a>
-	<form action="/" method="get">
+	<h1>職員一覧</h1>
+	<a href="/staff/staffMg/staffTop">TOPに戻る</a>
 		<table border="1">
 			<tr>
 				<th>図書館職員ID</th>
-				<th>所属図書館ID</th>
+				<th>所属図書館</th>
 				<th>名前</th>
-				<th>追加</th>
 				<th>変更</th>
 				<th>削除</th>
-				
 			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><button>追加</button></td>
-				<td><button>変更</button></td>
-				<td><button>削除</button></td>
+			<tr th:each="staff : ${staffList}">
+				<td th:text="${staff.id}"></td>
+				<td th:text="${staff.library.name}"></td>
+				<td th:text="${staff.name}"></td>
+				<form th:action="@{/staff/{staffId}/edit(staffId=${staff.id})}" method="Get">
+					<td><button type="submit">変更</button></td>
+				</form>
+				<form id="deleteForm" th:action="@{/staff/{staffId}/delete(staffId=${staff.id})}" method="post">
+					<td><button type="submit">削除</button></td>
+				</form>
 			</tr>
 		</table>
-		
-	</form>
+		<a href="/staff/staffAdd">職員追加</a>
 </body>
+
 </html>
