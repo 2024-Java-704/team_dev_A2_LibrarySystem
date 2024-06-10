@@ -9,61 +9,47 @@
 	<table border="1">
 		<tr>
 			<th>利用者ID</th>
-			<td>
-				userテーブルからIDを出力
-			</td>
+			<td th:text="${user.id}"></td>
 		</tr>
 		<tr>
 			<th>名前</th>
-			<td>
-				テーブルからnameを出力
-			</td>
+			<td th:text="${user.name}"></td>
 		</tr>
 		<tr>
 			<th>メールアドレス</th>
-			<td>
-				テーブルからemailを出力
-			</td>
+			<td th:text="${user.email}"></td>
 		</tr>
 		<tr>
 			<th>住所</th>
-			<td>
-				テーブルからaddressを出力
-			</td>
+			<td th:text="${user.address}"></td>
 		</tr>
 		<tr>
 			<th>電話番号</th>
-			<td>
-				テーブルからtelを出力
-			</td>
+			<td th:text="${user.tel}"></td>
 		</tr>
 		<tr>
 			<th>パスワード</th>
-			<td>
-				テーブルからpasswordを出力
-			</td>
+			<td th:text="${user.password}"></td>
 		</tr>
 	</table>
 	貸出状況
 	<table border="1">
 		<tr>
+			<th>貸出ID</th>
 			<th>本ID</th>
-			<th>名前</th>
+			<th>タイトル</th>
+			<th>貸出日</th>
 			<th>返却予定日</th>
 		</tr>
-		<tr>
-			<td>
-				貸出テーブルから該当利用者の貸出中の本のIDを出力
-			</td>
-			<td>
-				該当利用者の借りた本の名前を出力
-			</td>
-			<td>
-				該当利用者の借りた本の返却日を出力
-			</td>
+		<tr th:each="lending:${lendingList}">
+			<td th:text="${lending.id}"></td>
+			<td th:text="${lending.book.id}"></td>
+			<td th:text="${lending.book.title}"></td>
+			<td th:text="${lending.lendDate}"></td>
+			<td th:text="${lending.limitDate}"></td>
 		</tr>
 	</table>
-	<a href="">利用者一覧(userList.htmlへ)</a>
+	<a href="/staff/staffMg/userList">利用者一覧</a>
 	<br>
 	<a href="">延滞者一覧(delinquentList.htmlへ)</a>
 </body>
