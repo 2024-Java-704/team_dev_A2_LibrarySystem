@@ -33,14 +33,14 @@ public class Book {
 	private Library library;
 	
 	@ManyToOne
-	@JoinColumn(name="conditionId")
+	@JoinColumn(name="condition_id")
 	private Condition condition;
+	private Integer cnt;
+	private String img;
 	
-	public Book() {
-		
-	}
 	
-	public Book(Category category,String title,String hurigana,String author,String publisher,LocalDate pubYear,LocalDate regDay,Library library,Condition condition) {
+	public Book(Integer id,Category category, String title, String hurigana, String author, String publisher, LocalDate pubYear, LocalDate regDay, Condition condition, Library library, String img) {
+		this.id=id;
 		this.category=category;
 		this.title=title;
 		this.hurigana=hurigana;
@@ -48,23 +48,36 @@ public class Book {
 		this.publisher=publisher;
 		this.pubYear=pubYear;
 		this.regDay=regDay;
+		this.condition=condition;
+		this.library=library;
+		this.img=img;
+	}
+	
+	public Book(Category category,String title,String hurigana,String author,String publisher,LocalDate pubYear,Library library,Condition condition,String img) {
+		this.category=category;
+		this.title=title;
+		this.hurigana=hurigana;
+		this.author=author;
+		this.publisher=publisher;
+		this.pubYear=pubYear;
+		this.regDay=LocalDate.now();
 		this.library=library;
 		this.condition=condition;
+		this.img=img;
 	}
 	
 	
-	private Integer cnt;
-	private String img;
+	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Category getCategories() {
+	public Category getCategory() {
 		return category;
 	}
-	public void setCategories(Category category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 	public String getTitle() {

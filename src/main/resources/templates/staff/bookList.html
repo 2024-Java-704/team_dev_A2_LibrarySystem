@@ -1,60 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>本一覧</title>
+	<meta charset="UTF-8">
+	<title>本一覧</title>
 </head>
+
 <body>
 	<h1>本一覧</h1>
+
+	<button>50音順</button>
+	<button>人気順</button>
+	<button>出版年順</button>
+	<a href="/staff/materialMg/create">資料登録</a>
+	<a href="/">戻る</a>
 	
-	<button>50音順</butto>
-	<button>人気順</butto>
-	<button>出版年順</butto>
 
-<table border="1">
-		<tr>
-			<th>
-				ID
-			</th>
-			<th>
-				分類番号
-			</th>
-			<th>
-				タイトル
-			</th>
-			<th>
-				著者名
-			</th>
-			<th>
-				出版社
-			</th>
-			<th>
-				出版日
-			</th>
-			<th>
-				詳細
-			</th>
-			<th>
-				更新
-			</th>
-			<th>
-				削除
-			</th>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td><button>詳細</butto></td>
-			<td><button>更新</button></td>
-			<td><button>削除</button></td>
-		</tr>
+	<table border="1">
+		<tr th:each="book:${bookList}">
+			<td th:text="${book.id}"></td>
+			<td th:text="${book.category.categoryNum}"></td>
+			<a href="/">
+				<td th:text="${book.title}"></td>
+			</a>
+			<td th:text="${book.author}"></td>
+			<td th:text="${book.publisher}"></td>
+			<td>
+				<form th:action="@{/admin/items/{itemId}/edit(itemId=${item.id})}" method="get">
+					<button>更新</button>
+				</form>
+			</td>
+			<td>
+				<form th:action="@{/admin/items/{itemId}/delete(itemId=${item.id})}" method="post">
+					<button>削除</button>
+				</form>
+			</td>
 	</table>
-
-<a href="/">戻る</a>
-
 </body>
+
 </html>
