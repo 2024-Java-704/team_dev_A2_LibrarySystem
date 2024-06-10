@@ -6,13 +6,17 @@
 </head>
 <body>
 	<h1>職員追加画面</h1>
-	<a href="/">前画面に戻る</a>
-	<form action="/" method="post">
+	<a href="/staff/staffMg/staffList">前画面に戻る</a>
+	<form action="/staff/staffAdd" method="Post">
 		<table border="1">
 			<tr>
 				<th>名前</th>
 				<td><input type="text" name="name"></td>
 			</tr>
+			<tr>
+								<th>図書館</th>
+				<td>港区図書館<input type="hidden" name="libraryId" value="1"></td>
+				</tr>
 			<tr>
 				<th>メールアドレス</th>
 				<td><input type="text" name="email"></td>
