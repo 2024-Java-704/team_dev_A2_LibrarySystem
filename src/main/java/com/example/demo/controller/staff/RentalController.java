@@ -1,14 +1,16 @@
 package com.example.demo.controller.staff;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Lending;
-import com.example.demo.entity.Reservation;
 import com.example.demo.repository.LendingRepository;
 import com.example.demo.repository.ReservationRepository;
 
@@ -17,38 +19,55 @@ public class RentalController {
 
 	@Autowired
 	LendingRepository lendingRepository;
-	
+
 	@Autowired
 	ReservationRepository reservationRepository;
 
-	@GetMapping("/staff/staffMg/rentalList")
+	@GetMapping("/staff/materialMg/rentalList")
 	public String index(
 			Model model) {
-		
-		List<Reservation> rList=reservationRepository.findAll();
+
 		List<Lending> lendingList = lendingRepository.findAll();
-		model.addAttribute("lendings", lendingList);
-		model.addAttribute("r",rList);
-		
-		/*if (lendingList.size() == 0) {*/
-//			model.addAttribute("error", "貸し出している本がありません");
-			/*} else {
-				
-			}*/
+
+		if (lendingList.size() == 0) {
+			model.addAttribute("error", "貸し出している本がありません");
+		} else {
+			model.addAttribute("lendings", lendingList);
+		}
 		return "/staff/rentalList";
 	}
 
-	@GetMapping("/staff/staffMg/rentalAdd")
-	public String add(Model model) {
+	@GetMapping("/staff/materialMg/rentalAdd")
+	public String create(Model model) {
+		LocalDate renDate =LocalDate.now();
+		LocalDate returnDate=renDate.plusWeeks(1);
+		model.addAttribute("renDate",renDate);
+		model.addAttribute("returnDate",returnDate);
 		return "/staff/rentalAdd";
 	}
+	
+	@PostMapping("/staff/staffMg/rentalAdd")
+	public String add(
+			@RequestParam(value = "bookid", defaultValue = "") Integer bookid,
+			@RequestParam(value = "rentaldate", defaultValue = "") String rentaldate,
+			@RequestParam(value = "newreturn", defaultValue = "") String newreturn,
+			@RequestParam(value = "reservationid", defaultValue = "") Integer reservationid,
+			@RequestParam(value = "staffid", defaultValue = "") Integer staffid,
+			@RequestParam(value = "userid", defaultValue = "") Integer userid,
+			Model model) {
+		
+		return "redirect:/staff/rentalList";
+	}
 
-	@GetMapping("/staff/staffMg/rentalEdit")
+	@GetMapping("/staff/materialMg/rentalEdit")
 	public String edit(Model model) {
+		
+		
+		
 		return "/staff/rentalEdit";
 	}
 
-	@GetMapping("/staff/staffMg/return")
+	@GetMapping("/staff/materialMg/return")
 	public String ret(Model model) {
 		return "/staff/return";
 	}
