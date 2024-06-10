@@ -33,7 +33,7 @@ public class Book {
 	private Library library;
 	
 	@ManyToOne
-	@JoinColumn(name="conditionId")
+	@JoinColumn(name="condition_id")
 	private Condition condition;
 	
 	public Book() {
