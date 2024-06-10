@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>利用者一覧</h1>
-	<a href="/staff/staffMg/userAdd">利用者を追加（userAdd.htmlへ）</a>
+	<a href="/staff/userMg/new">利用者を追加</a>
 	<form action="/staff/staffMg/userList" method="get">
 		<input type="text" name="researchUserId" placeholder="利用者ID">
 		<br>
@@ -14,9 +14,6 @@
 		<br>
 		<button>検索</button>
 	</form>
-	<th:block th:if="${nothing}">
-		<a th:text="${nothing}"></a>
-	</th:block>
 	<th:block th:if="${userList}">
 	<table border="1">
 		<tr>
@@ -48,6 +45,6 @@
 	</table>
 	</th:block>
 	<br>
-	<a href="/staff/staffMg/userManagement">戻る</a>
+	<a href="/staff/userMg">戻る</a>
 </body>
 </html>

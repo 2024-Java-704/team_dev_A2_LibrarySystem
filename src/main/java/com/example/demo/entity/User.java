@@ -21,10 +21,18 @@ public class User {
 	private String tel;
 	private String password;
 	
-	User(){
+	public User(){
 	}
 	
-	User(Integer id, String name, String address, String email, String tel, String password){
+	public User(String name, String address, String email, String tel, String password){
+		this.name = name;
+		this.address = address;
+		this.email = email;
+		this.tel = tel;
+		this.password = password;
+	}
+	
+	public User(Integer id, String name, String address, String email, String tel, String password){
 		this.id = id;
 		this.name = name;
 		this.address = address;
