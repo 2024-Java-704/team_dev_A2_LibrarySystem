@@ -26,13 +26,13 @@
 			<th>更新</th>
 			<th>削除</th>
 		</tr>
-	<!--	<tr th:each="lending:${lendings}">
+		<tr th:each="lending:${lendings}">
 			<td th:text="${lending.id}"></td>
 			<td th:text="${lending.user.id}"></td>
 			<td th:text="${lending.book.title}"></td>
 			<td th:text="${lending.lendDate}"></td>
 			<td th:text="${lending.limitDate}"></td>
-			<td th:text="${lending.retunDate}"></td>
+			<td th:text="${lending.returnedDate}"></td>
 			<td th:text="${lending.reservation.id}"></td>
 			<td th:text="${lending.staff.id}"></td>
 			<td>
@@ -41,7 +41,7 @@
 				</form>
 			</td>
 			<td><button>削除</button></td>
-		</tr>-->
+		</tr>
 	</table>
 	<form action="/staff/staffMg/rentalAdd" method="get">
 		<button>新規貸出</button>
