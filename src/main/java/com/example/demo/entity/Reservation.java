@@ -43,13 +43,13 @@ public class Reservation {
 	@JoinColumn(name = "status_id")
 	private Status status;
 	
-	Reservation(){	
+	public Reservation(){	
 	}
-	Reservation(User user, Book book){
+	public Reservation(User user, Book book){
 		this.user = user;
 		this.book = book;
 	}
-	Reservation(Integer id, User user, Book book, LocalDate reservationDate, LocalDate scheduledDate, Library library, Status status){
+	public Reservation(Integer id, User user, Book book, LocalDate reservationDate, LocalDate scheduledDate, Library library, Status status){
 		this.id = id;
 		this.user = user;
 		this.book = book;
