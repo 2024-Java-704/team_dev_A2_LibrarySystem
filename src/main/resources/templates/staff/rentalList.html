@@ -36,22 +36,22 @@
 			<td th:text="${lending.reservation.id}"></td>
 			<td th:text="${lending.staff.id}"></td>
 			<td>
-				<form action="/staff/staffMg/rentalEdit" method="get">
+				<form action="/staff/materialMg/rentalEdit" method="get">
 					<button>更新</button>
 				</form>
 			</td>
 			<td><button>削除</button></td>
 		</tr>
 	</table>
-	<form action="/staff/staffMg/rentalAdd" method="get">
+	<form action="/staff/materialMg/rentalAdd" method="get">
 		<button>新規貸出</button>
 	</form>
 
-	<form action="/staff/staffMg/return" method="get">
+	<form action="/staff/materialMg/return" method="get">
 		<button>返却</button>
 	</form>
 	<br>
-	<a href="/staff/staffMg/materialMg">戻る</a>
+	<a href="/staff/materialMg">戻る</a>
 
 </body>
 
