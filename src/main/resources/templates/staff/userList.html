@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>利用者一覧</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>利用者一覧</title>
 </head>
+
 <body>
-	<h1>利用者一覧</h1>
+	<header>
+		<h1>利用者一覧</h1>
+	</header>
 	<a href="/staff/userMg/new">利用者を追加</a>
 	<form action="/staff/userMg/userList" method="get">
 		<input type="text" name="researchUserId" placeholder="利用者ID">
@@ -15,36 +20,37 @@
 		<button>検索</button>
 	</form>
 	<th:block th:if="${userList}">
-	<table border="1">
-		<tr>
-			<th>利用者ID</th>
-			<th>名前</th>
-			<th>詳細</th>
-			<th>更新</th>
-			<th>削除</th>
-		</tr>
-		<tr th:each="users:${userList}">
-			<td th:text="${users.id}"></td>
-			<td th:text="${users.name}"></td>
-			<td>
-				<form th:action="@{/staff/userMg/{userId}/userDetail(userId=${users.id})}" method="get">
-					<button>詳細</button>
-				</form>
-			</td>
-			<td>
-				<form th:action="@{/staff/userMg/{userId}/userEdit(userId=${users.id})}" method="get">
-					<button>更新</button>
-				</form>
-			</td>
-			<td>
-				<form th:action="@{/staff/userMg/{userId}/userDelete(userId=${users.id})}" method="post">
-					<button>削除</button>
-				</form>
-			</td>
-		</tr>
-	</table>
+		<table border="1">
+			<tr>
+				<th>利用者ID</th>
+				<th>名前</th>
+				<th>詳細</th>
+				<th>更新</th>
+				<th>削除</th>
+			</tr>
+			<tr th:each="users:${userList}">
+				<td th:text="${users.id}"></td>
+				<td th:text="${users.name}"></td>
+				<td>
+					<form th:action="@{/staff/userMg/{userId}/userDetail(userId=${users.id})}" method="get">
+						<button>詳細</button>
+					</form>
+				</td>
+				<td>
+					<form th:action="@{/staff/userMg/{userId}/userEdit(userId=${users.id})}" method="get">
+						<button>更新</button>
+					</form>
+				</td>
+				<td>
+					<form th:action="@{/staff/userMg/{userId}/userDelete(userId=${users.id})}" method="post">
+						<button>削除</button>
+					</form>
+				</td>
+			</tr>
+		</table>
 	</th:block>
 	<br>
 	<a href="/staff/userMg">戻る</a>
 </body>
+
 </html>
