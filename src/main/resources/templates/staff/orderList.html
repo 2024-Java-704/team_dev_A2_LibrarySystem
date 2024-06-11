@@ -1,43 +1,59 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
-<body>
+
+<body>7
+	<header>
 		<h1>注文一覧</h1>
+	</header>
 	<a href="/staff/staffMg/materialMg">資料管理に戻る</a>
 	<a href="/staff/materialMg/orderAdd">追加</a>
-	
-		<table border="1">
-			<tr>
-				<th>注文ID</th>
-				<th>利用者ID</th>
-				<th>本ID</th>
-				<th>注文日時</th>
-				<th>貸出予定日</th>
-				<th>注文図書館ID</th>
-				<th>状況ID</th>
-				<th>変更</th>
-				<th>削除</th>
-				
-			</tr>
-			<tr th:each="reservation : ${reservationList}">
-				<td th:text="${reservation.id}"></td>
-				<td th:text="${reservation.user.name}"></td>
-				<td th:text="${reservation.book.title}"></tdth:text="${reservation.user_id}">
-				<td th:text="${reservation.reservationDate}"></td>
-				<td th:text="${reservation.scheduledDate}"></td>
-				<td th:text="${reservation.library.name}"></td>
-				<td th:text="${reservation.status.name}"></td>
-			<td><form th:action="@{/staff/materialMg/{reservationId}/orderEdit(reservationId=${reservation.id})}" method="Get">
-		<button>変更</button></form></td>
-	
-				<td><form th:action="@{/staff/materialMg/{reservationId}/orderDelete(reservationId=${reservation.id})}" method="Post">
-					<button>削除</button></form></td>
-			</tr>
-		</table>
-		
-	
+
+	<table border="1">
+		<tr>
+			<th>注文ID</th>
+			<th>利用者ID</th>
+			<th>本ID</th>
+			<th>注文日時</th>
+			<th>貸出予定日</th>
+			<th>注文図書館ID</th>
+			<th>状況ID</th>
+			<th>変更</th>
+			<th>削除</th>
+
+		</tr>
+		<tr th:each="reservation : ${reservationList}">
+			<td th:text="${reservation.id}"></td>
+			<td th:text="${reservation.user.name}"></td>
+			<td th:text="${reservation.book.title}">
+				</tdth:text="${reservation.user_id}">
+			<td th:text="${reservation.reservationDate}"></td>
+			<td th:text="${reservation.scheduledDate}"></td>
+			<td th:text="${reservation.library.name}"></td>
+			<td th:text="${reservation.status.name}"></td>
+			<td>
+				<form th:action="@{/staff/materialMg/{reservationId}/orderEdit(reservationId=${reservation.id})}"
+					method="Get">
+					<button>変更</button>
+				</form>
+			</td>
+
+			<td>
+				<form th:action="@{/staff/materialMg/{reservationId}/orderDelete(reservationId=${reservation.id})}"
+					method="Post">
+					<button>削除</button>
+				</form>
+			</td>
+		</tr>
+	</table>
+
+
 </body>
+<footer></footer>
+
 </html>

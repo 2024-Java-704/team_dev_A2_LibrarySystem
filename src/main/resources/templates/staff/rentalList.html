@@ -2,17 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<meta charset="UTF-8">
 	<title>貸出一覧</title>
 </head>
 
 <body>
 
-
+	<header>
 	<h1>貸出一覧</h1>
-	
+	</header>
+
 	<span th:text="${error}" style="color:red;"></span>
-	
+
 	<table border="1" th:if="${lendings}">
 		<tr>
 			<th>貸出ID</th>
@@ -54,5 +56,5 @@
 	<a href="/staff/materialMg">戻る</a>
 
 </body>
-
+<footer></footer>
 </html>

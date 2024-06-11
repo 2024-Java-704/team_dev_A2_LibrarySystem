@@ -2,12 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<meta charset="UTF-8">
 	<title>貸出追加</title>
 </head>
 
 <body>
+	<header>
 	<h1>貸出追加</h1>
+	</header>
 	<form action="/staff/materialMg/rentalAdd" method="post">
 		<table border="1">
 			<tr>
@@ -31,7 +34,7 @@
 			<tr>
 				<th>予約ID</th>
 				<td>
-					<input type="text" name="reservationid" th:value="${}" required>
+					<input type="text" name="reservationid" required>
 				</td>
 			</tr>
 			<tr>
@@ -57,5 +60,5 @@
 	</form>
 	<a href="/staff/materialMg/rentalList">戻る</a>
 </body>
-
+<footer></footer>
 </html>

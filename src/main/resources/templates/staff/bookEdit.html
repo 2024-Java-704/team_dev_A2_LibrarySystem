@@ -2,12 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<meta charset="UTF-8">
 	<title>本の更新</title>
 </head>
 
 <body>
+	<header>
 	<h1>本の更新</h1>
+	</header>
 	<form th:action="@{/staff/materialMg/{id}/edit(id=${book.id})}" method="post">
 	<table border="1">
 		<tr>
@@ -112,5 +115,5 @@
 
 	<a href="/staff/materialMg/bookList">戻る</a>
 </body>
-
+<footer></footer>
 </html>
