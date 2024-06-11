@@ -32,11 +32,41 @@ public class Book {
 	private Library library;
 
 	@ManyToOne
-	@JoinColumn(name = "condition_id")
+	@JoinColumn(name="condition_id")
 	private Condition condition;
-
 	private Integer cnt;
 	private String img;
+	
+	
+	public Book(Integer id,Category category, String title, String hurigana, String author, String publisher, LocalDate pubYear, LocalDate regDay, Condition condition, Library library, String img) {
+		this.id=id;
+		this.category=category;
+		this.title=title;
+		this.hurigana=hurigana;
+		this.author=author;
+		this.publisher=publisher;
+		this.pubYear=pubYear;
+		this.regDay=regDay;
+		this.condition=condition;
+		this.library=library;
+		this.img=img;
+	}
+	
+	public Book(Category category,String title,String hurigana,String author,String publisher,LocalDate pubYear,Library library,Condition condition,String img) {
+		this.category=category;
+		this.title=title;
+		this.hurigana=hurigana;
+		this.author=author;
+		this.publisher=publisher;
+		this.pubYear=pubYear;
+		this.regDay=LocalDate.now();
+		this.library=library;
+		this.condition=condition;
+		this.img=img;
+	}
+	
+	
+	
 
 	public Book() {
 
@@ -62,6 +92,12 @@ public class Book {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+
 
 	public Category getCategories() {
 		return category;
