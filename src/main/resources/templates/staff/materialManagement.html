@@ -2,18 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<meta charset="UTF-8">
 	<title>資料管理</title>
 </head>
 
 <body>
-	
-	<h1>職員メニュー</h1>
-	
-	<form action="/staff/staffMg/bookList" method="get">
+	<header>
+		<h1>資料管理</h1>
+	</header>
+
+	<form action="/staff/materialMg/bookList" method="get">
 		<button>本一覧画面</button>
 	</form>
-	
+
 	<form action="/staff/staffMg/rentalList" method="get">
 		<button>貸出一覧</button>
 	</form>
@@ -25,9 +27,10 @@
 	<form action="/staff/staffMg/orderList" method="get">
 		<button>注文一覧</button>
 	</form>
-	
+
 	<a href="/staff/staffTop">Topメニューに戻る</a>
-	
+
 </body>
+<footer></footer>
 
 </html>

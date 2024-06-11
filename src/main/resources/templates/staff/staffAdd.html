@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>職員追加</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>職員追加</title>
 </head>
+
 <body>
-	<h1>職員追加画面</h1>
+	<header>
+		<h1>職員追加画面</h1>
+	</header>
 	<a href="/staff/staffMg">前画面に戻る</a>
 	<form action="/staff/staffMg/staffAdd" method="post">
 		<table border="1">
 			<tr>
 				<th>名前</th>
-				<td><input type="text" name="name"required></td>
+				<td><input type="text" name="name" required></td>
 			</tr>
 			<tr>
-								<th>図書館</th>
+				<th>図書館</th>
 				<td>港区図書館<input type="hidden" name="libraryId" value="1"></td>
-				</tr>
+			</tr>
 			<tr>
 				<th>メールアドレス</th>
-				<td><input type="text" name="email"required></td>
+				<td><input type="text" name="email" required></td>
 			</tr>
 			<tr>
 				<th>パスワード</th>
-				<td><input type="text" name="password"required></td>
+				<td><input type="text" name="password" required></td>
 			</tr>
 		</table>
 		<button>職員追加</button>
 	</form>
 </body>
+<footer></footer>
+
 </html>

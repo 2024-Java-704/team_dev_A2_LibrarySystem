@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>利用者編集</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>利用者編集</title>
 </head>
+
 <body>
-	<h1>利用者編集フォーム</h1>
+	<header>
+		<h1>利用者編集フォーム</h1>
+	</header>
 	<form th:action="@{/staff/userMg/{userId}/userEdit(userId=${user.id})}" method="post">
 		<a th:if="${error}">
 			<ul th:each="error:${error}" th:text="${error}"></ul>
@@ -50,4 +55,6 @@
 	</form>
 	<a href="/staff/userMg/userList">戻る</a>
 </body>
+<footer></footer>
+
 </html>
