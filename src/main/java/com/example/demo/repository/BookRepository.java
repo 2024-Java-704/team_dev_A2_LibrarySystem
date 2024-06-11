@@ -19,4 +19,8 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 	List<Book> findByPublisherContaining(String publisher);
 
 	List<Book> findByPubYear(LocalDate pubYear);
+	
+	List<Book> findAllByOrderByCnt();
+	List<Book> findAllByOrderByPubYear();
+	List<Book> findAllByOrderByHurigana();
 }

@@ -7,16 +7,30 @@
 </head>
 
 <body>
-	<h1>本一覧</h1>
-
-	<button>50音順</button>
-	<button>人気順</button>
-	<button>出版年順</button>
+	<a href=""<h1>本一覧</h1>
+	<form action="/staff/materialMg/bookList/jporder">
+		<button>50音順</button>
+	</form>
+	<form action="/staff/materialMg/bookList/ranking">
+		<button>人気順</button>
+	</form>
+	<form action="/staff/materialMg/bookList/pubYear">
+		<button>出版年順</button>
+	</form>
 	<a href="/staff/materialMg/create">資料登録</a>
-	<a href="/">戻る</a>
-	
+	<a href="/staff/materialMg">戻る</a>
+
 
 	<table border="1">
+		<tr>
+			<th>ID</th>
+			<th>分類番号</th>
+			<th>タイトル</th>
+			<th>著者</th>
+			<th>出版社</th>
+			<th>更新</th>
+			<th>削除</th>
+		</tr>
 		<tr th:each="book:${bookList}">
 			<td th:text="${book.id}"></td>
 			<td th:text="${book.category.categoryNum}"></td>
@@ -26,12 +40,12 @@
 			<td th:text="${book.author}"></td>
 			<td th:text="${book.publisher}"></td>
 			<td>
-				<form th:action="@{/admin/items/{itemId}/edit(itemId=${item.id})}" method="get">
+				<form th:action="@{/staff/materialMg/{id}/edit(id=${book.id})}" method="get">
 					<button>更新</button>
 				</form>
 			</td>
 			<td>
-				<form th:action="@{/admin/items/{itemId}/delete(itemId=${item.id})}" method="post">
+				<form th:action="@{/staff/materialMg/{id}/delete(id=${book.id})}" method="post">
 					<button>削除</button>
 				</form>
 			</td>
