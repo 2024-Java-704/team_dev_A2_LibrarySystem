@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>注文変更</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>注文変更</title>
 </head>
+
 <body>
-	<h1>注文変更画面</h1>
+	<header>
+		<h1>注文変更画面</h1>
+	</header>
 	<a href="/staff/materialMg/order">前画面に戻る</a>
 	<form th:action="@{/staff/materialMg/{reservationId}/orderEdit(reservationId=${reservation.id})}" method="post">
 		<table border="1">
@@ -31,10 +36,12 @@
 			</tr>
 			<tr>
 				<th>状態</th>
-				<td><input type="number" name="status"  th:value="${reservation.status.id}"required></td>
+				<td><input type="number" name="status" th:value="${reservation.status.id}" required></td>
 			</tr>
 		</table>
 		<button>注文変更</button>
 	</form>
 </body>
+<footer></footer>
+
 </html>
