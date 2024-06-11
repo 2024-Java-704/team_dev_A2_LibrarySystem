@@ -17,7 +17,7 @@ public class LibraryStaff {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@ManyToOne
-	@JoinColumn(name = "libraryId")
+	@JoinColumn(name = "library_id")
 	private Library library;
 	private String name;
 	private String email;

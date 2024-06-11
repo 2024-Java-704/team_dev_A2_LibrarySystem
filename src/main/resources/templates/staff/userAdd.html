@@ -6,42 +6,44 @@
 </head>
 <body>
 	<h1>利用者追加フォーム</h1>
-	<form>
+	<form action="/staff/userMg/add" method="post">
+		<a th:if="${error}">
+			<ul th:each="error:${error}" th:text="${error}"></ul>
+		</a>
 		<table border="1">
 			<tr>
 				<th>名前</th>
 				<td>
-					<input type="text" name="">
+					<input type="text" name="name" th:value="${name}">
 				</td>
 			</tr>
 			<tr>
 				<th>メールアドレス</th>
 				<td>
-					<input type="text" name="">
+					<input type="text" name="email" th:value="${email}">
 				</td>
 			</tr>
 			<tr>
 				<th>住所</th>
 				<td>
-					<input type="text" name="">
+					<input type="text" name="address" th:value="${address}">
 				</td>
 			</tr>
 			<tr>
 				<th>電話番号</th>
 				<td>
-					<input type="text" name="">
+					<input type="text" name="tel" th:value="${address}">
 				</td>
 			</tr>
 			<tr>
 				<th>パスワード</th>
 				<td>
-					<input type="text" name="">
+					<input type="text" name="password" th:value="${password}">
 				</td>
 			</tr>
 		</table>
-		<button>追加へ</button>
-		（追加完了のポップアップ表示後userList.htmlを表示）
+		<button>追加</button>
 	</form>
-	<a href="">戻る(userList.htmlへ）</a>
+	<a href="/staff/userMg/userList">戻る</a>
 </body>
 </html>

@@ -80,7 +80,7 @@ public class Lending {
 		return returnedDate;
 	}
 
-	public Reservation getResavation() {
+	public Reservation getReservation() {
 		return reservation;
 	}
 

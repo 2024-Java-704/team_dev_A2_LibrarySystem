@@ -6,18 +6,15 @@
 </head>
 <body>
 	<h1>利用者一覧</h1>
-	<a href="">利用者を追加（userAdd.htmlへ）</a>
-	<form>
-		<input type="text" name="" placeholder="名前">
+	<a href="/staff/userMg/new">利用者を追加</a>
+	<form action="/staff/userMg/userList" method="get">
+		<input type="text" name="researchUserId" placeholder="利用者ID">
 		<br>
-		<input type="text" name="" placeholder="電話番号">
-		<br>
-		<input type="text" name="" placeholder="メールアドレス">
-		<br>
-		<input type="text" name="" placeholder="住所">
+		<input type="text" name="researchUserName" placeholder="名前">
 		<br>
 		<button>検索</button>
 	</form>
+	<th:block th:if="${userList}">
 	<table border="1">
 		<tr>
 			<th>利用者ID</th>
@@ -26,15 +23,28 @@
 			<th>更新</th>
 			<th>削除</th>
 		</tr>
-		<tr>
-			<td>ここにuserテーブルからuserIdを出力する</td>
-			<td>ここにuserテーブルからnameを出力する</td>
-			<td>ここに詳細ボタンを作る（userDetail.htmlへ）</td>
-			<td>ここに更新ボタンを作る（userEdit.htmlへ）</td>
-			<td>ここに削除ボタンを作る</td>
+		<tr th:each="users:${userList}">
+			<td th:text="${users.id}"></td>
+			<td th:text="${users.name}"></td>
+			<td>
+				<form th:action="@{/staff/userMg/{userId}/userDetail(userId=${users.id})}" method="get">
+					<button>詳細</button>
+				</form>
+			</td>
+			<td>
+				<form th:action="@{/staff/userMg/{userId}/userEdit(userId=${users.id})}" method="get">
+					<button>更新</button>
+				</form>
+			</td>
+			<td>
+				<form th:action="@{/staff/userMg/{userId}/userDelete(userId=${users.id})}" method="post">
+					<button>削除</button>
+				</form>
+			</td>
 		</tr>
 	</table>
+	</th:block>
 	<br>
-	<a href="">戻る（userManagement.htmlへ）</a>
+	<a href="/staff/userMg">戻る</a>
 </body>
 </html>
