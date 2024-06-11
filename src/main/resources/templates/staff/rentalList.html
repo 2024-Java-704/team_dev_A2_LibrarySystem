@@ -10,9 +10,9 @@
 
 
 	<h1>貸出一覧</h1>
-	
+
 	<span th:text="${error}" style="color:red;"></span>
-	
+
 	<table border="1" th:if="${lendings}">
 		<tr>
 			<th>貸出ID</th>
@@ -33,14 +33,19 @@
 			<td th:text="${lending.lendDate}"></td>
 			<td th:text="${lending.limitDate}"></td>
 			<td th:text="${lending.returnedDate}"></td>
-			<td th:text="${lending.reservation.id}"></td>
+			<td th:if="${lending.reservation}" th:text="${lending.reservation.id}"></td>
+			<td th:if="${lending.reservation==null}"></td>
 			<td th:text="${lending.staff.id}"></td>
 			<td>
-				<form action="/staff/materialMg/rentalEdit" method="get">
+				<form th:action="@{/staff/materialMg/{id}/rentalEdit(id=${lending.id})}" method="get">
 					<button>更新</button>
 				</form>
 			</td>
-			<td><button>削除</button></td>
+			<td>
+				<form th:action="@{/staff/materialMg/{id}/rentalDelete(id=${lending.id})}" method="post">
+					<button>削除</button>
+				</form>
+			</td>
 		</tr>
 	</table>
 	<form action="/staff/materialMg/rentalAdd" method="get">

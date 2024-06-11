@@ -1,48 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>貸出情報更新</title>
+	<meta charset="UTF-8">
+	<title>貸出情報更新</title>
 </head>
+
 <body>
 	<h1>貸出情報更新</h1>
-	<form >
+
+	<span th:text="${error}" style="color:red;"></span>
+
+	<form th:action="@{/staff/materialMg/{id}/rentalEdit(id=${lending.id})}" method="post">
 		<table border="1">
 			<tr>
 				<th>貸出ID</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>利用者ID</th>
-				<td></td>
+				<td>
+					<input type="number" name="id" th:value="${lending.id}" required>
+				</td>
 			</tr>
 			<tr>
 				<th>本</th>
-				<td></td>
+				<td>
+					<input type="text" name="bookId" th:value="${lending.book.id}" required>
+				</td>
 			</tr>
 			<tr>
 				<th>貸出日時</th>
-				<td></td>
+				<td>
+					<input type="date" name="lendDate" th:value="${lending.lendDate}" required>
+				</td>
 			</tr>
 			<tr>
 				<th>返却予定日</th>
-				<td></td>
+				<td>
+					<input type="date" name="limitDate" th:value="${lending.limitDate}" required>
+				</td>
 			</tr>
 			<tr>
 				<th>返却日時</th>
-				<td></td>
+				<td>
+					<input type="date" name="returnedDate" th:value="${lending.returnedDate}">
+				</td>
 			</tr>
 			<tr>
 				<th>予約ID</th>
-				<td></td>
+				<td>
+					<input type="number" name="reservationId" th:value="${lending.reservation.id}">
+				</td>
 			</tr>
 			<tr>
 				<th>貸出処理者</th>
-				<td></td>
+				<td>
+					<input type="number" name="staffId" th:value="${lending.staff.id}" required>
+				</td>
+			</tr>
+			<tr>
+				<th>利用者ID</th>
+				<td>
+					<input type="number" name="userId" th:value="${lending.user.id}" required>
+				</td>
 			</tr>
 		</table>
 		<button>更新</button>
 	</form>
+
 	<a href="/staff/materialMg/rentalList">戻る</a>
 </body>
+
 </html>
