@@ -70,7 +70,7 @@ public class LoginController {
 			model.addAttribute("email", email);
 			return "/staff/login";
 		} else {
-			return "redirect:/";
+			return "redirect:/staff/staffTop";
 		}
 	}
 
