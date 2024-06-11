@@ -22,7 +22,7 @@ public class StaffMgController {
 	@Autowired
 	private LibraryRepository libraryRepository;
 
-	@GetMapping("/staff/staffMg/staffList")
+	@GetMapping("/staff/staffMg")
 	public String index(
 			@RequestParam(value = "library", defaultValue = "") Integer library,
 			Model model) {
@@ -33,12 +33,12 @@ public class StaffMgController {
 		return "/staff/staffList";
 	}
 
-	@GetMapping("/staff/staffAdd")
+	@GetMapping("/staff/staffMg/staffAdd")
 	public String add() {
 		return "/staff/staffAdd";
 	}
 
-	@PostMapping("/staff/staffAdd")
+	@PostMapping("/staff/staffMg/staffAdd")
 	public String addre(
 			@RequestParam(value = "name", defaultValue = "") String name,
 			@RequestParam(value = "libraryId", defaultValue = "") Integer libraryid,
@@ -50,10 +50,10 @@ public class StaffMgController {
 
 		libraryStaffRepository.save(staff);
 
-		return "redirect:/staff/staffMg/staffList";
+		return "redirect:/staff/staffMg";
 	}
 
-	@GetMapping("/staff/{id}/edit")
+	@GetMapping("/staff/staffMg/{id}/edit")
 	public String edit(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("id", id);
 		LibraryStaff librarystaff = libraryStaffRepository.findById(id).get();
@@ -61,7 +61,7 @@ public class StaffMgController {
 		return "/staff/staffEdit";
 	}
 
-	@PostMapping("/staff/{id}/edit")
+	@PostMapping("/staff/staffMg/{id}/edit")
 	public String handleEdit(
 			@PathVariable("id") Integer id,
 			@RequestParam(value = "name", defaultValue = "") String name,
@@ -73,7 +73,7 @@ public class StaffMgController {
 		LibraryStaff staff = new LibraryStaff(id, library, name, email, password);
 
 		libraryStaffRepository.save(staff);
-		return "redirect:/staff/staffMg/staffList";
+		return "redirect:/staff/staffMg";
 	}
 
 	@PostMapping("/staff/{id}/delete")
@@ -81,7 +81,7 @@ public class StaffMgController {
 
 			@PathVariable("id") Integer id, Model model) {
 		libraryStaffRepository.deleteById(id);
-		return "redirect:/staff/staffMg/staffList";
+		return "redirect:/staff/staffMg";
 	}
 
 }
