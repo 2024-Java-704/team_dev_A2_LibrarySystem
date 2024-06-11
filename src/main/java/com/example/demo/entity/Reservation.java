@@ -45,12 +45,17 @@ public class Reservation {
 	}
 
 	public Reservation(User user, Book book) {
+
 		this.user = user;
 		this.book = book;
 	}
 
-	public Reservation(User user, Book book, LocalDate reservationDate, LocalDate scheduledDate, Library library,
-			Status status) {
+
+
+
+	public Reservation(User user, Book book, LocalDate reservationDate, LocalDate scheduledDate,
+			Library library, Status status) {
+
 		this.user = user;
 		this.book = book;
 		this.reservationDate = reservationDate;
@@ -59,7 +64,8 @@ public class Reservation {
 		this.status = status;
 	}
 
-	public Reservation(Integer id, User user, Book book, LocalDate reservationDate, LocalDate scheduledDate,
+
+  public Reservation(Integer id, User user, Book book, LocalDate reservationDate, LocalDate scheduledDate,
 			Library library, Status status) {
 		this.id = id;
 		this.user = user;

@@ -23,7 +23,7 @@
 			<td th:text="${delays.book.title}"></td>
 			<td th:text="${delays.limitDate}"></td>
 			<td>
-				<form th:action="@{/staff/staffMg/{userId}/userDetail(userId=${delays.user.id})}" method="get">
+				<form th:action="@{/staff/userMg/{userId}/userDetail(userId=${delays.user.id})}" method="get">
 					<button>詳細</button>
 				</form>
 			</td>

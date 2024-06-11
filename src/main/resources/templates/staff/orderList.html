@@ -6,8 +6,9 @@
 </head>
 <body>
 		<h1>注文一覧</h1>
-	<a href="/">TOPに戻る</a>
-	<form action="/" method="get">
+	<a href="/staff/staffMg/materialMg">資料管理に戻る</a>
+	<a href="/staff/materialMg/orderAdd">追加</a>
+	
 		<table border="1">
 			<tr>
 				<th>注文ID</th>
@@ -17,25 +18,26 @@
 				<th>貸出予定日</th>
 				<th>注文図書館ID</th>
 				<th>状況ID</th>
-				<th>追加</th>
 				<th>変更</th>
 				<th>削除</th>
 				
 			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><button>追加</button></td>
-				<td><button>変更</button></td>
-				<td><button>削除</button></td>
+			<tr th:each="reservation : ${reservationList}">
+				<td th:text="${reservation.id}"></td>
+				<td th:text="${reservation.user.name}"></td>
+				<td th:text="${reservation.book.title}"></tdth:text="${reservation.user_id}">
+				<td th:text="${reservation.reservationDate}"></td>
+				<td th:text="${reservation.scheduledDate}"></td>
+				<td th:text="${reservation.library.name}"></td>
+				<td th:text="${reservation.status.name}"></td>
+			<td><form th:action="@{/staff/materialMg/{reservationId}/orderEdit(reservationId=${reservation.id})}" method="Get">
+		<button>変更</button></form></td>
+	
+				<td><form th:action="@{/staff/materialMg/{reservationId}/delete(reservationId=${reservation.id})}" method="Post">
+					<button>削除</button></form></td>
 			</tr>
 		</table>
 		
-	</form>
+	
 </body>
 </html>

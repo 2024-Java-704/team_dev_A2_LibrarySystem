@@ -21,7 +21,7 @@
 				<td th:text="${staff.id}"></td>
 				<td th:text="${staff.library.name}"></td>
 				<td th:text="${staff.name}"></td>
-				<form th:action="@{/staff/{staffId}/edit(staffId=${staff.id})}" method="Get">
+				<form th:action="@{/staff/staffMg/{staffId}/edit(staffId=${staff.id})}" method="Get">
 					<td><button type="submit">変更</button></td>
 				</form>
 				<form id="deleteForm" th:action="@{/staff/{staffId}/delete(staffId=${staff.id})}" method="post">
@@ -29,7 +29,7 @@
 				</form>
 			</tr>
 		</table>
-		<a href="/staff/staffAdd">職員追加</a>
+		<a href="/staff/staffMg/staffAdd">職員追加</a>
 </body>
 
 </html>

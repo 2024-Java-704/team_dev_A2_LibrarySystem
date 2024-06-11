@@ -13,12 +13,12 @@ public class SelectController {
 	@Autowired
 	Account acount;
 	
-	@GetMapping("/staff/staffMg/staffTop")
+	@GetMapping("/staff/staffTop")
 	public String index(Model model) {
 		return "/staff/staffTop";
 	}
 	
-	@GetMapping("/staff/staffMg/materialMg")
+	@GetMapping("/staff/materialMg")
 	public String materialMg(Model model) {
 		return "/staff/materialManagement";
 	}
