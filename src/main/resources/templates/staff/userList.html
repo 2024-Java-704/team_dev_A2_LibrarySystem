@@ -7,7 +7,7 @@
 <body>
 	<h1>利用者一覧</h1>
 	<a href="/staff/userMg/new">利用者を追加</a>
-	<form action="/staff/staffMg/userList" method="get">
+	<form action="/staff/userMg/userList" method="get">
 		<input type="text" name="researchUserId" placeholder="利用者ID">
 		<br>
 		<input type="text" name="researchUserName" placeholder="名前">
@@ -27,17 +27,17 @@
 			<td th:text="${users.id}"></td>
 			<td th:text="${users.name}"></td>
 			<td>
-				<form th:action="@{/staff/staffMg/{userId}/userDetail(userId=${users.id})}" method="get">
+				<form th:action="@{/staff/userMg/{userId}/userDetail(userId=${users.id})}" method="get">
 					<button>詳細</button>
 				</form>
 			</td>
 			<td>
-				<form th:action="@{/staff/staffMg/{userId}/userEdit(userId=${users.id})}" method="get">
+				<form th:action="@{/staff/userMg/{userId}/userEdit(userId=${users.id})}" method="get">
 					<button>更新</button>
 				</form>
 			</td>
 			<td>
-				<form th:action="@{/staff/staffMg/{userId}/userDelete(userId=${users.id})}" method="post">
+				<form th:action="@{/staff/userMg/{userId}/userDelete(userId=${users.id})}" method="post">
 					<button>削除</button>
 				</form>
 			</td>

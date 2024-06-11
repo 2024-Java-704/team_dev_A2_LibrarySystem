@@ -31,7 +31,7 @@ public class UserController {
 		return "/staff/userManagement";
 	}
 	
-	@GetMapping("/staff/staffMg/userList") //利用者一覧表示
+	@GetMapping("/staff/userMg/userList") //利用者一覧表示
 	public String userListIndex(
 			@RequestParam(name="researchUserId",defaultValue="") Integer userId,
 			@RequestParam(name="researchUserName",defaultValue="") String userName,
@@ -60,7 +60,7 @@ public class UserController {
 		return "/staff/userList";
 	}
 	
-	@GetMapping("/staff/staffMg/{userId}/userDetail") //利用者詳細表示
+	@GetMapping("/staff/userMg/{userId}/userDetail") //利用者詳細表示
 	public String userDetail(
 			@PathVariable("userId") Integer userId,
 			Model model) {
@@ -111,11 +111,11 @@ public class UserController {
 		} else {
 			User user=new User(name,address,email,tel,password);
 			userRepository.save(user);
-			return "redirect:/staff/staffMg/userList";
+			return "redirect:/staff/userMg/userList";
 		}
 	}
 	
-	@GetMapping("/staff/staffMg/{userId}/userEdit") //更新画面表示
+	@GetMapping("/staff/userMg/{userId}/userEdit") //更新画面表示
 	public String userEdit(
 			@PathVariable("userId") Integer userId,
 			Model model) {
@@ -125,7 +125,7 @@ public class UserController {
 		return "/staff/userEdit";
 	}
 	
-	@PostMapping("/staff/staffMg/{userId}/userEdit") //更新処理
+	@PostMapping("/staff/userMg/{userId}/userEdit") //更新処理
 	public String userUpdate(
 			@PathVariable("userId") Integer userId,
 			@RequestParam(name="name",defaultValue="") String name,
@@ -161,18 +161,18 @@ public class UserController {
 		} else {
 			User user=new User(userId,name,address,email,tel,password);
 			userRepository.save(user);
-			return "redirect:/staff/staffMg/userList";
+			return "redirect:/staff/userMg/userList";
 		}
 	}
 	
-	@PostMapping("/staff/staffMg/{userId}/userDelete")
+	@PostMapping("/staff/userMg/{userId}/userDelete")
 	public String userDelete(
 			@PathVariable("userId") Integer userId) {
 		userRepository.deleteById(userId);
-		return "redirect:/staff/staffMg/userList";
+		return "redirect:/staff/userMg/userList";
 	}
 	
-	@GetMapping("/staff/staffMg/delinquentList")
+	@GetMapping("/staff/userMg/delinquentList")
 	public String show(Model model) {
 		List<Lending> delayList=null;
 		LocalDate today=LocalDate.now();
