@@ -3,37 +3,35 @@
 
 <head>
 	<meta charset="UTF-8">
+	<title>本一覧</title>
 </head>
 
 <body>
-	<table border="1">
-		<h1>本一覧</h1>
-		<button>50音順</button>
-		<button>出版年順</button>
-		<button>人気順</button>
-		  <form action="/" method="post">
-		<tr>
-			<th>ID</th>
-			<th>分類番号</th>
-			<th>タイトル</th>
-			<th>著者名</th>
-			<th>出版社</th>
-			<th>出版日</th>
-			<th>詳細</th>
-		</tr>
-		<tr>
-			<th>1</th>
-			<th>3</th>
-			<th>タイトル</a></th>
-			<th>金子拓未</th>
-			<th>TACSOL</th>
-			<th>昨日</th>
-			<th><button>詳細</button></th>
-		</tr>
-		</form>
-	</table>
+	<h1>本一覧</h1>
+
+	<button>50音順</button>
+	<button>人気順</button>
+	<button>出版年順</button>
 	
-	<a href="リンク先のパス">戻る</a>
+
+	<table border="1">
+		<tr>
+			<td>資料ID</td>
+			<td>分類番号</td>
+			<td>タイトル</td>
+			<td>著者</td>
+			<td>出版社</td>
+			<td>出版日</td>
+		</tr>
+		<tr th:each="book:${books}">
+			<td th:text="${book.id}"></td>
+			<td th:text="${book.category.categoryNum}"></td>
+			<td th:text="${book.title}"></td>
+			<td th:text="${book.author}"></td>
+			<td th:text="${book.publisher}"></td>
+			<td th:text="${book.pubYear}"></td>
+		</tr>			
+	</table>
 </body>
 
 </html>

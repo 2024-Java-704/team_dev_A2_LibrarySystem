@@ -18,39 +18,31 @@ public class ReservationController {
 
 	@Autowired
 	ReservationRepository reservationRepository;
-	
-	
+
 	@GetMapping("/staff/staffMG/reservationList")
 	public String index() {
-		return "reservationList";
+		return "/staff/resevationList";
 	}
-	
-	
-	
+
 	@PostMapping("/staff/staffMG/reservationAdd")
 	public String reservationAdd(@RequestParam("category") String title,
 			@RequestParam("title") String category,
 			@RequestParam("author") String author,
 			@RequestParam("publisher") String publisher,
 			@RequestParam("pubYear") String pubYear,
-			Model model
-			) {
-		
+			Model model) {
+
 		List<Reservation> reservationList = reservationRepository.findAll();
 		model.addAttribute("reservations", reservationList);
-		
-		return "reservationAdd";
+
+		return "/staff/reservationAdd";
 	}
-	
-	@PostMapping("/reservationList/{id}/edit")
-	public String update(@PathVariable("id") Integer id,
-			)
-	
+
 	@PostMapping("/reservationList/{id}/delete")
-	public String delete(@PathVariable("id") Integer id,Model model) {
-		
+	public String delete(@PathVariable("id") Integer id, Model model) {
+
 		reservationRepository.deleteById(id);
-		
+
 		return "redirect:/reservationList";
 	}
 }

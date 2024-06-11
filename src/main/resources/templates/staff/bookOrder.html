@@ -1,16 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>発注</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>予約・注文</title>
 </head>
+
 <body>
-	<h1>発注</h1>
-	<form action="/" method="post">
-	 <input type.txt ="" value="利用者ID"><br>
- 
-    <input type.txt ="" value="パスワード"><br>
-    <Button>検索</Button>
-    </form>
+	<header></header>
+	<a>以下の資料を予約・注文しますか？</a>
+	<a th:if="${error}">
+		<ul th:each="error:${error}" th:text="${error}"></ul>
+	</a>
+	<th:block th:if="${bookOrder}">
+		<table border="1">
+			<tr>
+				<th>ID</th>
+				<td th:text="${bookOrder.id}"></td>
+			</tr>
+			<tr>
+				<th>分類番号</th>
+				<td th:text="${bookOrder.category.categoriesNum}"></td>
+			</tr>
+			<tr>
+				<th>タイトル</th>
+				<td th:text="${bookOrder.title}"></td>
+			</tr>
+			<th>タイトル（ふりがな）</th>
+			<td th:text="${bookOrder.hurigana}"></td>
+			<tr>
+				<td>著者名</td>
+				<td th:text="${bookOrder.author}"></td>
+			</tr>
+			<tr>
+				<td>出版社</td>
+				<td th:text="${bookOrder.publisher}"></td>
+			</tr>
+			<tr>
+				<td>発行年</td>
+				<td th:text="${bookOrder.pubYear}"></td>
+			</tr>
+			<tr>
+				<td>登録日</td>
+				<td th:text="${bookOrder.regDay}"></td>
+			</tr>
+			<tr>
+				<td>所属図書館</td>
+				<td th:text="${bookOrder.library.name}"></td>
+			</tr>
+			<tr>
+				<th>状態</th>
+				<td th:text="${bookOrder.condition.name}"></td>
+			</tr>
+			<tr>
+				<th>貸出回数</th>
+				<td th:text="${bookOrder.cnt}"></td>
+			</tr>
+		</table>
+	</th:block>
+	<form th:action="@{/staff/staffMg/{bookId}/order(bookId=${bookOrder.id})}" method="post">
+		<input type="text" name="userId" placeholder="利用者ID"><br>
+		<input type="text" name="userPassword" placeholder="パスワード"><br>
+		<button>予約・注文</button>
+	</form>
+	<a th:href="@{/staff/{id}/bookdetail(id=${bookOrder.id})}">戻る</a>
 </body>
+<footer></footer>
 </html>

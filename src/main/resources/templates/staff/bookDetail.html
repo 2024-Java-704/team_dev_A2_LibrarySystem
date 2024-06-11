@@ -1,58 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>本詳細</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>本詳細</title>
 </head>
+
 <body>
-	<h1>画像</h1>
-	<table border="1">
-		<tr>
-			<th>ID</th>
-			<th>2003</th>
-		</tr>
-		<tr>
-			<th>カテゴリーID</th>
-			<th>３</th>
-		</tr>
-		<tr>
-			<th>タイトル</th>
-			<th>final最初で最後のHTML</th>
-		</tr>
+	<header></header>
+	<th:block th:if="${bookDetail}">
+		<table border="1">
+			<tr>
+				<th>ID</th>
+				<td th:text="${bookDetail.id}"></td>
+			</tr>
+			<tr>
+				<th>分類番号</th>
+				<td th:text="${bookDetail.category.categoriesNum}"></td>
+			</tr>
+			<tr>
+				<th>タイトル</th>
+				<td th:text="${bookDetail.title}"></td>
+			</tr>
 			<th>タイトル（ふりがな）</th>
-			<th>final最初で最後のHTML</th>
-		<tr>
-			<th>著者名</th>
-			<th>金子拓未</th>
-		</tr>
-		<tr>
-			<th>出版社</th>
-			<th>金子拓未</th>
-		</tr>
-		<tr>
-			<th>発行年</th>
-			<th>2002</th>
-		</tr>
-		<tr>
-			<th>登録日</th>
-			<th>2002/01/30</th>
-		</tr>
-		<tr>
-			<th>所属図書館</th>
-			<th>2002/01/30</th>
-		</tr>
+			<td th:text="${bookDetail.hurigana}"></td>
 			<tr>
-			<th>状態</th>
-			<th>ほぼ新品</th>
-		</tr>
+				<td>著者名</td>
+				<td th:text="${bookDetail.author}"></td>
+			</tr>
 			<tr>
-			<th>貸出カウント</th>
-			<th>100000000000</th>
-		</tr>
-		
-		</form>
-	</table>
-	<button>発注</button>
-	<button>予約</button>
+				<td>出版社</td>
+				<td th:text="${bookDetail.publisher}"></td>
+			</tr>
+			<tr>
+				<td>発行年</td>
+				<td th:text="${bookDetail.pubYear}"></td>
+			</tr>
+			<tr>
+				<td>登録日</td>
+				<td th:text="${bookDetail.regDay}"></td>
+			</tr>
+			<tr>
+				<td>所属図書館</td>
+				<td th:text="${bookDetail.library.name}"></td>
+			</tr>
+			<tr>
+				<th>状態</th>
+				<td th:text="${bookDetail.condition.name}"></td>
+			</tr>
+			<tr>
+				<th>貸出回数</th>
+				<td th:text="${bookDetail.cnt}"></td>
+			</tr>
+		</table>
+	</th:block>
+	<form th:action="@{/staff/staffMg/{bookId}/order(bookId=${bookDetail.id})}" method="get">
+		<button>予約・注文</button>
+	</form>
+	<form th:action="@{/staff/staffMg/{bookId}/lend(bookId=${bookDetail.id})}" method="get">
+		<button>貸出</button>
+	</form>
+	<a th:href="/staff/{id}/bookdetail(id=${bookDetail.id})">戻る</a>
 </body>
+<footer></footer>
+
 </html>
