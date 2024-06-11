@@ -11,42 +11,45 @@
 	<header>
 	<h1>貸出追加</h1>
 	</header>
+
+    <span th:text="${error}" style="color:red;"></span>
 	<form action="/staff/materialMg/rentalAdd" method="post">
 		<table border="1">
 			<tr>
 				<th>本のID</th>
 				<td>
-					<input type="text" name="bookid" required>
-				</td>
+					<input type="text" name="bookId" required th:value="${bookId}">
 			</tr>
 			<tr>
 				<th>貸出日時</th>
 				<td>
-					<input type="date" name="rentaldate" th:value="${renDate}" required>
+					<input type="date" name="rentalDate" th:value="${rentalDate}" required>
 				</td>
 			</tr>
 			<tr>
 				<th>返却予定日</th>
 				<td>
-					<input type="date" name="newreturn" th:value="${returnDate}" required>
+					<input type="date" name="limitDate" th:value="${limitDate}" required>
 				</td>
 			</tr>
 			<tr>
 				<th>予約ID</th>
 				<td>
-					<input type="text" name="reservationid" required>
+					<input type="text" name="reservationId" th:value="${reservationId}">
+					
+
 				</td>
 			</tr>
 			<tr>
 				<th>貸出処理者（職員ID）</th>
 				<td>
-					<input type="text" name="staffid" required>
+					<input type="text" name="staffId" th:value="${staffId}" required>
 				</td>
 			</tr>
 			<tr>
 				<th>利用者ID</th>
 				<td>
-					<input type="text" name="userid" required>
+					<input type="text" name="userId" th:value="${userId}" required>
 				</td>
 			</tr>
 			<tr>
