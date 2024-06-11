@@ -33,7 +33,7 @@
 			<td><form th:action="@{/staff/materialMg/{reservationId}/orderEdit(reservationId=${reservation.id})}" method="Get">
 		<button>変更</button></form></td>
 	
-				<td><form th:action="@{/staff/materialMg/{reservationId}/delete(reservationId=${reservation.id})}" method="Post">
+				<td><form th:action="@{/staff/materialMg/{reservationId}/orderDelete(reservationId=${reservation.id})}" method="Post">
 					<button>削除</button></form></td>
 			</tr>
 		</table>

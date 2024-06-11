@@ -125,7 +125,7 @@ public class BookMgController {
 
 	}
 
-	@PostMapping("/staff/materialMg/{id}/delete")
+	@PostMapping("/staff/materialMg/{id}/bookDelete")
 	public String delete(
 			@PathVariable("id") Integer id, Model model) {
 		bookRepository.deleteById(id);

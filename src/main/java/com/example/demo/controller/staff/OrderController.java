@@ -106,7 +106,7 @@ public class OrderController {//reservation
 		return "redirect:/staff/materialMg/order";
 	}
 
-	@PostMapping("/staff/materialMg/{id}/delete")
+	@PostMapping("/staff/materialMg/{id}/orderDelete")
 	public String delete(
 
 			@PathVariable("id") Integer id, Model model) {
