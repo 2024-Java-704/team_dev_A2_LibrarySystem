@@ -21,7 +21,7 @@ public class ReservationController {
 
 	@GetMapping("/staff/staffMG/reservationList")
 	public String index() {
-		return "reservationList";
+		return "/staff/resevationList";
 	}
 
 	@PostMapping("/staff/staffMG/reservationAdd")
@@ -35,13 +35,8 @@ public class ReservationController {
 		List<Reservation> reservationList = reservationRepository.findAll();
 		model.addAttribute("reservations", reservationList);
 
-		return "reservationAdd";
+		return "/staff/reservationAdd";
 	}
-
-	//	@PostMapping("/reservationList/{id}/edit")
-	//	public String update(@PathVariable("id") Integer id,
-	//			) {
-	//		}
 
 	@PostMapping("/reservationList/{id}/delete")
 	public String delete(@PathVariable("id") Integer id, Model model) {
