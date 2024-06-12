@@ -29,10 +29,10 @@ INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,li
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(20, '眠れなくなるほど面白い 図解 仏教', 'ねむれなくなるほどおもしろい ずかい ぶっきょう' ,'渋谷申博','日本文芸社', '2019/07/24','2020/04/01',1,1, 330);
 
 
-INSERT INTO book(category_id,title,hurigana,author,AWpublisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(30, '科学の社会史', 'かがくのしゃかいし' ,'古川安','筑摩書房', '2018/10/11','2020/06/01',1,1, 120);
+INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(30, '科学の社会史', 'かがくのしゃかいし' ,'古川安','筑摩書房', '2018/10/11','2020/06/01',1,1, 120);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(30, '社会科学の哲学入門', 'しゃかいかがくのてつがくにゅうもん' ,'吉田敬','勁草書房', '2021/08/27','2022/04/01',1,1, 230);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(30, '社会科学の考え方―認識論、リサーチ・デザイン、手法', 'しゃかいかがくのかんがえかた-にんしきろん、りさーちでざいん、しゅほう' ,'野村康','名古屋大学出版会', '2017/05/27','2020/04/01',1,1, 140);
-INSERT INTO book(category_id,title,hurigana,author,AWpublisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(30, '社会科学のための統計学入門 実例からていねいに学ぶ', 'しゃかいかがくのためのとうけいがくにゅうもん じつれいからていねいにまなぶ' ,'毛塚和宏','講談社', '2022/06/23','2023/04/01',1,1, 120);
+INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(30, '社会科学のための統計学入門 実例からていねいに学ぶ', 'しゃかいかがくのためのとうけいがくにゅうもん じつれいからていねいにまなぶ' ,'毛塚和宏','講談社', '2022/06/23','2023/04/01',1,1, 120);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(30, '社会科学のためのデータ分析入門', 'しゃかいかがくのためのでーたぶんせきにゅうもん' ,'今井耕介','岩波書店', '2018/03/13','2020/04/01',1,1, 180);
 
 
