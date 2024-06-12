@@ -10,7 +10,7 @@
 <body>
 
 	<header>
-	<h1>貸出一覧</h1>
+		<h1>貸出一覧</h1>
 	</header>
 
 	<span th:text="${error}" style="color:red;"></span>
@@ -27,6 +27,7 @@
 			<th>貸出処理者</th>
 			<th>更新</th>
 			<th>削除</th>
+			<th>返却</th>
 		</tr>
 		<tr th:each="lending:${lendings}">
 			<td th:text="${lending.id}"></td>
@@ -48,18 +49,22 @@
 					<button>削除</button>
 				</form>
 			</td>
+			<td>
+				<form th:action="@{/staff/materialMg/{id}/return(id=${lending.id}" method="get">
+					<button>返却</button>
+				</form>
+			</td>
 		</tr>
 	</table>
 	<form action="/staff/materialMg/rentalAdd" method="get">
 		<button>新規貸出</button>
 	</form>
 
-	<form action="/staff/materialMg/return" method="get">
-		<button>返却</button>
-	</form>
+
 	<br>
 	<a href="/staff/materialMg">戻る</a>
 
 </body>
 <footer></footer>
+
 </html>
