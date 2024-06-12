@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+table {
+	width: 60%;
+	/* テーブルの幅をページの幅の80%に設定 */
+	margin: 0 auto;
+	/* テーブルを中央に配置 */
+	border-collapse: separate;
+	/* セルの境界線を分離 */
+	border-spacing: 8px;
+	/* 行間隔を設定 */
+}
+
+td,
+th {
+	padding: 8px;
+	/* セルの余白を設定 */
+	font-size: 8px;
+	/* 文字サイズを設定 */
+	text-align: center;
+	/* テキストを中央揃えに設定 */
+}
+
+button {
+	background-color: white;
+	border: 0px;
+	padding: 15px 25px;
+	/* ボタンの余白を設定 */
+	font-size: 20px;
+	/* ボタンの文字サイズを設定 */
+
+}
+
+td input[type="text"] {
+	width: 100%;
+	/* テキストボックスの幅を親セルに合わせる */
+	height: 80%;
+	/* テキストボックスの高さを親セルに合わせる */
+	box-sizing: border-box;
+	/* テキストボックスのサイズを調整する際に、borderやpaddingも含める */
+	padding: 20px;
+	/* テキストボックスの内側の余白を設定 */
+	font-size: 32px;
+	/* テキストボックスの文字サイズを設定 */
+	border: none;
+	/* テキストボックスの枠線を消す */
+}
+
+input{
+	font-size: 60px;
+	max-width: 70%;
+	max-height: 80px;
+}
+button.a{
+	font-size: 60px;
+	margin-left: 60px;
+}
+
