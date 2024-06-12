@@ -12,7 +12,7 @@
 		<h1>返却処理</h1>
 	</header>
 	以下の貸出中の資料を返却にしますか？
-	<form action="/staff/materialMg/return" method="post">
+	<form th:action="@{/staff/materialMg/{id}/return(id=${lending.id})}" method="post">
 	<table border="1">
 		<tr>
 			<th>貸出ID</th>

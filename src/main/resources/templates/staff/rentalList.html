@@ -15,7 +15,7 @@
 
 	<span th:text="${error}" style="color:red;"></span>
 
-	<table border="1" th:if="${lendings}">
+	<table border="1">
 		<tr>
 			<th>貸出ID</th>
 			<th>利用者</th>
@@ -50,7 +50,7 @@
 				</form>
 			</td>
 			<td>
-				<form th:action="@{/staff/materialMg/{id}/return(id=${lending.id}" method="get">
+				<form th:action="@{/staff/materialMg/{id}/return(id=${lending.id})}" method="get">
 					<button>返却</button>
 				</form>
 			</td>
