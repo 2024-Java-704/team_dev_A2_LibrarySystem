@@ -21,7 +21,7 @@
 			</tr>
 			<tr>
 				<th>分類番号</th>
-				<td th:text="${bookOrder.category.categoriesNum}"></td>
+				<td th:text="${bookOrder.category.categoryNum}"></td>
 			</tr>
 			<tr>
 				<th>タイトル</th>
@@ -30,23 +30,23 @@
 			<th>タイトル（ふりがな）</th>
 			<td th:text="${bookOrder.hurigana}"></td>
 			<tr>
-				<td>著者名</td>
+				<th>著者名</th>
 				<td th:text="${bookOrder.author}"></td>
 			</tr>
 			<tr>
-				<td>出版社</td>
+				<th>出版社</th>
 				<td th:text="${bookOrder.publisher}"></td>
 			</tr>
 			<tr>
-				<td>発行年</td>
+				<th>発行年</th>
 				<td th:text="${bookOrder.pubYear}"></td>
 			</tr>
 			<tr>
-				<td>登録日</td>
+				<th>登録日</th>
 				<td th:text="${bookOrder.regDay}"></td>
 			</tr>
 			<tr>
-				<td>所属図書館</td>
+				<th>所属図書館</th>
 				<td th:text="${bookOrder.library.name}"></td>
 			</tr>
 			<tr>

@@ -45,15 +45,82 @@ public class Lending {
 		this.book = book;
 	}
 
-	public Lending(Integer id, User user, Book book, LocalDate lendDate, LocalDate returnedDate, Reservation reservation,
+	public Lending(User user, Book book, LocalDate lendDate, LocalDate limitDate, Reservation reservation,
 			LibraryStaff staff) {
 		this.user = user;
 		this.book = book;
 		this.lendDate = lendDate;
-		this.returnedDate = returnedDate;
+		this.limitDate = limitDate;
 		this.reservation = reservation;
 		this.staff = staff;
 
+	}
+
+	public Lending(User user, Book book, LocalDate lendDate, LocalDate limitDate, LibraryStaff staff) {
+		this.user = user;
+		this.book = book;
+		this.lendDate = lendDate;
+		this.limitDate = limitDate;
+		this.reservation = null;
+		this.staff = staff;
+
+	}
+
+	public Lending(Integer id, User user, Book book, LocalDate lendDate, LocalDate limitDate,
+			Reservation reservation,
+			LibraryStaff staff) {
+		this.id = id;
+		this.user = user;
+		this.book = book;
+		this.lendDate = lendDate;
+		this.limitDate = limitDate;
+		this.reservation = reservation;
+		this.staff = staff;
+
+	}
+	
+	
+
+	public Lending(Integer id, User user, Book book, LocalDate lendDate, LocalDate limitDate, LibraryStaff staff) {
+		this.id = id;
+		this.user = user;
+		this.book = book;
+		this.lendDate = lendDate;
+		this.limitDate = limitDate;
+		this.reservation = null;
+		this.returnedDate = null;
+		this.staff = staff;
+
+	}
+
+	public Lending(Integer id, User user, Book book, LocalDate lendDate, LocalDate limitDate, LocalDate returnedDate,
+			LibraryStaff staff) {
+		this.id = id;
+		this.user = user;
+		this.book = book;
+		this.lendDate = lendDate;
+		this.limitDate = limitDate;
+		this.returnedDate = returnedDate;
+		this.reservation = null;
+		this.staff = staff;
+
+	}
+
+	public Lending(Integer id, User user, Book book, LocalDate lendDate, LocalDate limitDate, LocalDate returnedDate,
+			Reservation reservation, LibraryStaff staff) {
+		this.id = id;
+		this.user = user;
+		this.book = book;
+		this.lendDate = lendDate;
+		this.limitDate = limitDate;
+		this.returnedDate = returnedDate;
+		this.reservation = reservation;
+		this.staff = staff;
+	}
+
+	public Lending(LocalDate lendDate, LocalDate limitDate) {
+		this.lendDate = lendDate;
+		this.limitDate = limitDate;
 	}
 
 	public Integer getId() {
