@@ -44,7 +44,7 @@ public class RentalController {
 	@GetMapping("/staff/materialMg/rentalList")
 	public String index(
 			Model model) {
-
+		
 		List<Lending> lendingList = lendingRepository.findAll();
 
 		if (lendingList.size() == 0) {
