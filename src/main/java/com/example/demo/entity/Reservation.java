@@ -50,9 +50,6 @@ public class Reservation {
 		this.book = book;
 	}
 
-
-
-
 	public Reservation(User user, Book book, LocalDate reservationDate, LocalDate scheduledDate,
 			Library library, Status status) {
 
@@ -64,8 +61,7 @@ public class Reservation {
 		this.status = status;
 	}
 
-
-  public Reservation(Integer id, User user, Book book, LocalDate reservationDate, LocalDate scheduledDate,
+	public Reservation(Integer id, User user, Book book, LocalDate reservationDate, LocalDate scheduledDate,
 			Library library, Status status) {
 		this.id = id;
 		this.user = user;
