@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>注文追加</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>注文追加</title>
 </head>
+
 <body>
-	<h1>注文追加画面</h1>
+	<header>
+		<h1>注文追加画面</h1>
+	</header>
 	<a href="/staff/materialMg/order">前画面に戻る</a>
 	<form action="/staff/materialMg/orderAdd" method="post">
 		<table border="1">
 			<tr>
 				<th>利用者ID</th>
-				<td><input type="number" name="user"required></td>
+				<td><input type="number" name="user" required></td>
 			</tr>
 			<tr>
 				<th>本ID</th>
-				<td><input type="number" name="book"required></td>
+				<td><input type="number" name="book" required></td>
 			</tr>
 			<tr>
 				<th>注文日時</th>
@@ -27,14 +32,16 @@
 			</tr>
 			<tr>
 				<th>注文図書館ID</th>
-				<td><input type="number" name="liburary"required></td>
+				<td><input type="number" name="liburary" required></td>
 			</tr>
 			<tr>
 				<th>状態</th>
-				<td><input type="number" name="status"required></td>
+				<td><input type="number" name="status" required></td>
 			</tr>
 		</table>
 		<button>注文追加</button>
 	</form>
 </body>
+<footer></footer>
+
 </html>

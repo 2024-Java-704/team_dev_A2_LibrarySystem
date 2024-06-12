@@ -1,62 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>本詳細</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>本詳細</title>
 </head>
+
 <body>
+	<header></header>
 	<th:block th:if="${bookDetail}">
-	<table border="1">
-		<tr>
-			<th>ID</th>
-			<td th:text="${bookDetail.id}"></td>
-		</tr>
-		<tr>
-			<th>分類番号</th>
-			<td th:text="${bookDetail.category.categoriesNum}"></td>
-		</tr>
-		<tr>
-			<th>タイトル</th>
-			<td th:text="${bookDetail.title}"></td>
-		</tr>
+		<table border="1">
+			<tr>
+				<th>ID</th>
+				<td th:text="${bookDetail.id}"></td>
+			</tr>
+			<tr>
+				<th>分類番号</th>
+				<td th:text="${bookDetail.category.categoriesNum}"></td>
+			</tr>
+			<tr>
+				<th>タイトル</th>
+				<td th:text="${bookDetail.title}"></td>
+			</tr>
 			<th>タイトル（ふりがな）</th>
 			<td th:text="${bookDetail.hurigana}"></td>
-		<tr>
-			<td>著者名</td>
-			<td th:text="${bookDetail.author}"></td>
-		</tr>
-		<tr>
-			<td>出版社</td>
-			<td th:text="${bookDetail.publisher}"></td>
-		</tr>
-		<tr>
-			<td>発行年</td>
-			<td th:text="${bookDetail.pubYear}"></td>
-		</tr>
-		<tr>
-			<td>登録日</td>
-			<td th:text="${bookDetail.regDay}"></td>
-		</tr>
-		<tr>
-			<td>所属図書館</td>
-			<td th:text="${bookDetail.library.name}"></td>
-		</tr>
-		<tr>
-			<th>状態</th>
-			<td th:text="${bookDetail.condition.name}"></td>
-		</tr>
-		<tr>
-			<th>貸出回数</th>
-			<td th:text="${bookDetail.cnt}"></td>
-		</tr>
-	</table>
+			<tr>
+				<td>著者名</td>
+				<td th:text="${bookDetail.author}"></td>
+			</tr>
+			<tr>
+				<td>出版社</td>
+				<td th:text="${bookDetail.publisher}"></td>
+			</tr>
+			<tr>
+				<td>発行年</td>
+				<td th:text="${bookDetail.pubYear}"></td>
+			</tr>
+			<tr>
+				<td>登録日</td>
+				<td th:text="${bookDetail.regDay}"></td>
+			</tr>
+			<tr>
+				<td>所属図書館</td>
+				<td th:text="${bookDetail.library.name}"></td>
+			</tr>
+			<tr>
+				<th>状態</th>
+				<td th:text="${bookDetail.condition.name}"></td>
+			</tr>
+			<tr>
+				<th>貸出回数</th>
+				<td th:text="${bookDetail.cnt}"></td>
+			</tr>
+		</table>
 	</th:block>
 	<form th:action="@{/staff/staffMg/{bookId}/order(bookId=${bookDetail.id})}" method="get">
 		<button>予約・注文</button>
 	</form>
-		<form th:action="@{/staff/staffMg/{bookId}/lend(bookId=${bookDetail.id})}" method="get">
+	<form th:action="@{/staff/staffMg/{bookId}/lend(bookId=${bookDetail.id})}" method="get">
 		<button>貸出</button>
 	</form>
 	<a th:href="/staff/{id}/bookdetail(id=${bookDetail.id})">戻る</a>
 </body>
+<footer></footer>
+
 </html>
