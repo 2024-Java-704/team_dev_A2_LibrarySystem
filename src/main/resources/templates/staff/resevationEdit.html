@@ -1,40 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 </head>
-
 <body>
-	<header>
-		<h1>予約一覧</h1>
-	</header>
-	<form action="/" method="post">
-
+  <header>
+<h1>予約更新</h1>
+  </header>
+<a href="/staff/materiaMg/reservation">戻る</a>
+<form th:action="@{/staff/materiaMg/{reservationId}/reservationEdit(reservationId=${reservation.id})}" method="post">
+	<table border="1">
 		<tr>
-			<table border="1">
-				<th>予約ID</th>
-				<th> <input type.txt="" value="ID"></th>
-		</tr>
-		<tr>
-			<th>利用者ID</th>
-			<th> <input type.txt="" value="利用者ID"></th>
-		</tr>
-		<tr>
-			<th>パスワード</th>
-			<th> <input type.txt="" value="ID"></th>
-		</tr>
-		<tr>
-			<th>本ID</th>
-			<th> <input type.txt="" value="本ID"></th>
-		</tr>
-
-		<button>更新</button>
-	</form>
-	<a href="リンク先のパス">戻る</a>
-</body>
-<footer></footer>
-
-</html>
+			<th>予約ID</th>
+			<td th:text="${reservation.id}"></td>
+			</tr>
+			
+			<tr>
+				<th>利用者ID</th>
+				<td>
+					<input type="number" name="user" th:value="${reservation.user.id}" required>
+				</td>
+			</tr>
+			<tr>
+				<th>本ID</th>
+				<td>
+					<input type="number" name="book" th:value="${reservation.book.id}" required>
+				</td>
+			</tr>
+			<tr>
+				<th>予約日</th>
+				<td>
+					<input type="date" name="reservationDate" th:value="${reservation.reservationDate}" required>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>貸出予定日</th>
+				<td>
+					<input type="date" name="scheduledDate" th:value="${reservation.scheduledDate}" required>
+				</td>
+			</tr>
+			<tr>
+				<th>予約図書館ID</th>
+				<td>
+					<input type="number" name="library" th:value="${reservation.library.id}" required>
+				</td>
+			</tr>
+			<tr>
+				<th>状況ID</th>
+				<td>
+					<input type="number" name="status" th:value="${reservation.status.id}" required>
+				</td>
+			</tr>
+			</table>
+			<button>予約変更</button>
+			</form>
+			</body>
+			
+			</html>

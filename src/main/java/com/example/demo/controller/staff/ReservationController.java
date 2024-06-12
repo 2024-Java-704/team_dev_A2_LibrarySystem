@@ -1,5 +1,6 @@
 package com.example.demo.controller.staff;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,39 +11,110 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.entity.Book;
+import com.example.demo.entity.Library;
 import com.example.demo.entity.Reservation;
+import com.example.demo.entity.Status;
+import com.example.demo.entity.User;
+import com.example.demo.repository.BookRepository;
+import com.example.demo.repository.LibraryRepository;
 import com.example.demo.repository.ReservationRepository;
+import com.example.demo.repository.StatusRepository;
+import com.example.demo.repository.UserRepository;
+
+
 
 @Controller
 public class ReservationController {
 
 	@Autowired
-	ReservationRepository reservationRepository;
-
-	@GetMapping("/staff/staffMG/reservationList")
-	public String index() {
-		return "/staff/resevationList";
-	}
-
-	@PostMapping("/staff/staffMG/reservationAdd")
-	public String reservationAdd(@RequestParam("category") String title,
-			@RequestParam("title") String category,
-			@RequestParam("author") String author,
-			@RequestParam("publisher") String publisher,
-			@RequestParam("pubYear") String pubYear,
-			Model model) {
-
+	private ReservationRepository reservationRepository;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private BookRepository bookRepository;
+	@Autowired
+	private LibraryRepository libraryRepository;
+	@Autowired
+	private StatusRepository statusRepository;
+	
+	@GetMapping("/staff/materiaMg/reservationList")
+	public String index(@RequestParam(value = "reservation",defaultValue="") Integer reservation, Model model) {
 		List<Reservation> reservationList = reservationRepository.findAll();
-		model.addAttribute("reservations", reservationList);
-
+		model.addAttribute("reservationList",reservationList);
+		return "/staff/reservationList";
+	}
+	
+	
+	
+	@GetMapping("/staff/materiaMg/reservationAdd")
+	public String add(Model model) {
+		
+		LocalDate today = LocalDate.now();
+		LocalDate scheduledDate = today.plusWeeks(1);
+		
+		model.addAttribute("reservationDate", today);
+		model.addAttribute("scheduledDate", scheduledDate);
+		
 		return "/staff/reservationAdd";
 	}
-
-	@PostMapping("/reservationList/{id}/delete")
-	public String delete(@PathVariable("id") Integer id, Model model) {
-
-		reservationRepository.deleteById(id);
-
-		return "redirect:/reservationList";
+	
+	
+	@PostMapping("/staff/materiaMg/reservationAdd")
+	public String reservationAdd(@RequestParam(value = "user", defaultValue = "") Integer user_id,
+			@RequestParam(value = "book", defaultValue = "") Integer book_id,
+			@RequestParam(value = "reservationDate", defaultValue = "") LocalDate reservationDate,
+			@RequestParam(value = "scheduledDate", defaultValue = "") LocalDate scheduledDate,
+			@RequestParam(value = "library", defaultValue = "") Integer library_id,
+			@RequestParam(value = "status", defaultValue = "") Integer status_id,
+			Model model) {
+		
+		User user = userRepository.findById(user_id).get();
+		Book book = bookRepository.findById(book_id).get();
+		Library library = libraryRepository.findById(library_id).get();
+		Status status = statusRepository.findById(status_id).get();
+		
+		Reservation orderReservation = new Reservation(user, book, reservationDate, scheduledDate, library, status);
+		reservationRepository.save(orderReservation);
+		return "redirect:/staff/materiaMg/reservationList";
 	}
+	@GetMapping("/staff/materiaMg/{id}/reservationEdit")
+	public String edits(@PathVariable("id") Integer id,
+			Model model) {
+		model.addAttribute("id", id);
+		Reservation reservation = reservationRepository.findById(id).get();
+		model.addAttribute("reservation", reservation);
+		return "/staff/reservationEdit";
+	}
+			
+	@PostMapping("/staff/materiaMg/{id}/reservationEdit")
+	public String edits(@PathVariable("id") Integer id,
+			@RequestParam(value = "user", defaultValue = "") Integer user_id,
+			@RequestParam(value = "book", defaultValue = "") Integer book_id,
+			@RequestParam(value = "reservationDate", defaultValue = "") LocalDate reservationDate,
+			@RequestParam(value = "scheduledDate", defaultValue = "") LocalDate scheduledDate,
+			@RequestParam(value = "library", defaultValue = "") Integer library_id,
+			@RequestParam(value = "status", defaultValue = "") Integer status_id,
+			Model model) {
+		User user = userRepository.findById(user_id).get();
+		Book book = bookRepository.findById(book_id).get();
+		Library library = libraryRepository.findById(library_id).get();
+		Status status = statusRepository.findById(status_id).get();
+		Reservation orderReservation = new Reservation(id, user, book, reservationDate, scheduledDate, library, status);
+		reservationRepository.save(orderReservation);
+		return "redirect:/staff/materiaMg/reservationList";
+	}
+	
+	@PostMapping("/staff/materiaMg/{id}/delete")
+	public String delete(@PathVariable("id") Integer id,
+			Model model
+			) {
+		
+		reservationRepository.deleteById(id);
+		return "redirect:/staff/materiaMg/reservationList";
+	}
+	
+	
 }
+
+
