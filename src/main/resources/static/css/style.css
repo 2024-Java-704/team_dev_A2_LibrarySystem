@@ -11,6 +11,13 @@ header, nav, footer {
 	padding-top: 5px; /* 内側余白(上) */
 	padding-bottom: 5px; /* 内側余白(下) */
 }
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background: #45496a;
+}
 /* ヘッダー、ナビゲーション内リンク */
 header a, nav a {
 	color: #ffffff;

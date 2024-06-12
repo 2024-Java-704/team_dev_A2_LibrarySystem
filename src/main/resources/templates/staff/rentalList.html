@@ -45,8 +45,8 @@
 				</form>
 			</td>
 			<td>
-				<form th:action="@{/staff/materialMg/{id}/rentalDelete(id=${lending.id})}" method="post">
-					<button>削除</button>
+				<form th:action="@{/staff/materialMg/{id}/rentalDelete(id=${lending.id})}" class="deleteForm" method="post">
+					<button class="deleteButton">削除</button>
 				</form>
 			</td>
 			<td>
@@ -67,4 +67,28 @@
 </body>
 <footer></footer>
 
+<script type="text/javascript">
+	
+	let deleteButtons = document.querySelectorAll(".deleteButton");
+	let deleteForms = document.querySelectorAll(".deleteForm");
+	
+	deleteButtons.forEach(function(deleteButton, i){
+		
+		deleteButton.addEventListener("click", (event) => {
+			event.preventDefault();
+			
+			console.log(deleteForms);
+			
+			// 「OK」時の処理開始 ＋ 確認ダイアログの表示
+			if (window.confirm('本当に削除しますか？')) {
+				deleteForms[i].submit();
+			}
+	
+			else {// 「キャンセル」時の処理開始
+				window.alert('キャンセルされました'); // 警告ダイアログを表示
+			}
+		});
+	});
+
+</script>
 </html>
