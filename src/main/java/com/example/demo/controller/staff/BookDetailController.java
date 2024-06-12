@@ -51,21 +51,12 @@ public class BookDetailController {
 	public String indexBookDetail(
 			@PathVariable("id") Integer id,
 			Model model) {
-
 		Book book = bookRepository.findById(id).get();
-		//		Integer libraryId = libraryStaffRepository.findById(account.getId()).get();
-		//		String reserve = null;
-		//		if (book.getLibrary().getId() == account.getId()) {
-		//			reserve = "予約";
-		//		} else {
-		//			reserve = "発注";
-		//		}
-		//		model.addAttribute("reserve", reserve);
 		model.addAttribute("bookDetail", book);
 		return "/staff/bookDetail";
 	}
 
-	@GetMapping("/staff/staffMg/{bookId}/order")
+	@PostMapping("/staff/staffMg/{bookId}/order")
 	public String bookOrder(
 			@PathVariable("bookId") Integer id,
 			Model model) {
@@ -74,7 +65,7 @@ public class BookDetailController {
 		return "/staff/bookOrder";
 	}
 
-	@PostMapping("/staff/staffMg/{bookId}/order")
+	@GetMapping("/staff/staffMg/{bookId}/order")
 	public String bookReserve(
 			@PathVariable("bookId") Integer id,
 			@RequestParam(name = "userId", defaultValue = "") Integer userId,
