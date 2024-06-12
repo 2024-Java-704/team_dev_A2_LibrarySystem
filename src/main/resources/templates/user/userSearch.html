@@ -16,12 +16,13 @@
 
 	<table border="1">
 		<tr>
-			<td>資料ID</td>
-			<td>分類番号</td>
-			<td>タイトル</td>
-			<td>著者</td>
-			<td>出版社</td>
-			<td>出版日</td>
+			<th>資料ID</th>
+			<th>分類番号</th>
+			<th>タイトル</th>
+			<th>著者</th>
+			<th>出版社</th>
+			<th>出版日</th>
+			<th>詳細</th>
 		</tr>
 		<tr th:each="book:${books}">
 			<td th:text="${book.id}"></td>
@@ -30,8 +31,14 @@
 			<td th:text="${book.author}"></td>
 			<td th:text="${book.publisher}"></td>
 			<td th:text="${book.pubYear}"></td>
+			<td>
+				<form th:action="@{/user/{id}/bookDetail(id=${book.id})}" method="get">
+					<button>詳細</button>
+				</form>
+			</td>
 		</tr>			
 	</table>
+	<a href="/user/userTop">戻る</a>
 </body>
 
 </html>

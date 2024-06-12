@@ -23,6 +23,7 @@ import com.example.demo.model.Account;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.LendingRepository;
 import com.example.demo.repository.LibraryStaffRepository;
+import com.example.demo.repository.ReservationRepository;
 import com.example.demo.repository.StatusRepository;
 import com.example.demo.repository.UserRepository;
 
@@ -45,6 +46,9 @@ public class BookDetailController {
 	LendingRepository lendingRepository;
 
 	@Autowired
+	ReservationRepository reservationRepository;
+
+	@Autowired
 	Account account;
 
 	@GetMapping("/staff/{id}/bookdetail") //詳細表示
@@ -56,7 +60,7 @@ public class BookDetailController {
 		return "/staff/bookDetail";
 	}
 
-	@PostMapping("/staff/staffMg/{bookId}/order")
+	@GetMapping("/staff/staffMg/{bookId}/order")
 	public String bookOrder(
 			@PathVariable("bookId") Integer id,
 			Model model) {
@@ -65,46 +69,31 @@ public class BookDetailController {
 		return "/staff/bookOrder";
 	}
 
-	@GetMapping("/staff/staffMg/{bookId}/order")
+	@PostMapping("/staff/staffMg/{bookId}/order")
 	public String bookReserve(
 			@PathVariable("bookId") Integer id,
 			@RequestParam(name = "userId", defaultValue = "") Integer userId,
 			@RequestParam(name = "userPassword", defaultValue = "") String userPassword,
 			Model model) {
 		List<String> errorList = new ArrayList<>();
-		User user = userRepository.findByIdAndPassword(userId, userPassword).get(0);
+		List<User> userList = userRepository.findByIdAndPassword(userId, userPassword);
 		if (userId == null) {
 			errorList.add("利用者IDを入力してください");
 		}
-		if (userPassword == "") {
+		if (userPassword.equals("")) {
 			errorList.add("パスワードを入力してください");
 		}
-		if (user == null) {
+		if (userList.size() == 0) {
 			errorList.add("該当する利用者が見つかりませんでした");
 		}
 		Book book = bookRepository.findById(id).get();
-		LocalDate today = LocalDate.now();
+		Integer staffId = account.getId();
+		System.out.println("==================");
+		System.out.println(staffId);
+		System.out.println("==================");
 		LibraryStaff librarystaff = libraryStaffRepository.findById(account.getId()).get();
 		Library library = librarystaff.getLibrary();
-		Status status = statusRepository.findById(1).get();
 		Integer conditionId = book.getCondition().getId();
-		LocalDate scheduled = null;
-		Lending lending = lendingRepository.findFirstByBookIdOrderByIdDesc(book.getId());
-
-		//外の図書館にある＆貸出可能
-		if (librarystaff.getLibrary().getId() != book.getLibrary().getId() && (conditionId == 1)) {
-			scheduled = today.plusDays(2);
-		}
-		//自分の図書館にある＆貸出中
-		if ((librarystaff.getLibrary().getId() == book.getLibrary().getId())
-				&& (conditionId != 1)) {
-			scheduled = lending.getLimitDate().plusDays(1);
-		}
-		//外の図書館にある＆貸出中
-		if ((librarystaff.getLibrary().getId() != book.getLibrary().getId()) && (conditionId != 1)) {
-			scheduled = lending.getLimitDate().plusDays(2);
-		}
-		//エラーチェック
 		if (conditionId == 1 && (librarystaff.getLibrary().getId() == book.getLibrary().getId())) {
 			errorList.add("この資料は本図書館で貸出可能です");
 		}
@@ -113,10 +102,34 @@ public class BookDetailController {
 			model.addAttribute("bookOrder", book);
 			return "/staff/bookOrder";
 		} else {
+			User user = userList.get(0);
+			LocalDate today = LocalDate.now();
+			Status status = statusRepository.findById(1).get();
+
+			LocalDate scheduled = null;
+			Lending lending = lendingRepository.findFirstByBookIdOrderByIdDesc(book.getId());
+
+			//外の図書館にある＆貸出可能
+			if (librarystaff.getLibrary().getId() != book.getLibrary().getId() && (conditionId == 1)) {
+				scheduled = today.plusDays(2);
+			}
+			//自分の図書館にある＆貸出中
+			if ((librarystaff.getLibrary().getId() == book.getLibrary().getId())
+					&& (conditionId != 1)) {
+				scheduled = lending.getLimitDate().plusDays(1);
+			}
+			//外の図書館にある＆貸出中
+			if ((librarystaff.getLibrary().getId() != book.getLibrary().getId()) && (conditionId != 1)) {
+				scheduled = lending.getLimitDate().plusDays(2);
+			}
 			Reservation reservation = new Reservation(user, book, today, scheduled, library, status);
-			model.addAttribute("reservation", reservation);
+			reservationRepository.save(reservation);
+			Reservation reserved = reservationRepository.findByUserIdAndBookIdOrderByIdDesc(userId, id).get(0);
+			model.addAttribute("reservation", reserved);
 			return "/staff/bookOrderEnd";
 		}
+
+		//エラーチェック
 
 	}
 

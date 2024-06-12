@@ -1,17 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>発注注文画面</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>予約・注文完了</title>
 </head>
+
 <body>
- 　<h1>発注しました</h1>
-		
-			<th>ID</th>
-			
-			
-		
-	
-	<a href="リンク先のパス">本一覧に戻る</a>
+	<header></header>
+	<h1>以下の内容で予約・注文が完了しました</h1>
+	<th:block th:if="${reservation}">
+		<table border="1">
+			<tr>
+				<th>予約・注文ID</th>
+				<td th:text="${reservation.id}"></td>
+			</tr>
+			<tr>
+				<th>利用者ID</th>
+				<td th:text="${reservation.user.id}"></td>
+			</tr>
+			<tr>
+				<th>利用者名</th>
+				<td th:text="${reservation.user.name}"></td>
+			</tr>
+			<th>資料ID</th>
+			<td th:text="${reservation.book.id}"></td>
+			<tr>
+				<th>タイトル</th>
+				<td th:text="${reservation.book.title}"></td>
+			</tr>
+			<tr>
+				<th>予約・注文日</th>
+				<td th:text="${reservation.reservationDate}"></td>
+			</tr>
+			<tr>
+				<th>受け取り予定日</th>
+				<td th:text="${reservation.scheduledDate}"></td>
+			</tr>
+			<tr>
+				<th>受け取り図書館</th>
+				<td th:text="${reservation.library.name}"></td>
+			</tr>
+		</table>
+	</th:block>
+	<a href="/user/userTop">戻る</a>
 </body>
+<footer></footer>
 </html>
