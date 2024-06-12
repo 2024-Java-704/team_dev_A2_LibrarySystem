@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -19,8 +20,14 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 	List<Book> findByPublisherContaining(String publisher);
 
 	List<Book> findByPubYear(LocalDate pubYear);
-	
+
 	List<Book> findAllByOrderByCnt();
+
 	List<Book> findAllByOrderByPubYear();
+
 	List<Book> findAllByOrderByHurigana();
+
+	List<Book> findByCategory(Optional<Category> findById);
+
+	List<Book> findByHuriganaContaining(String keyword);
 }

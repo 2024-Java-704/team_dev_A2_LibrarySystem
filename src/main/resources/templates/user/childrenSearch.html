@@ -3,15 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>自己紹介</title>
-    <link href="style.css" rel="stylesheet">
-    <!-- <style>
-        #msg{
-            font-size:60px; 
-            color:#990000;
-            
-        }
-    </style> -->
+    <title>子供用検索ページ</title>
+    <link rel="stylesheet" type="text/css" href="/css/childrenstyle.css">
+    
 </head>
 
 <body>
@@ -23,28 +17,30 @@
 
 
         </header>
-        <div class="main">
+       
+        <form action="/user/childrenSearch" method="post" id="searchForm" >
+				<input type="text" name="keyword" id="disp" placeholder="検索キーワード"  size="120px">
+   				<button class="a" id="ke">検索</button>
+    	</form>
 
-           
-
-<table border="1">
-    <td colspan="8" id="disp">　</td>
-    <td colspan="2"><button id="ke">検索</button></td>
+		<table border="1">
 		<tr>
 			
 			<td colspan="2"><button id="C">全て消す</button></td>
             <td colspan="2"><button id="BS">一文字消す</button></td>
             
             <td colspan="2"><button id="space">スペース</button></td>
-
+            <td></td>
             <td ><button id="huto1">＜</button></td> 
             <td ><button id="huto2">＞</button></td>
-
+            <td></td>
             <td ><button id="daku">゛</button></td>
             <td ><button id="handaku">゜</button></td>
             
 		</tr>
 		<tr>
+            <td><button id="btn56">ゃ</button></td>
+            <td><button id="btn51">ぁ</button></td>
 			<td><button id="btn1">わ</button></td>
 			<td><button id="btn2">ら</button></td>
 			<td><button id="btn3">や</button></td>
@@ -58,9 +54,11 @@
 			
 		</tr>
 		<tr>
-			<td><button id="btn11">　</button></td>
+            <td><button id="btn57">ゅ</button></td>
+            <td><button id="btn52">ぃ</button></td>
+			<td></td>
 			<td><button id="btn12">り</button></td>
-			<td><button id="btn13">　</button></td>
+			<td></td>
 			<td><button id="btn14">み</button></td>
 			<td><button id="btn15">ひ</button></td>
 			<td><button id="btn16">に</button></td>
@@ -70,6 +68,8 @@
 			<td><button id="btn20">い</button></td>
 		</tr>
 		<tr>
+            <td><button id="btn58">ょ</button></td>
+            <td><button id="btn53">ぅ</button></td>
 			<td><button id="btn21">を</button></td>
 			<td><button id="btn22">る</button></td>
 			<td><button id="btn23">ゆ</button></td>
@@ -82,9 +82,11 @@
 			<td><button id="btn30">う</button></td>
 		</tr>
 		<tr>
-			<td><button id="btn31">　</button></td>
+            <td><button id="btn59">っ</button></td>
+            <td><button id="btn54">ぇ</button></td>
+			<td></td>
 			<td><button id="btn32">れ</button></td>
-			<td><button id="btn33">　</button></td>
+			<td></td>
 			<td><button id="btn34">め</button></td>
 			<td><button id="btn35">へ</button></td>
 			<td><button id="btn36">ね</button></td>
@@ -94,6 +96,8 @@
 			<td><button id="btn40">え</button></td>
 		</tr>
 		<tr>
+            <td><button id="btn60">ー</button></td>
+            <td><button id="btn55">ぉ</button></td>
 			<td><button id="btn41">ん</button></td>
 			<td><button id="btn42">ろ</button></td>
 			<td><button id="btn43">よ</button></td>
@@ -108,97 +112,153 @@
        
             
 	</table>
+
 	<script>
 		// ボタンを押下した場合に呼び出される関数
 		function clickBtn(value) {
 			
+		
+			
 			// 表示部分のDOMオブジェクトを取得する
 			var disp = document.querySelector("#disp");
 
-			if ("=" == value) {
-				// イコールボタンだったとき
-				disp.innerHTML = eval(disp.innerHTML); // 一例です。eval関数を使わなくてもOK
+			if ("ke" == value) {
+				
+				var form = document.getElementById("searchForm");
+				
+				//var keyword = disp.value;
+				
+				//検索ボタン
+				//var form = document.createElement("form");
+				//form.method="POST";
+				//form.action="/user/childrenSearch";
+				//document.body.append(form);
+				
+				console.log(form);
+				form.submit();
+				
 			} else if ("C" == value) {
-				disp.innerHTML = null;
+				disp.value = null;
 			} else if("BS"== value){
-                let keyword = disp.textContent;
+                let keyword = disp.value;
                 let keywordLength = keyword.length;
                 let key = keyword.slice(0,keywordLength -1);
-                disp.innerHTML = key;
-            } else if("daku"==value){
-                let keyword = disp.textContent;
-                let keywordLength = keyword.length;
-                let key = keyword.slice(0,keywordLength,0);
-                disp.innerHTML = key;
-            }
-            else {
-				// イコール以外のボタンだったとき
-				if ("" == disp.innerHTML) {
-					// 初期表示（0）だったら数字を置き換える
-					disp.innerHTML = value;
-				} else {
-					// 表示されている文字列にボタンの値の文字をつなげる
-					disp.innerHTML += value;
-				}
+                disp.value = key;
+            }  else if("daku"==value){
+                let keyword = disp.value;
+                //keywordの最後の一文字を取得し、濁点がつけられるか判定
+                let lastChar = keyword.slice(-1); //最後の一文字を取得
+                let daku = ["か","き","く","け","こ","さ","し","す","せ","そ","た","ち","つ","て","と","は","ひ","ふ","へ","ほ","ぱ","ぴ","ぷ","ぺ","ぽ"];
+                let dakuon = ["が","ぎ","ぐ","げ","ご","ざ","じ","ず","ぜ","ぞ","だ","ぢ","づ","で","ど","ば","び","ぶ","べ","ぼ","ば","び","ぶ","べ","ぼ"];
+                let dakuonIndex = daku.indexOf(lastChar); //dataの中にlastCharがあるか判定(あればそのindexを返す。なければ-1を返す)
+                if(dakuonIndex != -1){ //lastCharがdakuに含まれている場合
+                    let dakuonChar = dakuon[dakuonIndex]; //濁音に変換
+                    let key = keyword.slice(0,keyword.length -1); //最後の一文字を削除
+                    disp.value = key + dakuonChar; //濁点をつけた文字を追加して表示
+                }
+            } else if("handaku"==value){
+                let keyword = disp.value;
+                let lastChar = keyword.slice(-1);
+                let handaku = ["は","ひ","ふ","へ","ほ","ば","び","ぶ","べ","ぼ"];
+                let handakuon = ["ぱ","ぴ","ぷ","ぺ","ぽ","ぱ","ぴ","ぷ","ぺ","ぽ"];
                 
-			}
-		}
+                let handakuonIndex = handaku.indexOf(lastChar);
+                if(handakuonIndex != -1){
+                    let handakuonChar = handakuon[handakuonIndex];
+                    let key = keyword.slice(0,keyword.length -1);
+                    disp.value = key + handakuonChar;        
+                }
+                            
+             } else {
+                    // ひらがなのボタンだったとき
+                    console.log(value);
+                    
+                    if ("" == disp.value) {
+                        // 初期表示（""）だったら文字を置き換える
+                        disp.value = value;
+                    } else {
+                        // 表示されている文字列にボタンの値の文字をつなげる
+                        disp.value += value;
+                    }
+			    }
+		    }
 
 		// ボタンのイベントハンドラを登録
-		document.querySelector("#btn1").addEventListener("click", function() {clickBtn("わ")});
-		document.querySelector("#btn2").addEventListener("click", function() {clickBtn("ら")});
-		document.querySelector("#btn3").addEventListener("click", function() {clickBtn("や")});
-		document.querySelector("#btn4").addEventListener("click", function() {clickBtn("ま")});
-		document.querySelector("#btn5").addEventListener("click", function() {clickBtn("は")});
-		document.querySelector("#btn6").addEventListener("click", function() {clickBtn("な")});
-		document.querySelector("#btn7").addEventListener("click", function() {clickBtn("た")});
-		document.querySelector("#btn8").addEventListener("click", function() {clickBtn("さ")});
-		document.querySelector("#btn9").addEventListener("click", function() {clickBtn("か")});
-		document.querySelector("#btn10").addEventListener("click", function() {clickBtn("あ")});
-		// document.querySelector("#btn11").addEventListener("click", function() {clickBtn("  ")});
-		document.querySelector("#btn12").addEventListener("click", function() {clickBtn("り")});
-		// document.querySelector("#btn13").addEventListener("click", function() {clickBtn("  ")});
-		document.querySelector("#btn14").addEventListener("click", function() {clickBtn("み")});
-		document.querySelector("#btn15").addEventListener("click", function() {clickBtn("ひ")});
-		document.querySelector("#btn16").addEventListener("click", function() {clickBtn("に")});
-		document.querySelector("#btn17").addEventListener("click", function() {clickBtn("ち")});
-		document.querySelector("#btn18").addEventListener("click", function() {clickBtn("し")});
-		document.querySelector("#btn19").addEventListener("click", function() {clickBtn("き")});
-		document.querySelector("#btn20").addEventListener("click", function() {clickBtn("い")});
-		document.querySelector("#btn21").addEventListener("click", function() {clickBtn("を")});
-		document.querySelector("#btn22").addEventListener("click", function() {clickBtn("る")});
-		document.querySelector("#btn23").addEventListener("click", function() {clickBtn("ゆ")});
-		document.querySelector("#btn24").addEventListener("click", function() {clickBtn("む")});
-		document.querySelector("#btn25").addEventListener("click", function() {clickBtn("ふ")});
-		document.querySelector("#btn26").addEventListener("click", function() {clickBtn("ぬ")});
-		document.querySelector("#btn27").addEventListener("click", function() {clickBtn("つ")});
-		document.querySelector("#btn28").addEventListener("click", function() {clickBtn("す")});
-		document.querySelector("#btn29").addEventListener("click", function() {clickBtn("く")});
-		document.querySelector("#btn30").addEventListener("click", function() {clickBtn("う")});
-		// document.querySelector("#btn31").addEventListener("click", function() {clickBtn("  ")});
-		document.querySelector("#btn32").addEventListener("click", function() {clickBtn("れ")});
-		// document.querySelector("#btn33").addEventListener("click", function() {clickBtn("  ")});
-		document.querySelector("#btn34").addEventListener("click", function() {clickBtn("め")});
-		document.querySelector("#btn35").addEventListener("click", function() {clickBtn("へ")});
-		document.querySelector("#btn36").addEventListener("click", function() {clickBtn("ね")});
-		document.querySelector("#btn37").addEventListener("click", function() {clickBtn("て")});
-		document.querySelector("#btn38").addEventListener("click", function() {clickBtn("せ")});
-		document.querySelector("#btn39").addEventListener("click", function() {clickBtn("け")});
-		document.querySelector("#btn40").addEventListener("click", function() {clickBtn("え")});
-		document.querySelector("#btn41").addEventListener("click", function() {clickBtn("ん")});
-		document.querySelector("#btn42").addEventListener("click", function() {clickBtn("ろ")});
-		document.querySelector("#btn43").addEventListener("click", function() {clickBtn("よ")});
-		document.querySelector("#btn44").addEventListener("click", function() {clickBtn("も")});
-		document.querySelector("#btn45").addEventListener("click", function() {clickBtn("ほ")});
-		document.querySelector("#btn46").addEventListener("click", function() {clickBtn("の")});
-		document.querySelector("#btn47").addEventListener("click", function() {clickBtn("と")});
-		document.querySelector("#btn48").addEventListener("click", function() {clickBtn("そ")});
-		document.querySelector("#btn49").addEventListener("click", function() {clickBtn("こ")});
-		document.querySelector("#btn50").addEventListener("click", function() {clickBtn("お")});
-		document.querySelector("#C").addEventListener("click", function() {clickBtn("C")});
-        document.querySelector("#space").addEventListener("click", function() {clickBtn(" ")});
-        document.querySelector("#BS").addEventListener("click", function() {clickBtn("BS")});
-        document.querySelector("#daku").addEventListener("click", function() {clickBtn("daku")});
+		document.querySelector("#btn1").addEventListener("click", function(event) {event.preventDefault(); clickBtn("わ")});
+		document.querySelector("#btn2").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ら")});
+		document.querySelector("#btn3").addEventListener("click", function(event) {event.preventDefault(); clickBtn("や")});
+		document.querySelector("#btn4").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ま")});
+		document.querySelector("#btn5").addEventListener("click", function(event) {event.preventDefault(); clickBtn("は")});
+		document.querySelector("#btn6").addEventListener("click", function(event) {event.preventDefault(); clickBtn("な")});
+		document.querySelector("#btn7").addEventListener("click", function(event) {event.preventDefault(); clickBtn("た")});
+		document.querySelector("#btn8").addEventListener("click", function(event) {event.preventDefault(); clickBtn("さ")});
+		document.querySelector("#btn9").addEventListener("click", function(event) {event.preventDefault(); clickBtn("か")});
+		document.querySelector("#btn10").addEventListener("click", function(event) {event.preventDefault(); clickBtn("あ")});
+		// document.querySelector("#btn11").addEventListener("click", function(event) {event.preventDefault(); clickBtn("  ")});
+		document.querySelector("#btn12").addEventListener("click", function(event) {event.preventDefault(); clickBtn("り")});
+		// document.querySelector("#btn13").addEventListener("click", function(event) {event.preventDefault(); clickBtn("  ")});
+		document.querySelector("#btn14").addEventListener("click", function(event) {event.preventDefault(); clickBtn("み")});
+		document.querySelector("#btn15").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ひ")});
+		document.querySelector("#btn16").addEventListener("click", function(event) {event.preventDefault(); clickBtn("に")});
+		document.querySelector("#btn17").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ち")});
+		document.querySelector("#btn18").addEventListener("click", function(event) {event.preventDefault(); clickBtn("し")});
+		document.querySelector("#btn19").addEventListener("click", function(event) {event.preventDefault(); clickBtn("き")});
+		document.querySelector("#btn20").addEventListener("click", function(event) {event.preventDefault(); clickBtn("い")});
+		document.querySelector("#btn21").addEventListener("click", function(event) {event.preventDefault(); clickBtn("を")});
+		document.querySelector("#btn22").addEventListener("click", function(event) {event.preventDefault(); clickBtn("る")});
+		document.querySelector("#btn23").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ゆ")});
+		document.querySelector("#btn24").addEventListener("click", function(event) {event.preventDefault(); clickBtn("む")});
+		document.querySelector("#btn25").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ふ")});
+		document.querySelector("#btn26").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ぬ")});
+		document.querySelector("#btn27").addEventListener("click", function(event) {event.preventDefault(); clickBtn("つ")});
+		document.querySelector("#btn28").addEventListener("click", function(event) {event.preventDefault(); clickBtn("す")});
+		document.querySelector("#btn29").addEventListener("click", function(event) {event.preventDefault(); clickBtn("く")});
+		document.querySelector("#btn30").addEventListener("click", function(event) {event.preventDefault(); clickBtn("う")});
+		// document.querySelector("#btn31").addEventListener("click", function(event) {event.preventDefault(); clickBtn("  ")});
+		document.querySelector("#btn32").addEventListener("click", function(event) {event.preventDefault(); clickBtn("れ")});
+		// document.querySelector("#btn33").addEventListener("click", function(event) {event.preventDefault(); clickBtn("  ")});
+		document.querySelector("#btn34").addEventListener("click", function(event) {event.preventDefault(); clickBtn("め")});
+		document.querySelector("#btn35").addEventListener("click", function(event) {event.preventDefault(); clickBtn("へ")});
+		document.querySelector("#btn36").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ね")});
+		document.querySelector("#btn37").addEventListener("click", function(event) {event.preventDefault(); clickBtn("て")});
+		document.querySelector("#btn38").addEventListener("click", function(event) {event.preventDefault(); clickBtn("せ")});
+		document.querySelector("#btn39").addEventListener("click", function(event) {event.preventDefault(); clickBtn("け")});
+		document.querySelector("#btn40").addEventListener("click", function(event) {event.preventDefault(); clickBtn("え")});
+		document.querySelector("#btn41").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ん")});
+		document.querySelector("#btn42").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ろ")});
+		document.querySelector("#btn43").addEventListener("click", function(event) {event.preventDefault(); clickBtn("よ")});
+		document.querySelector("#btn44").addEventListener("click", function(event) {event.preventDefault(); clickBtn("も")});
+		document.querySelector("#btn45").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ほ")});
+		document.querySelector("#btn46").addEventListener("click", function(event) {event.preventDefault(); clickBtn("の")});
+		document.querySelector("#btn47").addEventListener("click", function(event) {event.preventDefault(); clickBtn("と")});
+		document.querySelector("#btn48").addEventListener("click", function(event) {event.preventDefault(); clickBtn("そ")});
+		document.querySelector("#btn49").addEventListener("click", function(event) {event.preventDefault(); clickBtn("こ")});
+		document.querySelector("#btn50").addEventListener("click", function(event) {event.preventDefault(); clickBtn("お")});
+        
+        
+		document.querySelector("#btn51").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ぁ")});
+		document.querySelector("#btn52").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ぃ")});
+		document.querySelector("#btn53").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ぅ")});
+		document.querySelector("#btn54").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ぇ")});
+		document.querySelector("#btn55").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ぉ")});
+		document.querySelector("#btn56").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ゃ")});
+		document.querySelector("#btn57").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ゅ")});
+		document.querySelector("#btn58").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ょ")});
+		document.querySelector("#btn59").addEventListener("click", function(event) {event.preventDefault(); clickBtn("っ")});
+		document.querySelector("#btn60").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ー")});
+        
+		document.querySelector("#C").addEventListener("click", function(event) {event.preventDefault(); clickBtn("C")});
+        document.querySelector("#space").addEventListener("click", function(event) {event.preventDefault(); clickBtn(" ")});
+        document.querySelector("#BS").addEventListener("click", function(event) {event.preventDefault(); clickBtn("BS")});
+        document.querySelector("#daku").addEventListener("click", function(event) {event.preventDefault(); clickBtn("daku")});
+        document.querySelector("#handaku").addEventListener("click", function(event) {event.preventDefault(); clickBtn("handaku")});
+
+        document.querySelector("#huto1").addEventListener("click", function(event) {event.preventDefault(); clickBtn("<")});
+        document.querySelector("#huto2").addEventListener("click", function(event) {event.preventDefault(); clickBtn(">")});
+        
+         //document.querySelector("#ke").addEventListener("click",  function() {clickBnt("ke")});
+          document.querySelector("#ke").addEventListener("click", function(event) {event.preventDefault(); clickBtn("ke")});
+        
 	</script>
         </div>
 

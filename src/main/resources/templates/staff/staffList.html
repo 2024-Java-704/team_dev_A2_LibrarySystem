@@ -25,10 +25,10 @@
 			<td th:text="${staff.library.name}"></td>
 			<td th:text="${staff.name}"></td>
 			<form th:action="@{/staff/staffMg/{staffId}/edit(staffId=${staff.id})}" method="Get">
-				<td><button type="submit">変更</button></td>
+				<td><button>変更</button></td>
 			</form>
-			<form id="deleteForm" th:action="@{/staff/{staffId}/delete(staffId=${staff.id})}" method="post">
-				<td><button type="submit">削除</button></td>
+			<form th:action="@{/staff/{staffId}/delete(staffId=${staff.id})}" class="deleteForm" method="post">
+				<td><button class="deleteButton">削除</button></td>
 			</form>
 		</tr>
 	</table>
@@ -37,5 +37,29 @@
 	<a href="/staff/staffTop">TOPに戻る</a>
 </body>
 <footer></footer>
+<script type="text/javascript">
+	
+	let deleteButtons = document.querySelectorAll(".deleteButton");
+	let deleteForms = document.querySelectorAll(".deleteForm");
+	
+	deleteButtons.forEach(function(deleteButton, i){
+		
+		deleteButton.addEventListener("click", (event) => {
+			event.preventDefault();
+			
+			console.log(deleteForms);
+			
+			// 「OK」時の処理開始 ＋ 確認ダイアログの表示
+			if (window.confirm('本当に削除しますか？')) {
+				deleteForms[i].submit();
+			}
+	
+			else {// 「キャンセル」時の処理開始
+				window.alert('キャンセルされました'); // 警告ダイアログを表示
+			}
+		});
+	});
 
+
+</script>
 </html>

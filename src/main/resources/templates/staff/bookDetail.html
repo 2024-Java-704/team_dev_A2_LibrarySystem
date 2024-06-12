@@ -54,7 +54,7 @@
 			</tr>
 		</table>
 	</th:block>
-	<form th:action="@{/staff/staffMg/{bookId}/order(bookId=${bookDetail.id})}" method="post">
+	<form th:action="@{/staff/staffMg/{bookId}/order(bookId=${bookDetail.id})}" method="get">
 		<button>予約・注文</button>
 	</form>
 	<form th:action="@{/staff/staffMg/{bookId}/lend(bookId=${bookDetail.id})}" method="get">
