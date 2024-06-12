@@ -76,7 +76,7 @@ public class ReservationController {
 		
 		Reservation orderReservation = new Reservation(user, book, reservationDate, scheduledDate, library, status);
 		reservationRepository.save(orderReservation);
-		return "redirect:/staff/materiaMg/resevationList";
+		return "redirect:/staff/materialMg/reservationList";
 	}
 	@GetMapping("/staff/materialMg/{id}/reservationEdit")
 	public String edits(@PathVariable("id") Integer id,
@@ -109,9 +109,8 @@ public class ReservationController {
 	public String delete(@PathVariable("id") Integer id,
 			Model model
 			) {
-		
 		reservationRepository.deleteById(id);
-		return "redirect:/staff/materialMg/resevationList";
+		return "redirect:/staff/materialMg/reservationList";
 	}
 	
 	
