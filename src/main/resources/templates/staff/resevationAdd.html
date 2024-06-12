@@ -1,36 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>予約追加</title>
 </head>
-
 <body>
-	<h1>予約一覧</h1>
-	<form action="/" method="post">
+<h1>予約追加</h1>
 
-		<tr>
-			<table border="1">
-				<th>予約ID</th>
-				<th> <input type.txt="" value="ID"></th>
-		</tr>
+<form action="/staff/materiaMg/reservationAdd" method="post">
+	<table action="1">
+		
 		<tr>
 			<th>利用者ID</th>
-			<th> <input type.txt="" value="利用者ID"></th>
+			<td>
+				<input type="number" name="user"required>
+			</td>
 		</tr>
 		<tr>
-			<th>パスワード</th>
-		<th> <input type.txt="" value="ID"></th>
-		</tr>
-<tr>
 			<th>本ID</th>
-			<th> <input type.txt="" value="本ID"></th>
+			<td>
+				<input type="number" name="book"required>
+			</td>
 		</tr>
-
+		<tr>
+			<th>予約日</th>
+			<td>
+				<input type="date" name="reservationDate" th:value="${reservationDate}"required>
+			</td>
+		</tr>
+		<tr>
+			<th>貸出予定日</th>
+			<td>
+				<input type="date" name="scheduledDate" th:value="${scheduledDate}"required>
+			</td>
+		</tr>
+		<tr>
+			<th>予約図書館ID</th>
+			<td>
+				<input type="number" name="library"required>
+			</td>
+		</tr>
+		<tr>
+			<th>状況ID</th>
+			<td>
+				<input type="number" name="status"required>
+			</td>
+		</tr>
+		</table>
 		<button>追加</button>
-	</form>
-	<a href="リンク先のパス">戻る</a>
+		</form>
+				
 </body>
-
 </html>

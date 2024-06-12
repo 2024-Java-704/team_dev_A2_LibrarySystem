@@ -2,32 +2,69 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>予約一覧</title>
 </head>
 <body>
-	<h1>予約一覧</h1>
-	<form action="/" method="post">
+<h1>予約一覧</h1>
+
+<a href="/staff/materiaMg">資料管理に戻る</a>
+<a href="/staff/materiaMg/reservationAdd">追加</a>
+
+<table border="1">
+	<tr>
+		<th>
+			予約ID
+		</th>
+		<th>
+			利用者ID
+		</th>
+		<th>
+			本ID
+		</th>
+		<th>
+			予約日
+		</th>
+		<th>
+			貸出予定日
+		</th>
+		<th>
+			予約図書館ID
+		</th>
+		<th>
+			状況ID
+		</th>
 		
-		<tr>
-				<table border="1">
-			<th>予約ID</th>
-			<th>利用者ID</th>
-			<th>本ID</th>
-			<th>予約日時</th>
-			<th>貸出予定日</th>
-			<th>予約図書館ID</th>
-			<th>状況</th>
+		<th>
+			変更
+		</th>
+		<th>
+			削除
+		</th>
 		</tr>
-		<tr>
-			<th>1</th>
-			<th>3</th>
-			<th>タイトル</a></th>
-			<th>金子拓未</th>
-			<th>TACSOL</th>
-			<th>昨日</th>
-			<th>新品</th>
-		</tr>
-		</form>
-		<a href="リンク先のパス">戻る</a>
+	<tr th:each="reservation : ${reservationList}">
+		<td th:text="${reservation.id}"></td>
+		<td th:text="${reservation.user.name}"></td>
+		<td th:text="${reservation.user_id}"></td>
+		<td th:text="${reservation.reservationDate}"></td>
+		<td th:text="${reservation.scheduledDate}"></td>
+		<td th:text="${reservation.library.name}"></td>
+		<td th:text="${reservation.status.name}"></td>
+		
+		<td>
+			<form th:action="@{/staff/materiaMg/{reservationId}/reservationEdit(reservationId=${reservation.id})}"
+				method="get">
+			<button>変更</button>
+			</form>
+		</td>
+		<td>
+			<form th:action="@{/staff/materiaMg/{reservationId}/delete(reservationId=${reservation.id})}" method="post">
+				<button>削除</button>
+			</form>
+		</td>
+				
+	</tr>
+</table>
+				
 </body>
+
 </html>
