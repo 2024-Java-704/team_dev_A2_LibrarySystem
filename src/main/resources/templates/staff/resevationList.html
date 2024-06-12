@@ -12,8 +12,8 @@
 <header>
 <h1>予約一覧</h1>
   </header>
-<a href="/staff/materiaMg">資料管理に戻る</a>
-<a href="/staff/materiaMg/reservationAdd">追加</a>
+<a href="/staff/materialMg">資料管理に戻る</a>
+<a href="/staff/materialMg/reservationAdd">追加</a>
 
 <table border="1">
 	<tr>
@@ -49,21 +49,21 @@
 	<tr th:each="reservation : ${reservationList}">
 		<td th:text="${reservation.id}"></td>
 		<td th:text="${reservation.user.name}"></td>
-		<td th:text="${reservation.user_id}"></td>
+		<td th:text="${reservation.user.id}"></td>
 		<td th:text="${reservation.reservationDate}"></td>
 		<td th:text="${reservation.scheduledDate}"></td>
 		<td th:text="${reservation.library.name}"></td>
 		<td th:text="${reservation.status.name}"></td>
 		
 		<td>
-			<form th:action="@{/staff/materiaMg/{reservationId}/reservationEdit(reservationId=${reservation.id})}"
+			<form th:action="@{/staff/materialMg/{reservationId}/reservationEdit(reservationId=${reservation.id})}"
 				method="get">
 			<button>変更</button>
 			</form>
 		</td>
 		<td>
-			<form th:action="@{/staff/materiaMg/{reservationId}/delete(reservationId=${reservation.id})}" class="deleteForm" method="post">
-				<button class="deleteButton">削除</button>
+			<form th:action="@{/staff/materialMg/{reservationId}/delete(reservationId=${reservation.id})}" method="post" class="deleteForm">
+				<button>削除</button>
 			</form>
 		</td>
 				

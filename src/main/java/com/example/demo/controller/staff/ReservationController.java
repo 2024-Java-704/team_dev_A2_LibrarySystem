@@ -38,16 +38,16 @@ public class ReservationController {
 	@Autowired
 	private StatusRepository statusRepository;
 	
-	@GetMapping("/staff/materiaMg/reservationList")
+	@GetMapping("/staff/materialMg/reservationList")
 	public String index(@RequestParam(value = "reservation",defaultValue="") Integer reservation, Model model) {
 		List<Reservation> reservationList = reservationRepository.findAll();
 		model.addAttribute("reservationList",reservationList);
-		return "/staff/reservationList";
+		return "/staff/resevationList";
 	}
 	
 	
 	
-	@GetMapping("/staff/materiaMg/reservationAdd")
+	@GetMapping("/staff/materialMg/reservationAdd")
 	public String add(Model model) {
 		
 		LocalDate today = LocalDate.now();
@@ -56,11 +56,11 @@ public class ReservationController {
 		model.addAttribute("reservationDate", today);
 		model.addAttribute("scheduledDate", scheduledDate);
 		
-		return "/staff/reservationAdd";
+		return "/staff/resevationAdd";
 	}
 	
 	
-	@PostMapping("/staff/materiaMg/reservationAdd")
+	@PostMapping("/staff/materialMg/reservationAdd")
 	public String reservationAdd(@RequestParam(value = "user", defaultValue = "") Integer user_id,
 			@RequestParam(value = "book", defaultValue = "") Integer book_id,
 			@RequestParam(value = "reservationDate", defaultValue = "") LocalDate reservationDate,
@@ -76,18 +76,18 @@ public class ReservationController {
 		
 		Reservation orderReservation = new Reservation(user, book, reservationDate, scheduledDate, library, status);
 		reservationRepository.save(orderReservation);
-		return "redirect:/staff/materiaMg/reservationList";
+		return "redirect:/staff/materiaMg/resevationList";
 	}
-	@GetMapping("/staff/materiaMg/{id}/reservationEdit")
+	@GetMapping("/staff/materialMg/{id}/reservationEdit")
 	public String edits(@PathVariable("id") Integer id,
 			Model model) {
 		model.addAttribute("id", id);
 		Reservation reservation = reservationRepository.findById(id).get();
 		model.addAttribute("reservation", reservation);
-		return "/staff/reservationEdit";
+		return "/staff/resevationEdit";
 	}
 			
-	@PostMapping("/staff/materiaMg/{id}/reservationEdit")
+	@PostMapping("/staff/materialMg/{id}/reservationEdit")
 	public String edits(@PathVariable("id") Integer id,
 			@RequestParam(value = "user", defaultValue = "") Integer user_id,
 			@RequestParam(value = "book", defaultValue = "") Integer book_id,
@@ -102,16 +102,16 @@ public class ReservationController {
 		Status status = statusRepository.findById(status_id).get();
 		Reservation orderReservation = new Reservation(id, user, book, reservationDate, scheduledDate, library, status);
 		reservationRepository.save(orderReservation);
-		return "redirect:/staff/materiaMg/reservationList";
+		return "redirect:/staff/materialMg/reservationList";
 	}
 	
-	@PostMapping("/staff/materiaMg/{id}/delete")
+	@PostMapping("/staff/materialMg/{id}/delete")
 	public String delete(@PathVariable("id") Integer id,
 			Model model
 			) {
 		
 		reservationRepository.deleteById(id);
-		return "redirect:/staff/materiaMg/reservationList";
+		return "redirect:/staff/materialMg/resevationList";
 	}
 	
 	

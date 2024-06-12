@@ -76,31 +76,55 @@ public class RentalController {
 			@RequestParam(value = "error", defaultValue = "") String error,
 			Model model) {
 
-		Book book = bookRepository.findById(bookId).orElseThrow();
+		try {
+			bookRepository.findById(bookId).orElseThrow();
+		} catch (NoSuchElementException e) {
+			model.addAttribute("bookId", bookId);
+			model.addAttribute("reservationId", reservationId);
+			model.addAttribute("staffId", staffId);
+			model.addAttribute("limitDate", limitDate);
+			model.addAttribute("rentalDate", rentalDate);
+			model.addAttribute("userId", userId);
+			model.addAttribute("error", "資料が見つかりませんでした");
+			return "/staff/rentalAdd";
+		}
 
 		try {
-			User user = userRepository.findById(userId).orElseThrow();
-			LibraryStaff staff = libraryStaffRepository.findById(staffId).orElseThrow();
+			libraryStaffRepository.findById(staffId).orElseThrow();
+		} catch (NoSuchElementException e) {
+			model.addAttribute("bookId", bookId);
+			model.addAttribute("reservationId", reservationId);
+			model.addAttribute("staffId", staffId);
+			model.addAttribute("limitDate", limitDate);
+			model.addAttribute("rentalDate", rentalDate);
+			model.addAttribute("userId", userId);
+			model.addAttribute("error", "スタッフが見つかりませんでした");
+			return "/staff/rentalAdd";
+		}
 
-			if (!(user.getPassword().equals(password))) {
-				model.addAttribute("bookId", bookId);
-				model.addAttribute("reservationId", reservationId);
-				model.addAttribute("staffId", staffId);
-				model.addAttribute("limitDate", limitDate);
-				model.addAttribute("rentalDate", rentalDate);
-				model.addAttribute("userId", userId);
-				model.addAttribute("error", "パスワードが違います");
-				return "/staff/rentalAdd";
-			} else {
-				if (reservationId == null) {
-					Lending lending = new Lending(user, book, rentalDate, limitDate, staff);
-					lendingRepository.save(lending);
-				} else {
-					Reservation reservation = reservationRepository.findById(reservationId).orElseThrow();
-					Lending lending = new Lending(user, book, rentalDate, limitDate, reservation, staff);
-					lendingRepository.save(lending);
-				}
+		try {
+			userRepository.findById(userId).orElseThrow();
+		} catch (NoSuchElementException e) {
+			model.addAttribute("bookId", bookId);
+			model.addAttribute("reservationId", reservationId);
+			model.addAttribute("staffId", staffId);
+			model.addAttribute("limitDate", limitDate);
+			model.addAttribute("rentalDate", rentalDate);
+			model.addAttribute("userId", userId);
+			model.addAttribute("error", "ユーザーが見つかりませんでした");
+			return "/staff/rentalAdd";
+		}
+
+		try {
+			if (reservationId == null) {
+				User user = userRepository.findByIdAndPassword(userId, password).get(0);
+				Book book = bookRepository.findById(bookId).orElseThrow();
+				LibraryStaff staff = libraryStaffRepository.findById(staffId).orElseThrow();
+				Lending lending = new Lending(user, book, rentalDate, limitDate, staff);
+				lendingRepository.save(lending);
 				return "redirect:/staff/materialMg/rentalList";
+			} else {
+				reservationRepository.findById(reservationId).orElseThrow();
 			}
 
 		} catch (NoSuchElementException e) {
@@ -109,9 +133,41 @@ public class RentalController {
 			model.addAttribute("staffId", staffId);
 			model.addAttribute("limitDate", limitDate);
 			model.addAttribute("rentalDate", rentalDate);
-			model.addAttribute("error", "ユーザーが見つかりませんでした");
+			model.addAttribute("userId", userId);
+			model.addAttribute("error", "予約IDが見つかりませんでした");
+			return "/staff/rentalAdd";
+
+		} catch (IndexOutOfBoundsException e) {
+			model.addAttribute("bookId", bookId);
+			model.addAttribute("reservationId", reservationId);
+			model.addAttribute("staffId", staffId);
+			model.addAttribute("limitDate", limitDate);
+			model.addAttribute("rentalDate", rentalDate);
+			model.addAttribute("userId", userId);
+			model.addAttribute("error", "パスワードが違います");
 			return "/staff/rentalAdd";
 		}
+
+		try {
+			User user = userRepository.findByIdAndPassword(userId, password).get(0);
+			Book book = bookRepository.findById(bookId).orElseThrow();
+			LibraryStaff staff = libraryStaffRepository.findById(staffId).orElseThrow();
+			Reservation reservation = reservationRepository.findById(reservationId).orElseThrow();
+			Lending lending = new Lending(user, book, rentalDate, limitDate, reservation, staff);
+			lendingRepository.save(lending);
+			return "redirect:/staff/materialMg/rentalList";
+
+		} catch (IndexOutOfBoundsException e) {
+			model.addAttribute("bookId", bookId);
+			model.addAttribute("reservationId", reservationId);
+			model.addAttribute("staffId", staffId);
+			model.addAttribute("limitDate", limitDate);
+			model.addAttribute("rentalDate", rentalDate);
+			model.addAttribute("userId", userId);
+			model.addAttribute("error", "パスワードが違います");
+			return "/staff/rentalAdd";
+		}
+
 	}
 
 	@GetMapping("/staff/materialMg/{id}/rentalEdit")
@@ -119,7 +175,15 @@ public class RentalController {
 			@PathVariable("id") Integer id,
 			Model model) {
 		Lending lending = lendingRepository.findById(id).get();
-		model.addAttribute("lending", lending);
+		try {
+			if (lending.getReservation().getId() != null) {
+				model.addAttribute("lending", lending);
+				return "/staff/rentalEdit";
+			}
+		} catch (NullPointerException e) {
+			model.addAttribute("reservationId", "");
+			model.addAttribute("lending", lending);
+		}
 		return "/staff/rentalEdit";
 	}
 
@@ -132,51 +196,90 @@ public class RentalController {
 			@RequestParam(value = "returnedDate", defaultValue = "") LocalDate returnedDate,
 			@RequestParam(value = "reservationId", defaultValue = "") Integer reservationId,
 			@RequestParam(value = "staffId", defaultValue = "") Integer staffId,
-			@RequestParam(value = "rentalId", defaultValue = "") Integer rentalId,
 			@RequestParam(value = "userId", defaultValue = "") Integer userId,
 			Model model) {
-
-		Book book = bookRepository.findById(bookId).orElseThrow();
+		try {
+			bookRepository.findById(bookId).orElseThrow();
+		} catch (NoSuchElementException e) {
+			model.addAttribute("bookId", bookId);
+			model.addAttribute("reservationId", reservationId);
+			model.addAttribute("rentalDate", lendDate);
+			model.addAttribute("staffId", staffId);
+			model.addAttribute("limitDate", limitDate);
+			model.addAttribute("returnedDate", returnedDate);
+			model.addAttribute("userId", userId);
+			model.addAttribute("error", "資料が見つかりませんでした");
+			return "/staff/rentalEdit";
+		}
 
 		try {
-			User user = userRepository.findById(userId).orElseThrow();
-			LibraryStaff staff = libraryStaffRepository.findById(staffId).orElseThrow();
+			libraryStaffRepository.findById(staffId).orElseThrow();
+		} catch (NoSuchElementException e) {
+			model.addAttribute("bookId", bookId);
+			model.addAttribute("reservationId", reservationId);
+			model.addAttribute("rentalDate", lendDate);
+			model.addAttribute("staffId", staffId);
+			model.addAttribute("limitDate", limitDate);
+			model.addAttribute("returnedDate", returnedDate);
+			model.addAttribute("userId", userId);
+			model.addAttribute("error", "スタッフが見つかりませんでした");
+			return "/staff/rentalEdit";
+		}
 
+		try {
+			userRepository.findById(userId).orElseThrow();
+		} catch (NoSuchElementException e) {
+			model.addAttribute("bookId", bookId);
+			model.addAttribute("reservationId", reservationId);
+			model.addAttribute("rentalDate", lendDate);
+			model.addAttribute("staffId", staffId);
+			model.addAttribute("limitDate", limitDate);
+			model.addAttribute("returnedDate", returnedDate);
+			model.addAttribute("userId", userId);
+			model.addAttribute("error", "ユーザーが見つかりませんでした");
+			return "/staff/rentalEdit";
+		}
+
+		try {
 			if (reservationId == null) {
+				User user = userRepository.findById(userId).get();
+				Book book = bookRepository.findById(bookId).orElseThrow();
+				LibraryStaff staff = libraryStaffRepository.findById(staffId).orElseThrow();
 				Lending lending = new Lending(id, user, book, lendDate, limitDate, returnedDate, staff);
 				lendingRepository.save(lending);
+				return "redirect:/staff/materialMg/rentalList";
 			} else {
+				User user = userRepository.findById(userId).orElseThrow();
+				Book book = bookRepository.findById(bookId).orElseThrow();
+				LibraryStaff staff = libraryStaffRepository.findById(staffId).orElseThrow();
 				Reservation reservation = reservationRepository.findById(reservationId).orElseThrow();
 				Lending lending = new Lending(id, user, book, lendDate, limitDate, returnedDate, reservation, staff);
 				lendingRepository.save(lending);
+				return "redirect:/staff/materialMg/rentalList";
 			}
-			return "redirect:/staff/materialMg/rentalList";
 
 		} catch (NoSuchElementException e) {
 			model.addAttribute("bookId", bookId);
 			model.addAttribute("reservationId", reservationId);
-			model.addAttribute("limitDate", limitDate);
 			model.addAttribute("rentalDate", lendDate);
-			model.addAttribute("returnedDate", returnedDate);
 			model.addAttribute("staffId", staffId);
-			model.addAttribute("rentalId", rentalId);
-			model.addAttribute("error", "ユーザーが見つかりませんでした");
+			model.addAttribute("limitDate", limitDate);
+			model.addAttribute("returnedDate", returnedDate);
+			model.addAttribute("userId", userId);
+			model.addAttribute("error", "予約IDが見つかりませんでした");
 			return "/staff/rentalEdit";
+
 		}
 	}
 
-	@PostMapping("/staff/materialMg/{id}/delete")
+	@PostMapping("/staff/materialMg/{id}/rentalDelete")
 	public String delete(
 			@PathVariable("id") Integer id,
 			Model model) {
 
 		lendingRepository.deleteById(id);
 
-		return "/staff/materialMg/rentalList";
+		return "redirect:/staff/materialMg/rentalList";
 	}
 
-	@GetMapping("/staff/materialMg/return")
-	public String ret(Model model) {
-		return "/staff/return";
-	}
 }
