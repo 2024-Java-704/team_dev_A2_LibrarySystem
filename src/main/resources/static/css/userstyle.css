@@ -1,0 +1,107 @@
+body {
+	background: #EFF0F7;
+	font-family: "Nico Moji", sans-serif;
+}
+
+.column {
+	height: 100vh;
+	width: 100%;
+	text-align: center;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+}
+
+.info {
+	margin-bottom: 10%;
+}
+
+h2 {
+	font-size: 3rem;
+}
+
+p {
+	font-size: 1.5rem;
+}
+
+a {
+	font-size: 2rem;
+	background: #0bd;
+	border-radius: 5px;
+	padding: 10px 20px;
+	color: #fff;
+	text-decoration: none;
+	display: inline-block;
+	margin-top: 18px;
+}
+
+a:hover {
+	background: #0090aa;
+}
+
+.bookfoto {
+	background: url(https://item-shopping.c.yimg.jp/i/n/komadori-jp_4822289605-230214-0010?xkn2sru46yz93fcmqlb) no-repeat top center;
+	background-size: cover;
+	color: rgba(255, 255, 255, .7);
+}
+
+.bookinfo {
+	background-size: cover;
+	color: rgba(0, 0, 0, .7);
+}
+
+@media all and (min-width: 500px) {
+	.wrapper {
+		display: flex;
+	}
+}
+
+.z-index_test {
+	height: 400px;
+	/* 高さ指定 */
+	width: 400px;
+	/* 幅指定 */
+	position: relative;
+	/* 位置指定 */
+	z-index: 10;
+	/* 重なり順指定 */
+}
+
+
+
+table,
+th,
+td {
+	border-collapse: collapse;
+	border: 1px solid #7d8bae;
+}
+
+/* 表 */
+table {
+	margin: 10px auto;
+	min-width: 800px;
+	min-height: 400px;
+}
+
+/* 表見出しセル */
+table th {
+	background: #7d8bae;
+	color: #ffffff;
+}
+
+/* 送信ボタン */
+button {
+	padding: 5px 20px;
+	background-color: #e5857b;
+	color: #ffffff;
+	border: none;
+	width: 150px;
+	cursor: pointer;
+	display: block;
+	margin: 0 auto
+}
+
+/* 送信ボタン(マウスオーバー時) */
+button:hover {
+	background-color: #f1b2b2;
+}

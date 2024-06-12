@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<link rel="stylesheet" type="text/css" href="/css/userstyle.css">
 <meta charset="UTF-8">
 <title>資料詳細</title>
 </head>
 <body>
 	<h1>資料詳細</h1>
-	<table border="1">
+	<div class="wrapper">
+		 <div class="bookfoto">
+    <div class="info" >
+		<div class="z-index_test">
+		 <div class="z-index_test2">	
+		 </div>
+    </div>
+    </div>
+  </div>
+ 
+  <div class="bookinfo">
+    <div class="info">
+      <table border="1">
 		<tr>
 			<th>ID</th>
 			<td th:text="${bookDetail.id}"></td>
@@ -45,13 +58,12 @@
 			<th>状態</th>
 			<td th:text="${bookDetail.condition.name}"></td>
 		</tr>
-		<tr>
-			<th>貸出カウント</th>
-			<td th:text="${bookDetail.cnt}"></td>
-		</tr>
 		
 		</form>
 	</table>
+    </div>
+</div>
+	</div>
 	<form th:action="@{/user/{bookId}/order(bookId=${bookDetail.id})}" method="get">
 		<button>予約・注文</button>
 	</form>
