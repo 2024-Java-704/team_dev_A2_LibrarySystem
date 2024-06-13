@@ -10,5 +10,14 @@ import com.example.demo.entity.Status;
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
 	List<Reservation> findByUserIdAndBookIdOrderByIdDesc(Integer userId, Integer bookId);
-	List<Reservation> findByStatus (Status Status);
+
+	List<Reservation> findByStatus(Status Status);
+
+	List<Reservation> findByBookIdAndLibraryIdAndStatus(Integer bookId, Integer libraryId, Status status);
+
+	List<Reservation> findByBookIdAndLibraryId(Integer bookId, Integer libraryId);
+
+	List<Reservation> findByLibraryIdAndBookIdNot(Integer libraryId, Integer bookId);
+
+	List<Reservation> findByBookIdAndLibraryIdNot(Integer bookId, Integer libraryId);
 }

@@ -54,11 +54,19 @@
 		</table>
 	</th:block>
 	<form th:action="@{/user/{bookId}/order(bookId=${bookOrder.id})}" method="post">
+		受け取り図書館を選択してください
+		<br>
+		<select name="library">
+			<option th:each="library:${library}" th:value="${library.id}">[[${library.name}]]</option>
+		</select>
+		<br>
+		<p>利用者ID・パスワードを入力してください</p>
+		<p>（利用者ID・パスワードをお持ちでない方はカウンターまでお越しください）</p>
 		<input type="text" name="userId" placeholder="利用者ID"><br>
 		<input type="text" name="userPassword" placeholder="パスワード"><br>
 		<button>予約・注文</button>
 	</form>
-	<a>利用者ID・パスワードをお持ちでない方はカウンターまでお越しください</a>
+	
 	<br>
 	<a th:href="@{/user/{id}/bookDetail(id=${bookOrder.id})}">戻る</a>
 </body>
