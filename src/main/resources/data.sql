@@ -96,6 +96,7 @@ INSERT INTO library_staff(library_id,name,email,password) VALUES(3,'斎藤四郎
 INSERT INTO library_manager(name,email,password) VALUES('山田太郎','yamada@mail.com','ggg');
 --貸出テーブルデータ
 INSERT INTO lending(user_id,book_id,lend_date,limit_date,returned_date,reservation_id,staff_id) VALUES(1,1,'2024/05/03','2024/05/10','2024/05/07',1,1);
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,staff_id) VALUES(2,10,'2024/05/10','2024/05/17',2);
 --予約テーブルデータ
 INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(1,2,'2024/05/07','2024/05/12',1,1);
 
