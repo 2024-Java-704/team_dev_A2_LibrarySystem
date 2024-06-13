@@ -63,6 +63,18 @@ public class RentalController {
 		model.addAttribute("limitDate", limitDate);
 		return "/staff/rentalAdd";
 	}
+	
+	@GetMapping("/staff/materialMg/{bookId}/rentalAdd")
+	public String detailCreate(
+			@PathVariable("bookId")Integer id
+			,Model model) {
+		LocalDate rentalDate = LocalDate.now();
+		LocalDate limitDate = rentalDate.plusWeeks(1);
+		model.addAttribute("rentalDate", rentalDate);
+		model.addAttribute("limitDate", limitDate);
+		model.addAttribute("bookId",id);
+		return "/staff/rentalAdd";
+	}
 
 	@PostMapping("/staff/materialMg/rentalAdd")
 	public String add(
