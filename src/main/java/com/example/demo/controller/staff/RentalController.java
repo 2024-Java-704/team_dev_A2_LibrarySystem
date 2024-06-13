@@ -16,11 +16,13 @@ import com.example.demo.entity.Book;
 import com.example.demo.entity.Lending;
 import com.example.demo.entity.LibraryStaff;
 import com.example.demo.entity.Reservation;
+import com.example.demo.entity.Status;
 import com.example.demo.entity.User;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.LendingRepository;
 import com.example.demo.repository.LibraryStaffRepository;
 import com.example.demo.repository.ReservationRepository;
+import com.example.demo.repository.StatusRepository;
 import com.example.demo.repository.UserRepository;
 
 @Controller
@@ -40,6 +42,9 @@ public class RentalController {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	StatusRepository statusRepository;
 
 	@GetMapping("/staff/materialMg/rentalList")
 	public String index(
@@ -166,7 +171,8 @@ public class RentalController {
 			Reservation reservation = reservationRepository.findById(reservationId).orElseThrow();
 			Lending lending = new Lending(user, book, rentalDate, limitDate, reservation, staff);
 			lendingRepository.save(lending);
-			reservation.setId(3);
+			Status status=statusRepository.findById(3).get();
+			reservation.setStatus(status);
 			reservationRepository.save(reservation);
 			return "redirect:/staff/materialMg/rentalList";
 
