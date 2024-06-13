@@ -99,6 +99,8 @@ public class ControllerOfUser {
 			Model model) {
 		Book book = bookRepository.findById(id).get();
 		model.addAttribute("bookDetail", book);
+		List<Book> findByTitle = bookRepository.findByTitleContaining(book.getTitle());
+		model.addAttribute("bookList", findByTitle);
 		return "/user/userDetail";
 	}
 

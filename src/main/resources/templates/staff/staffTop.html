@@ -12,13 +12,20 @@
 	<header>
 		<h1>職員メニュー</h1>
 	</header>
-
-	<a href="/staff/materialMg">資料管理</a>
-	<a href="/staff/staffMg">職員管理</a>
-	<a href="/staff/userMg">利用者管理</a>
-	<a href="/staff/logout">ログインに戻る</a>
-
-
+	<form action="/staff/materialMg" method="get">
+		<button class="topbutton">資料管理</button>
+	</form>
+	<form action="/staff/staffMg" method="get">
+		<button class="topbutton">職員管理</button>
+	</form>
+	<form action="/staff/userMg" method="get">
+		<button class="topbutton">利用者管理</button>
+	</form>
+	<form action="/staff/logout" method="get">
+		<button class="topbutton">ログインに戻る</button>
+	</form>
+	
+	
 </body>
 <footer th:replace="footer"></footer>
 

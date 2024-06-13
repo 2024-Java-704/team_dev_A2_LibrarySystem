@@ -6,24 +6,19 @@
 <title>資料詳細</title>
 </head>
 <body>
+	<header>
 	<h1>資料詳細</h1>
-	<div class="wrapper">
-		 <div class="bookfoto">
-    <div class="info" >
-		<div class="z-index_test">
-		 <div class="z-index_test2">	
-		 </div>
-    </div>
-    </div>
-  </div>
- <a href="/user/userSearch">戻る</a>
-  <div class="bookinfo">
-    <div class="info">
-      <table border="1">
-		<tr>
-			<th>ID</th>
-			<td th:text="${bookDetail.id}"></td>
-		</tr>
+	<small class="caption"></small>
+	</header>
+	 <div class="content">
+        <div class="content_img">
+			<!--<img th:src="${bookDetail.img}">-->
+			画像を表示
+		</div>
+        
+    <div class="content_description">
+      <table border="1" class="overtable">
+		
 		<tr>
 			<th>分類番号</th>
 			<td th:text="${bookDetail.category.categoryNum}"></td>
@@ -46,27 +41,31 @@
 			<th>発行年</th>
 			<td th:text="${bookDetail.pubYear}"></td>
 		</tr>
-		<tr>
-			<th>登録日</th>
-			<td th:text="${bookDetail.regDay}"></td>
-		</tr>
-		<tr>
-			<th>所属図書館</th>
-			<td th:text="${bookDetail.library.name}"></td>
-		</tr>
-		<tr>
-			<th>状態</th>
-			<td th:text="${bookDetail.condition.name}"></td>
-		</tr>
-		
 		</form>
 	</table>
-    </div>
-</div>
 	</div>
+	</div>
+	<table border="1" class="undertable">
+		<tr>
+			<th>所属図書館</th>
+			<th>状態</th>
+			<th>予約・注文</th>
+			
+		</tr>
+		<tr th:each="title:${bookList}">
+			<td th:text="${title.library.name}"></td>
+			<td th:text="${title.condition.name}"></td>
+			<td><button class="btn-flat-simple">予約・注文</button></td>
+		</tr>
+		<tr>
+			
+			
+		</tr>
+	</table>
 	<form th:action="@{/user/{bookId}/order(bookId=${bookDetail.id})}" method="get">
-		<button>予約・注文</button>
+		
 	</form>
 	
 </body>
+<footer></footer>
 </html>
