@@ -12,8 +12,14 @@
 <header>
 <h1>予約一覧</h1>
   </header>
+ <form action="/staff/materialMg/reservationAdd">
+	 <button>新規追加</button>
+ </form>
+ <a href="/staff/materialMg/reservationList">予約リスト</a>
+ <a href="/staff/materialMg/cancel">キャンセルリスト</a>
+ <a href="/staff/materialMg/rental">貸出済みリスト</a>
 <a href="/staff/materialMg">資料管理に戻る</a>
-<a href="/staff/materialMg/reservationAdd">追加</a>
+
 
 <table border="1">
 	<tr>
@@ -40,10 +46,10 @@
 		</th>
 		
 		<th>
-			変更
+			
 		</th>
 		<th>
-			削除
+			
 		</th>
 		</tr>
 	<tr th:each="reservation : ${reservationList}">
