@@ -48,7 +48,6 @@ public class ReturnController {
 	public String index(@PathVariable("id") Integer id,
 			@ModelAttribute("error") String error,
 			Model model) {
-		System.out.println("aaaaaaaaaaa");
 		Lending lending = lendingRepository.findById(id).get();
 		model.addAttribute("error", error);
 		model.addAttribute("lending", lending);
