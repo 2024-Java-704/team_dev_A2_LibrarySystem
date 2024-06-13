@@ -21,17 +21,22 @@
 			<th>本ID</th>
 			<th>注文日時</th>
 			<th>貸出予定日</th>
-			<th>注文図書館ID</th>
-			<th>状況ID</th>
+			<th>注文図書館</th>
+			<th>状況</th>
 			<th>変更</th>
 			<th>削除</th>
 
 		</tr>
 		<tr th:each="reservation : ${reservationList}">
 			<td th:text="${reservation.id}"></td>
-			<td th:text="${reservation.user.name}"></td>
-			<td th:text="${reservation.book.title}">
-				</tdth:text="${reservation.user_id}">
+			<td>
+				<a th:href="@{/staff/userMg/{userId}/userDetail(userId=${reservation.user.id})}" th:text="${reservation.user.id}"> 
+				</a>
+			</td>
+			<td>
+				<a th:href="@{/staff/{id}/bookdetail(id=${reservation.book.id})}" th:text="${reservation.book.id}">
+				</a>	
+			</td>
 			<td th:text="${reservation.reservationDate}"></td>
 			<td th:text="${reservation.scheduledDate}"></td>
 			<td th:text="${reservation.library.name}"></td>
