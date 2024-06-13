@@ -13,30 +13,32 @@
 	</header>
 	以下の貸出中の資料を返却にしますか？
 	<form th:action="@{/staff/materialMg/{id}/return(id=${lending.id})}" method="post">
-	<table border="1">
-		<tr>
-			<th>貸出ID</th>
-			<th>利用者ID</th>
-			<th>タイトル</th>
-			<th>貸出日</th>
-			<th>返却予定日</th>
-			<th>予約ID</th>
-			<th>貸出担当職員ID</th>
-		</tr>
-		<tr>
-			<td th:text="${lending.id}"></td>
-			<td th:text="${lending.user.id}"></td>
-			<td th:text="${lending.book.title}"></td>
-			<td th:text="${lending.lendDate}"></td>
-			<td th:text="${lending.limitDate}"></td>
-			<td th:if="${lending.reservation}" th:text="${lending.reservation.id}"></td>
-			<td th:if="${lending.reservation==null}"></td>
-			<td th:text="${lending.staff.id}"></td>
-		</tr>
-	</table>
-	入力してください
-	<input type="text" name="staffId" placeholder="返却担当職員ID">
-	<button>返却</button>
+		<table border="1">
+			<tr>
+				<th>貸出ID</th>
+				<th>利用者ID</th>
+				<th>タイトル</th>
+				<th>貸出日</th>
+				<th>返却予定日</th>
+				<th>予約ID</th>
+				<th>貸出担当職員ID</th>
+			</tr>
+			<tr>
+				<td th:text="${lending.id}"></td>
+				<td th:text="${lending.user.id}"></td>
+				<td th:text="${lending.book.title}"></td>
+				<td th:text="${lending.lendDate}"></td>
+				<td th:text="${lending.limitDate}"></td>
+				<td th:if="${lending.reservation}" th:text="${lending.reservation.id}"></td>
+				<td th:if="${lending.reservation==null}"></td>
+				<td th:text="${lending.staff.id}"></td>
+			</tr>
+		</table>
+		入力してください
+		<br>
+		<p th:text="${error}"></p>
+		<input type="text" name="staffId" placeholder="返却担当職員ID">
+		<button>返却</button>
 	</form>
 	<br>
 	<a href="/staff/materialMg/rentalList">戻る</a>

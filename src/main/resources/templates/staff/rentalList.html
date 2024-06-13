@@ -18,21 +18,27 @@
 	<table border="1">
 		<tr>
 			<th>貸出ID</th>
-			<th>利用者</th>
-			<th>本</th>
+			<th>利用者ID</th>
+			<th>資料ID</th>
 			<th>貸出日時</th>
 			<th>返却予定日</th>
 			<th>返却日</th>
 			<th>予約ID</th>
-			<th>貸出処理者</th>
+			<th>職員ID</th>
 			<th>更新</th>
 			<th>削除</th>
 			<th>返却</th>
 		</tr>
 		<tr th:each="lending:${lendings}">
 			<td th:text="${lending.id}"></td>
-			<td th:text="${lending.user.id}"></td>
-			<td th:text="${lending.book.title}"></td>
+			<td>
+				<a th:href="@{/staff/userMg/{userId}/userDetail(userId=${lending.user.id})}" th:text="${lending.user.id}"> 
+				</a>
+			</td>
+			<td>
+				<a th:href="@{/staff/{id}/bookdetail(id=${lending.book.id})}" th:text="${lending.book.id}">
+				</a>	
+			</td>
 			<td th:text="${lending.lendDate}"></td>
 			<td th:text="${lending.limitDate}"></td>
 			<td th:text="${lending.returnedDate}"></td>
