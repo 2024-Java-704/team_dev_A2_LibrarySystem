@@ -2,8 +2,8 @@ package com.example.demo.controller.user;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Book;
-import com.example.demo.entity.Category;
 import com.example.demo.entity.Lending;
 import com.example.demo.entity.Library;
 import com.example.demo.entity.Reservation;
@@ -65,33 +64,113 @@ public class ControllerOfUser {
 	@PostMapping("/user/userSearch") //検索処理・検索結果表示
 	public String search(
 			@RequestParam(name = "title", defaultValue = "") String title,
-			@RequestParam(name = "category", defaultValue = "") String categoryId,
+			@RequestParam(name = "category", defaultValue = "") Integer categoryId,
 			@RequestParam(name = "author", defaultValue = "") String author,
 			@RequestParam(name = "publisher", defaultValue = "") String publisher,
 			@RequestParam(name = "publishDay", defaultValue = "") LocalDate publishDay,
 			Model model) {
 
 		List<Book> bookList = new ArrayList<>();
-		if (!(title.equals(""))) {
+		if (title.contains("　")) {//タイトル全角条件複数
+			String[] titles = title.split("　");
+
+			for (String tai : titles) {
+				bookList.addAll(bookRepository.findByTitleContaining(tai));
+			}
+			List<Book> booktitles = new ArrayList<>(new HashSet<>(bookList)); //タイトルの検索結果
+
+			model.addAttribute("books", booktitles);
+
+		}
+		if (title.contains("\s")) {//タイトル半角条件複数
+			String[] titles = title.split("\s");
+
+			for (String tai : titles) {
+				bookList.addAll(bookRepository.findByTitleContaining(tai));
+			}
+			List<Book> booktitles = new ArrayList<>(new HashSet<>(bookList));
+			model.addAttribute("books", booktitles);
+			return "/user/userSearch";
+		}
+		if (!(title.equals(""))) {//タイトル条件ひとつ
 			bookList.addAll(bookRepository.findByTitleContaining(title));
+
+			if (categoryId != null) {
+				//				Category category = categoryRepository.findByCategoryNum(categoryId);
+				//				List<Book> findByCategory = bookRepository.findByCategory(category);
+				//				bookList.addAll(findByCategory);
+			}
 		}
-		if (categoryId != null) {
-			Category category = categoryRepository.findByCategoryNum(categoryId);
-			List<Book> findByCategory = bookRepository.findByCategory(category);
-			bookList.addAll(findByCategory);
-		}
-		if (!(publisher.equals(""))) {
-			bookList.addAll(bookRepository.findByPublisherContaining(publisher));
-		}
-		if (!(author.equals(""))) {
-			bookList.addAll(bookRepository.findByAuthorContaining(author));
-		}
-		if (!(Objects.isNull(publishDay))) {
-			bookList.addAll(bookRepository.findByPubYear(publishDay));
-		}
-		model.addAttribute("books", bookList);
 		return "/user/userSearch";
+
 	}
+	//		List<Book> bookList = new ArrayList<>();
+	//		if (title.contains("　")) {//タイトル全角条件複数
+	//			String[] titles = title.split("　");
+	//
+	//			for (String tai : titles) {
+	//				bookList.addAll(bookRepository.findByTitleContaining(tai));
+	//			}
+	//			List<Book> booktitles = new ArrayList<>(new HashSet<>(bookList)); //タイトルの検索結果
+	//
+	//			List<Integer> bookIds = new ArrayList<>();//本のIDだけを入れるリストを作成
+	//			for (Book book : booktitles) {
+	//				bookIds.add(book.getId());
+	//			}
+	//
+	//			//booktitlesに対して絞り込み
+	//
+	//			if (categoryId != null) {//分類番号があったら
+	//				for (Integer bookId : bookIds) {
+	//					List<Book> findByCategory = bookRepository.findByIdAndCategoryId(bookId, categoryId);
+	//
+	//				}
+	//			}
+	//
+	//			model.addAttribute("books", booktitles);
+	//			return "/user/userSearch";
+	//		}
+	//		if (title.contains("\s")) {//タイトル半角条件複数
+	//			String[] titles = title.split("\s");
+	//
+	//			for (String tai : titles) {
+	//				bookList.addAll(bookRepository.findByTitleContaining(tai));
+	//			}
+	//			List<Book> booktitles = new ArrayList<>(new HashSet<>(bookList));
+	//			model.addAttribute("books", booktitles);
+	//			return "/user/userSearch";
+	//		}
+
+	//=======================================================
+
+	//		if (!(title.equals(""))) {//タイトル条件ひとつ
+	//			bookList.addAll(bookRepository.findByTitleContaining(title));
+	//
+	//			if (categoryId != null) {
+	//				Category category = categoryRepository.findByCategoryNum(categoryId);
+	//				List<Book> findByCategory = bookRepository.findByCategory(category);
+	//				bookList.addAll(findByCategory);
+	//			}
+	//		}
+	//		if (categoryId != null) {
+	//			Category category = categoryRepository.findByCategoryNum(categoryId);
+	//			List<Book> findByCategory = bookRepository.findByCategory(category);
+	//			bookList.addAll(findByCategory);
+	//		}
+	//
+	//		if (!(author.equals(""))) {
+	//			bookList.addAll(bookRepository.findByAuthorContaining(author));
+	//		}
+	//
+	//		if (!(publisher.equals(""))) {//出版社条件ひとつ
+	//			bookList.addAll(bookRepository.findByPublisherContaining(publisher));
+	//		}
+	//
+	//		if (!(Objects.isNull(publishDay))) {
+	//			bookList.addAll(bookRepository.findByPubYear(publishDay));
+	//		}
+
+	//	}
 
 	@GetMapping("/user/{id}/bookDetail") //詳細表示
 	public String userBookDetail(
