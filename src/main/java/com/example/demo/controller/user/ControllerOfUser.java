@@ -107,13 +107,16 @@ public class ControllerOfUser {
 			@PathVariable("bookId") Integer id,
 			Model model) {
 		Book book = bookRepository.findById(id).get();
+		List<Library> libraries = libraryRepository.findAll();
 		model.addAttribute("bookOrder", book);
+		model.addAttribute("library", libraries);
 		return "/user/order";
 	}
 
 	@PostMapping("/user/{bookId}/order") //注文処理
 	public String userBookReserve(
 			@PathVariable("bookId") Integer id,
+			@RequestParam("library") Integer libraryId,
 			@RequestParam(name = "userId", defaultValue = "") Integer userId,
 			@RequestParam(name = "userPassword", defaultValue = "") String userPassword,
 			Model model) {
@@ -129,16 +132,21 @@ public class ControllerOfUser {
 		if (userList.size() == 0) {
 			errorList.add("利用者IDとパスワードが一致しませんでした");
 		}
+		Book book = bookRepository.findById(id).get();
+		if ((book.getLibrary().getId() == libraryId) && (book.getCondition().getId() == 1)) {
+			errorList.add("こちらの資料は本図書館で貸出可能です");
+		}
 		if (errorList.size() > 0) {
-			Book book = bookRepository.findById(id).get();
 			model.addAttribute("error", errorList);
 			model.addAttribute("bookOrder", book);
+			List<Library> libraries = libraryRepository.findAll();
+			model.addAttribute("library", libraries);
 			return "/user/order";
 		} else {
 			User user = userList.get(0);
-			Book book = bookRepository.findById(id).get();
 			LocalDate today = LocalDate.now();
-			Library library = book.getLibrary();
+			Library bookLibrary = book.getLibrary();
+			Library library = libraryRepository.findById(libraryId).get();
 			Status status = statusRepository.findById(1).get();
 			Integer conditionId = book.getCondition().getId();
 			LocalDate scheduled = null;
@@ -153,12 +161,11 @@ public class ControllerOfUser {
 				scheduled = lending.getLimitDate().plusDays(1);
 			}
 
-			//エラーチェック
-
 			Reservation reservation = new Reservation(user, book, today, scheduled, library, status);
 			reservationRepository.save(reservation);
 			Reservation reserved = reservationRepository.findByUserIdAndBookIdOrderByIdDesc(userId, id).get(0);
 			model.addAttribute("reservation", reserved);
+			model.addAttribute("bookLibrary", bookLibrary);
 			return "/user/orderEnd";
 		}
 

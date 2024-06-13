@@ -30,4 +30,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 	List<Book> findByCategory(Optional<Category> findById);
 
 	List<Book> findByHuriganaContaining(String keyword);
+
+	List<Book> findByLibraryId(Integer libraryId);
 }

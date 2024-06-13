@@ -24,8 +24,8 @@
 				<th>利用者名</th>
 				<td th:text="${reservation.user.name}"></td>
 			</tr>
-			<th>資料ID</th>
-			<td th:text="${reservation.book.id}"></td>
+				<th>資料ID</th>
+				<td th:text="${reservation.book.id}"></td>
 			<tr>
 				<th>タイトル</th>
 				<td th:text="${reservation.book.title}"></td>
@@ -37,6 +37,10 @@
 			<tr>
 				<th>受け取り予定日</th>
 				<td th:text="${reservation.scheduledDate}"></td>
+			</tr>
+			<tr>
+				<th>所属図書館</th>
+				<td th:text="${bookLibrary.name}"></td>
 			</tr>
 			<tr>
 				<th>受け取り図書館</th>
