@@ -22,11 +22,8 @@ import com.example.demo.repository.ReservationRepository;
 import com.example.demo.repository.StatusRepository;
 import com.example.demo.repository.UserRepository;
 
-
-
 @Controller
 public class ReservationController {
-
 	@Autowired
 	private ReservationRepository reservationRepository;
 	@Autowired
@@ -37,29 +34,43 @@ public class ReservationController {
 	private LibraryRepository libraryRepository;
 	@Autowired
 	private StatusRepository statusRepository;
-	
+
 	@GetMapping("/staff/materialMg/reservationList")
-	public String index(@RequestParam(value = "reservation",defaultValue="") Integer reservation, Model model) {
-		List<Reservation> reservationList = reservationRepository.findAll();
-		model.addAttribute("reservationList",reservationList);
+	public String index(@RequestParam(value = "reservation", defaultValue = "") Integer reservation, Model model) {
+		Status status = statusRepository.findById(1).get();
+		List<Reservation> reservationList = reservationRepository.findByStatus(status);
+		model.addAttribute("reservationList", reservationList);
 		return "/staff/resevationList";
 	}
-	
-	
-	
+
 	@GetMapping("/staff/materialMg/reservationAdd")
 	public String add(Model model) {
-		
+
 		LocalDate today = LocalDate.now();
 		LocalDate scheduledDate = today.plusWeeks(1);
-		
+
 		model.addAttribute("reservationDate", today);
 		model.addAttribute("scheduledDate", scheduledDate);
-		
+
 		return "/staff/resevationAdd";
 	}
-	
-	
+
+	@GetMapping("/staff/materialMg/rental")
+	public String rentalList(Model model) {
+		Status status = statusRepository.findById(3).get();
+		List<Reservation> rentalList = reservationRepository.findByStatus(status);
+		model.addAttribute("reservationList", rentalList);
+		return "/staff/resevationList";
+	}
+
+	@GetMapping("/staff/materialMg/cancel")
+	public String cancelList(Model model) {
+		Status status = statusRepository.findById(2).get();
+		List<Reservation> cancelList = reservationRepository.findByStatus(status);
+		model.addAttribute("reservationList", cancelList);
+		return "/staff/resevationList";
+	}
+
 	@PostMapping("/staff/materialMg/reservationAdd")
 	public String reservationAdd(@RequestParam(value = "user", defaultValue = "") Integer user_id,
 			@RequestParam(value = "book", defaultValue = "") Integer book_id,
@@ -68,16 +79,17 @@ public class ReservationController {
 			@RequestParam(value = "library", defaultValue = "") Integer library_id,
 			@RequestParam(value = "status", defaultValue = "") Integer status_id,
 			Model model) {
-		
+
 		User user = userRepository.findById(user_id).get();
 		Book book = bookRepository.findById(book_id).get();
 		Library library = libraryRepository.findById(library_id).get();
 		Status status = statusRepository.findById(status_id).get();
-		
+
 		Reservation orderReservation = new Reservation(user, book, reservationDate, scheduledDate, library, status);
 		reservationRepository.save(orderReservation);
 		return "redirect:/staff/materialMg/reservationList";
 	}
+
 	@GetMapping("/staff/materialMg/{id}/reservationEdit")
 	public String edits(@PathVariable("id") Integer id,
 			Model model) {
@@ -86,7 +98,7 @@ public class ReservationController {
 		model.addAttribute("reservation", reservation);
 		return "/staff/resevationEdit";
 	}
-			
+
 	@PostMapping("/staff/materialMg/{id}/reservationEdit")
 	public String edits(@PathVariable("id") Integer id,
 			@RequestParam(value = "user", defaultValue = "") Integer user_id,
@@ -104,16 +116,15 @@ public class ReservationController {
 		reservationRepository.save(orderReservation);
 		return "redirect:/staff/materialMg/reservationList";
 	}
-	
+
 	@PostMapping("/staff/materialMg/{id}/delete")
 	public String delete(@PathVariable("id") Integer id,
-			Model model
-			) {
-		reservationRepository.deleteById(id);
+			Model model) {
+		Reservation reservation = reservationRepository.findById(id).get();
+		Status status = statusRepository.findById(2).get();
+		reservation.setStatus(status);
+		reservationRepository.save(reservation);
 		return "redirect:/staff/materialMg/reservationList";
 	}
-	
-	
+
 }
-
-

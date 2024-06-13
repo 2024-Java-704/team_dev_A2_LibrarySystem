@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.entity.Reservation;
+import com.example.demo.entity.Status;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
 	List<Reservation> findByUserIdAndBookIdOrderByIdDesc(Integer userId, Integer bookId);
+	List<Reservation> findByStatus (Status Status);
 }
