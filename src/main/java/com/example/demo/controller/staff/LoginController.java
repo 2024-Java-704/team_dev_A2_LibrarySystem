@@ -60,6 +60,7 @@ public class LoginController {
 				LibraryStaff libraryStaff = libraryStaffList.get(0);
 				account.setName(libraryStaff.getName());
 				account.setId(libraryStaff.getId());//名前とユーザーIDをセッション管理
+				account.setLibraryId(libraryStaff.getLibrary().getId());
 			}
 		}
 
