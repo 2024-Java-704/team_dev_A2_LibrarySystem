@@ -11,6 +11,9 @@
 	<header>
 		<h1>延滞者一覧</h1>
 	</header>
+	<th:block th:if="${error}">
+		<a th:text="${error}"></a>
+	</th:block>
 	<th:block th:if="${delayList}">
 		<table border="1">
 			<tr>

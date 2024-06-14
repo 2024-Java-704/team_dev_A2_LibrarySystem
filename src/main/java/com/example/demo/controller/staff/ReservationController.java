@@ -14,14 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Book;
 import com.example.demo.entity.Library;
-import com.example.demo.entity.LibraryStaff;
 import com.example.demo.entity.Reservation;
 import com.example.demo.entity.Status;
 import com.example.demo.entity.User;
 import com.example.demo.model.Account;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.LibraryRepository;
-import com.example.demo.repository.LibraryStaffRepository;
 import com.example.demo.repository.ReservationRepository;
 import com.example.demo.repository.StatusRepository;
 import com.example.demo.repository.UserRepository;
@@ -38,18 +36,14 @@ public class ReservationController {
 	private LibraryRepository libraryRepository;
 	@Autowired
 	private StatusRepository statusRepository;
-	@Autowired
-	private LibraryStaffRepository libraryStaffRepository;
+
 	@Autowired
 	Account account;
 
 	@GetMapping("/staff/materialMg/reservationList")
 	public String index(@RequestParam(value = "reservation", defaultValue = "") Integer reservation, Model model) {
 		Status status = statusRepository.findById(1).get();
-		LibraryStaff libraryStaff = libraryStaffRepository.findById(account.getId()).get();
-		Library library = libraryStaff.getLibrary(); //ログイン中の職員の図書館
-		Integer libraryStaffId = library.getId(); //ログイン中の職員の図書館ID
-		List<Book> books = bookRepository.findByLibraryId(libraryStaffId);
+		List<Book> books = bookRepository.findByLibraryId(account.getLibraryId());
 		List<Integer> bookIdList = new ArrayList<>();
 		for (Book book : books) {
 			bookIdList.add(book.getId());
@@ -58,10 +52,14 @@ public class ReservationController {
 		for (Integer bookId : bookIdList) {
 			reservationList.addAll(reservationRepository.findByBookIdAndLibraryIdAndStatus(
 					bookId,
-					libraryStaffId, status));
-
+					account.getLibraryId(), status));
 		}
-		model.addAttribute("reservationList", reservationList);
+		if (reservationList.size() == 0) {
+			model.addAttribute("error", "貸し出している本がありません");
+		} else {
+			model.addAttribute("reservationList", reservationList);
+		}
+
 		return "/staff/resevationList";
 	}
 

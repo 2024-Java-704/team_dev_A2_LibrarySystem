@@ -15,14 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Book;
 import com.example.demo.entity.Library;
-import com.example.demo.entity.LibraryStaff;
 import com.example.demo.entity.Reservation;
 import com.example.demo.entity.Status;
 import com.example.demo.entity.User;
 import com.example.demo.model.Account;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.LibraryRepository;
-import com.example.demo.repository.LibraryStaffRepository;
 import com.example.demo.repository.ReservationRepository;
 import com.example.demo.repository.StatusRepository;
 import com.example.demo.repository.UserRepository;
@@ -41,8 +39,6 @@ public class OrderController {//reservation
 	private StatusRepository statusRepository;
 	@Autowired
 	private Account account;
-	@Autowired
-	private LibraryStaffRepository libraryStaffRepository;
 
 	@GetMapping("/staff/materialMg/order")
 	public String index(
@@ -50,36 +46,43 @@ public class OrderController {//reservation
 			@RequestParam(value = "accept", defaultValue = "") String accept,
 			@RequestParam(value = "send", defaultValue = "") String send,
 			Model model) {
-		LibraryStaff libraryStaff = libraryStaffRepository.findById(account.getId()).get();
-		Library library = libraryStaff.getLibrary(); //ログイン中の職員の図書館
-		Integer libraryStaffId = library.getId(); //ログイン中の職員の図書館ID	
-		List<Reservation> orderList = new ArrayList<>();
-		List<Book> books = bookRepository.findByLibraryId(libraryStaffId); //Listに自分の図書館の資料を全て追加
+		List<Book> books = bookRepository.findByLibraryId(account.getLibraryId());
 		List<Integer> bookIdList = new ArrayList<>();
 		for (Book book : books) {
 			bookIdList.add(book.getId());
 		}
-		if (accept.equals("juchu")) {
-
+		List<Reservation> orderList = new ArrayList<>();
+		if (accept.equals("juchu")) { //受注
 			for (Integer bookId : bookIdList) {
 				orderList.addAll(reservationRepository.findByBookIdAndLibraryIdNot(
 						bookId,
-						libraryStaffId));
+						account.getLibraryId()));
 			}
-
-		} else if (send.equals("hacchu")) {
 			for (Integer bookId : bookIdList) {
-				System.out.println(bookId);
-				orderList.addAll(reservationRepository.findByLibraryIdAndBookIdNot(
-						libraryStaffId,
-						bookId));
+				orderList.removeAll(reservationRepository.findByBookIdAndLibraryId(bookId, account.getId()));
 			}
-
+		} else if (send.equals("hacchu")) {//発注
+			for (Integer bookId : bookIdList) {
+				orderList.addAll(reservationRepository.findByBookIdNotAndLibraryId(
+						bookId,
+						account.getLibraryId()));
+			}
+			for (Integer bookId : bookIdList) {
+				orderList.removeAll(reservationRepository.findByBookIdAndLibraryId(bookId, account.getId()));
+			}
 		} else {
-			orderList.addAll(reservationRepository.findAll());
+			for (Integer bookId : bookIdList) {//一覧表示
+				orderList.addAll(reservationRepository.findByBookIdOrLibraryId(
+						bookId,
+						account.getLibraryId()));
+			}
+			for (Integer bookId : bookIdList) {
+				orderList.removeAll(reservationRepository.findByBookIdAndLibraryId(bookId, account.getId()));
+			}
 		}
 
-		List<Reservation> order2List = new ArrayList<>(new HashSet<>(orderList));
+		List<Reservation> order2List = new ArrayList<>(
+				new HashSet<>(orderList));
 		model.addAttribute("reservationList", order2List);
 
 		return "/staff/orderList";

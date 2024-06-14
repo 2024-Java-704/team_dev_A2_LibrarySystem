@@ -1,6 +1,7 @@
 package com.example.demo.controller.staff;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -18,8 +19,10 @@ import com.example.demo.entity.LibraryStaff;
 import com.example.demo.entity.Reservation;
 import com.example.demo.entity.Status;
 import com.example.demo.entity.User;
+import com.example.demo.model.Account;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.LendingRepository;
+import com.example.demo.repository.LibraryRepository;
 import com.example.demo.repository.LibraryStaffRepository;
 import com.example.demo.repository.ReservationRepository;
 import com.example.demo.repository.StatusRepository;
@@ -42,16 +45,29 @@ public class RentalController {
 
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	StatusRepository statusRepository;
+
+	@Autowired
+	LibraryRepository libraryRepository;
+
+	@Autowired
+	Account account;
 
 	@GetMapping("/staff/materialMg/rentalList")
 	public String index(
 			Model model) {
 
-		List<Lending> lendingList = lendingRepository.findByReturnedDateIsNull();
-
+		List<Book> books = bookRepository.findByLibraryId(account.getLibraryId());
+		List<Integer> bookIdList = new ArrayList<>();
+		for (Book book : books) {
+			bookIdList.add(book.getId());
+		}
+		List<Lending> lendingList = new ArrayList<>();
+		for (Integer bookId : bookIdList) {
+			lendingList.addAll(lendingRepository.findByBookIdAndReturnedDateIsNull(bookId));
+		}
 		if (lendingList.size() == 0) {
 			model.addAttribute("error", "貸し出している本がありません");
 		} else {
@@ -171,7 +187,7 @@ public class RentalController {
 			Reservation reservation = reservationRepository.findById(reservationId).orElseThrow();
 			Lending lending = new Lending(user, book, rentalDate, limitDate, reservation, staff);
 			lendingRepository.save(lending);
-			Status status=statusRepository.findById(3).get();
+			Status status = statusRepository.findById(3).get();
 			reservation.setStatus(status);
 			reservationRepository.save(reservation);
 			return "redirect:/staff/materialMg/rentalList";
