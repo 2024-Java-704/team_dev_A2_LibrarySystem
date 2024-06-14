@@ -56,7 +56,7 @@
 			<td th:text="${title.library.name}"></td>
 			<td th:text="${title.condition.name}"></td>
 			<td>
-				<form th:action="@{/user/{bookId}/order(bookId=${bookDetail.id})}" method="get">
+				<form th:action="@{/user/{bookId}/order(bookId=${title.id})}" method="get">
 					<button class="btn-flat-simple">予約・注文</button>
 				</form>
 			</td>
