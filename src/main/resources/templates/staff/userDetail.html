@@ -45,6 +45,7 @@
 			<th>タイトル</th>
 			<th>貸出日</th>
 			<th>返却予定日</th>
+			<th>返却日</th>
 		</tr>
 		<tr th:each="lending:${lendingList}">
 			<td th:text="${lending.id}"></td>
@@ -52,6 +53,7 @@
 			<td th:text="${lending.book.title}"></td>
 			<td th:text="${lending.lendDate}"></td>
 			<td th:text="${lending.limitDate}"></td>
+			<td th:if="${lending.returnedDate}" th:text="${lending.returnedDate}"></td>
 		</tr>
 	</table>
 	<a href="/staff/userMg/userList">利用者一覧</a>
