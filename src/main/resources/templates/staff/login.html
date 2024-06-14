@@ -11,13 +11,13 @@
 	<header>
 		<h1>ログイン</h1>
 	</header>
-	<div th:each="error:${errorList1}">
+	<div th:each="error:${errorList1}" class="errormsg">
 		<span th:text="${error}"></span>
 	</div>
 	<form action="/staff/login" method="post">
-		<input type="text" name="email" placeholder="メールアドレス">
+		<input type="text" name="email" placeholder="メールアドレス" class="login">
 		<br>
-		<input type="password" name="password" placeholder="パスワード">
+		<input type="password" name="password" placeholder="パスワード" class="login">
 		<br>
 		<button>ログイン</button>
 	</form>

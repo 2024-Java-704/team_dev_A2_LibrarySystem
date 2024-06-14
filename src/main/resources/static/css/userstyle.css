@@ -92,6 +92,7 @@ body {
 }
 
 .orderinput {
+	font-size: medium;
 	display: block;
 	margin: 0 auto;
 	width: 300px;
@@ -147,6 +148,7 @@ input {
 	border-top-right-radius: 20px;
 	border-bottom-left-radius: 20px;
 	border-bottom-right-radius: 20px;
+	font-size: large;
 }
 
 table {
