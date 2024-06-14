@@ -192,7 +192,7 @@ public class UserController {
 			delayList.addAll(lendingRepository.findByBookIdAndLimitDateBeforeAndReturnedDateIsNull(bookId, today));
 		}
 		if (delayList.size() == 0) {
-			model.addAttribute("error", "貸し出している本がありません");
+			model.addAttribute("error", "延滞者はいません");
 		} else {
 			model.addAttribute("delayList", delayList);
 		}
