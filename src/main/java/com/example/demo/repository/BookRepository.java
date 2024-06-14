@@ -11,6 +11,7 @@ import com.example.demo.entity.Category;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
+	// タイトルあいまい検索
 	List<Book> findByTitleContaining(String title);
 
 	List<Book> findByCategory(Category category);
@@ -31,5 +32,19 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
 	List<Book> findByHuriganaContaining(String keyword);
 
+
+	List<Book> findByIdAndCategoryId(Integer bookId, Integer categoryId);
+
+	// ここから追加分
+	List<Book> findByTitleNotContaining(String title);
+
+	List<Book> findByAuthorNotContaining(String author);
+
+	List<Book> findByPublisherNotContaining(String publisher);
+
+	List<Book> findByCategoryNotIn(List<Category> categories); // 修正点
+
+	List<Book> findByPubYearNotIn(List<LocalDate> pubYears);
+  
 	List<Book> findByLibraryId(Integer libraryId);
 }
