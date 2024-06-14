@@ -11,6 +11,8 @@
 
 	<header>
 		<h1>職員メニュー</h1>
+		<span th:text="${@account.libraryName}+' 職員用管理ページ'"></span>
+	<a href="/logout">ログアウト</a>
 	</header>
 	<form action="/staff/materialMg" method="get">
 		<button class="topbutton">資料管理</button>

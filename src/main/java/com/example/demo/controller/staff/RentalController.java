@@ -85,6 +85,25 @@ public class RentalController {
 		return "/staff/rentalAdd";
 	}
 
+	@GetMapping("/staff/materialMg/{id}/reservationRental")
+	public String create2(@PathVariable("id") Integer id,
+			Model model) {
+
+		Reservation reservation = reservationRepository.findById(id).get();
+		Integer userId = reservation.getUser().getId();
+		Integer bookId = reservation.getBook().getId();
+
+		LocalDate rentalDate = LocalDate.now();
+		LocalDate limitDate = rentalDate.plusWeeks(1);
+		model.addAttribute("staffId", account.getId());
+		model.addAttribute("reservationId", reservation.getId());
+		model.addAttribute("bookId", bookId);
+		model.addAttribute("userId", userId);
+		model.addAttribute("rentalDate", rentalDate);
+		model.addAttribute("limitDate", limitDate);
+		return "/staff/rentalAdd";
+	}
+
 	@GetMapping("/staff/materialMg/{bookId}/rentalAdd")
 	public String detailCreate(
 			@PathVariable("bookId") Integer id, Model model) {
