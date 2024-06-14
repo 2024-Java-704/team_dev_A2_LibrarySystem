@@ -123,3 +123,19 @@ button:hover {
 	top: -webkit-calc(100% - 3px);
 	top: calc(100% - 3px);
 }
+.login {
+	display: block;
+	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 500px;
+	height: 50px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	font-size: x-large
+}
+.errormsg {
+	color: red;
+}
