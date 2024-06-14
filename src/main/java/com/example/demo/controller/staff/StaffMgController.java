@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Library;
 import com.example.demo.entity.LibraryStaff;
+import com.example.demo.model.Account;
 import com.example.demo.repository.LibraryRepository;
 import com.example.demo.repository.LibraryStaffRepository;
 
@@ -21,6 +22,9 @@ public class StaffMgController {
 	private LibraryStaffRepository libraryStaffRepository;
 	@Autowired
 	private LibraryRepository libraryRepository;
+	@Autowired
+	Account account;
+	
 
 	@GetMapping("/staff/staffMg")
 	public String index(
@@ -34,18 +38,19 @@ public class StaffMgController {
 	}
 
 	@GetMapping("/staff/staffMg/staffAdd")
-	public String add() {
+	public String add(Model model) {
+		Library library=libraryRepository.findById(account.getLibraryId()).get();
+		model.addAttribute("library", library);
 		return "/staff/staffAdd";
 	}
 
 	@PostMapping("/staff/staffMg/staffAdd")
 	public String addre(
 			@RequestParam(value = "name", defaultValue = "") String name,
-			@RequestParam(value = "libraryId", defaultValue = "") Integer libraryid,
 			@RequestParam(value = "email", defaultValue = "") String email,
 			@RequestParam(value = "password", defaultValue = "") String password,
 			Model model) {
-		Library library = libraryRepository.findById(libraryid).get();
+		Library library = libraryRepository.findById(account.getLibraryId()).get();
 		LibraryStaff staff = new LibraryStaff(library, name, email, password);
 
 		libraryStaffRepository.save(staff);

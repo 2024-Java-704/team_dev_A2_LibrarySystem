@@ -12,8 +12,14 @@
 <header>
 <h1>予約一覧</h1>
   </header>
+ <form action="/staff/materialMg/reservationAdd">
+	 <button>新規追加</button>
+ </form>
+ <a href="/staff/materialMg/reservationList">予約リスト</a>
+ <a href="/staff/materialMg/cancel">キャンセルリスト</a>
+ <a href="/staff/materialMg/rental">貸出済みリスト</a>
 <a href="/staff/materialMg">資料管理に戻る</a>
-<a href="/staff/materialMg/reservationAdd">追加</a>
+
 
 <table border="1">
 	<tr>
@@ -33,23 +39,29 @@
 			貸出予定日
 		</th>
 		<th>
-			予約図書館ID
+			予約図書館
 		</th>
 		<th>
-			状況ID
+			状況
 		</th>
 		
 		<th>
-			変更
+			
 		</th>
 		<th>
-			削除
+			
 		</th>
 		</tr>
 	<tr th:each="reservation : ${reservationList}">
 		<td th:text="${reservation.id}"></td>
-		<td th:text="${reservation.user.name}"></td>
-		<td th:text="${reservation.user.id}"></td>
+		<td>
+			<a th:href="@{/staff/userMg/{userId}/userDetail(userId=${reservation.user.id})}" th:text="${reservation.user.id}"> 
+			</a>
+		</td>
+		<td>
+			<a th:href="@{/staff/{id}/bookdetail(id=${reservation.book.id})}" th:text="${reservation.book.id}">
+			</a>	
+		</td>
 		<td th:text="${reservation.reservationDate}"></td>
 		<td th:text="${reservation.scheduledDate}"></td>
 		<td th:text="${reservation.library.name}"></td>

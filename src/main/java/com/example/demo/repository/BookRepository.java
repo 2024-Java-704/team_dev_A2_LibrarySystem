@@ -32,6 +32,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
 	List<Book> findByHuriganaContaining(String keyword);
 
+
 	List<Book> findByIdAndCategoryId(Integer bookId, Integer categoryId);
 
 	// ここから追加分
@@ -44,5 +45,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 	List<Book> findByCategoryNotIn(List<Category> categories); // 修正点
 
 	List<Book> findByPubYearNotIn(List<LocalDate> pubYears);
-
+  
+	List<Book> findByLibraryId(Integer libraryId);
 }

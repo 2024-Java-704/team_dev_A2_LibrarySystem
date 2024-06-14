@@ -2,14 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+	<link rel="stylesheet" type="text/css" href="/css/userstyle.css">
 	<meta charset="UTF-8">
 	<title>本一覧</title>
 </head>
 
 <body>
-	<h1>本一覧</h1>
-<form th:action="@{/user/userDetailSearch?sort=jporder}" method="Post">
 
+	<header>
+		<h1>本一覧</h1>
+	</header>
+<form th:action="@{/user/userDetailSearch?sort=jporder}" method="Post">
 	<button>50音順</button>
 </form>
 	<form th:action="@{/user/userDetailSearch?sort=ranking}" method="Post">
@@ -21,32 +24,29 @@
 	<button>出版年順</button>
 	</form>
 
-	<table border="1">
+	<table border="1" class="booklist">
 		<tr>
-			<th>資料ID</th>
-			<th>分類番号</th>
-			<th>タイトル</th>
+			<th class="numtable">資料ID</th>
+			<th class="numtable">分類番号</th>
+			<th class="titletable">タイトル</th>
 			<th>著者</th>
 			<th>出版社</th>
-			<th>出版日</th>
-			<th>詳細</th>
+			<th class="daytable">出版日</th>
+
 		</tr>
 		<tr th:each="book:${books}">
 			<td th:text="${book.id}"></td>
 			<td th:text="${book.category.categoryNum}"></td>
-			<td th:text="${book.title}"></td>
+			<td><a th:href="@{/user/{id}/bookDetail(id=${book.id})}" th:text="${book.title}">
+				</a></td>
 			<td th:text="${book.author}"></td>
 			<td th:text="${book.publisher}"></td>
 			<td th:text="${book.pubYear}"></td>
-			<td>
-				<form th:action="@{/user/{id}/bookDetail(id=${book.id})}" method="get">
-					<button>詳細</button>
-				</form>
-			</td>
-		</tr>			
+		</tr>
 	</table>
 	<a href="/user/userTop">戻る</a>
 	<a href="/user/childrenSearch">キッズメニューに戻る</a>
 </body>
+<footer></footer>
 
 </html>

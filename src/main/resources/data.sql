@@ -23,7 +23,7 @@ INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,li
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(2, '哲学用語図鑑', 'てつがくようごずかん' ,'田中正人','プレジデント社', '2015/02/26','2020/04/01',1,1, 200);
 
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(3, '眠れなくなるほど面白い 図解 孫氏の兵法', 'ねむれなくなるほどおもしろい ずかい そんしのへいほう' ,'島崎晋','日本文芸社', '2019/02/22','2020/04/01',1,1, 330);
-INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(3, '眠れなくなるほど面白い 図解 論語', 'ねむれなくなるほどおもしろい ずかい ろんご' ,'山口謡司','日本文芸社', '2019/02/22','2020/04/01',1,1, 330);
+INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(3, '眠れなくなるほど面白い 図解 論語', 'ねむれなくなるほどおもしろい ずかい ろんご' ,'山口謡司','日本文芸社', '2019/02/22','2020/04/01',1,2, 330);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(3, '眠れなくなるほど面白い 図解 神道', 'ねむれなくなるほどおもしろい ずかい しんどう' ,'渋谷申博','日本文芸社', '2020/04/22','2020/07/01',1,1, 330);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(3, '眠れなくなるほど面白い 図解 ギリシャ神話', 'ねむれなくなるほどおもしろい ずかい ぎりしゃしんわ' ,'島崎晋','日本文芸社', '2020/08/19','2021/04/01',1,1, 330);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(3, '眠れなくなるほど面白い 図解 仏教', 'ねむれなくなるほどおもしろい ずかい ぶっきょう' ,'渋谷申博','日本文芸社', '2019/07/24','2020/04/01',1,1, 330);
@@ -73,6 +73,11 @@ INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,li
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, '傲慢と善良', 'ごうまんとぜんりょう' ,'辻村深月','朝日新聞出版', '2022/09/07','2022/10/30',1,1, 320);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, 'コンビニ人間', 'こんびににんげん' ,'村田沙耶香','文藝春秋', '2018/09/04','2021/07/30',1,1,340);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',1,1, 360);
+INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, 'コンビニ人間', 'こんびににんげん' ,'村田沙耶香','文藝春秋', '2018/09/04','2021/07/30',2,1,340);
+INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, '傲慢と善良', 'ごうまんとぜんりょう' ,'辻村深月','朝日新聞出版', '2022/09/07','2022/10/30',3,1, 320);
+INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',2,1, 3);
+INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 3);
+
 --図書館テーブルデータ
 INSERT INTO library(name,address,tel) VALUES('港区図書館','東京都港区','03-1111-2222');
 INSERT INTO library(name,address,tel) VALUES('品川区図書館','東京都品川区','03-1111-3333');
@@ -95,8 +100,27 @@ INSERT INTO library_staff(library_id,name,email,password) VALUES(3,'斎藤四郎
 --図書館管理者テーブルデータ
 INSERT INTO library_manager(name,email,password) VALUES('山田太郎','yamada@mail.com','ggg');
 --貸出テーブルデータ
-INSERT INTO lending(user_id,book_id,lend_date,limit_date,returned_date,reservation_id,staff_id) VALUES(1,1,'2024/05/03','2024/05/10','2024/05/07',1,1);
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,returned_date,reservation_id,staff_id) VALUES(1,1,'2024/05/03','2024/05/10','2024/05/07',1,1); --延滞なし・返却あり・図書館ID1
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,returned_date,staff_id) VALUES(1,49,'2024/05/03','2024/05/10','2024/05/07',2); --延滞なし・返却あり・図書館ID1
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,returned_date,staff_id) VALUES(1,50,'2024/05/03','2024/05/10','2024/05/07',3); --延滞なし・返却あり・図書館ID2
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,staff_id) VALUES(2,10,'2024/05/10','2024/05/17',1); --延滞あり・返却なし・図書館ID1
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,staff_id) VALUES(2,49,'2024/05/10','2024/05/17',2); --延滞あり・返却なし・図書館ID2
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,staff_id) VALUES(3,50,'2024/05/10','2024/05/17',3); --延滞あり・返却なし・図書館ID3
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,staff_id) VALUES(3,48,'2024/06/10','2024/06/17',1); --延滞なし・返却なし・図書館ID1
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,staff_id) VALUES(3,49,'2024/06/10','2024/06/17',2); --延滞なし・返却なし・図書館ID2
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,staff_id) VALUES(3,50,'2024/06/10','2024/06/17',3); --延滞なし・返却なし・図書館ID3
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,returned_date,staff_id) VALUES(2,48,'2024/05/10','2024/05/17','2024/05/20',1); --延滞あり・返却あり・図書館ID1
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,returned_date,staff_id) VALUES(2,49,'2024/05/10','2024/05/17','2024/05/20',2); --延滞あり・返却あり・図書館ID2
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,returned_date,staff_id) VALUES(2,50,'2024/05/10','2024/05/17','2024/05/20',3); --延滞あり・返却あり・図書館ID3
+
+
 --予約テーブルデータ
-INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(1,2,'2024/05/07','2024/05/12',1,1);
-
-
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(1,2,'2024/05/07','2024/05/12',1,1); --図書館1→1
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(1,49,'2024/05/25','2024/06/01',1,1); --図書館1→2
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(1,50,'2024/05/25','2024/06/01',1,1); --図書館1→3
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(2,25,'2024/05/25','2024/06/01',2,1); --図書館2→1
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(2,49,'2024/05/25','2024/06/01',2,1); --図書館2→2
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(2,50,'2024/06/10','2024/06/12',2,1); --図書館2→3
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(3,30,'2024/04/11','2024/04/13',3,1); --図書館3→1
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(3,49,'2024/05/25','2024/06/01',3,1); --図書館3→2
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(3,50,'2024/05/25','2024/06/01',3,1); --図書館3→3

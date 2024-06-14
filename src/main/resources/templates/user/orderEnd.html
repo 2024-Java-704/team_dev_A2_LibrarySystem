@@ -2,14 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/css/userstyle.css">
 	<meta charset="UTF-8">
 	<title>予約・注文完了</title>
 </head>
 
 <body>
-	<header></header>
+	<header>
 	<h1>以下の内容で予約・注文が完了しました</h1>
+	</header>
 	<th:block th:if="${reservation}">
 		<table border="1">
 			<tr>
@@ -24,8 +25,8 @@
 				<th>利用者名</th>
 				<td th:text="${reservation.user.name}"></td>
 			</tr>
-			<th>資料ID</th>
-			<td th:text="${reservation.book.id}"></td>
+				<th>資料ID</th>
+				<td th:text="${reservation.book.id}"></td>
 			<tr>
 				<th>タイトル</th>
 				<td th:text="${reservation.book.title}"></td>
@@ -37,6 +38,10 @@
 			<tr>
 				<th>受け取り予定日</th>
 				<td th:text="${reservation.scheduledDate}"></td>
+			</tr>
+			<tr>
+				<th>所属図書館</th>
+				<td th:text="${bookLibrary.name}"></td>
 			</tr>
 			<tr>
 				<th>受け取り図書館</th>

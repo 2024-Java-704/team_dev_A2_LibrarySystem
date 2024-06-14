@@ -2,23 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+	<link rel="stylesheet" type="text/css" href="/css/userstyle.css">
 	<meta charset="UTF-8">
 	<title>資料検索</title>
 </head>
 
 <body>
-	<h1>資料検索</h1>
-    <form action="/user/userDetailSearch" method="post">
-   		<input type="text" name="title" placeholder="タイトル"><br>
-    	<input type="text" name="category" placeholder="分類番号"><br>
-    	<input type="text" name="author" placeholder="著者"><br>
-    	<input type="text" name="publisher" placeholder="出版社"><br>
-    	<input type="date" name="publishDay" placeholder="出版日"><br>
-    	<button>検索</button>
+	<header>
+    <h1>資料検索</h1>
+	</header>
+   <form action="/user/userDetailSearch" method="post">
+		<table class="searchtable">
+   	<input type="text" name="title" placeholder="タイトル"><br>
+		<input type="text" name="category" placeholder="分類番号"><br>
+		<input type="text" name="author" placeholder="著者"><br>
+		<input type="text" name="publisher" placeholder="出版社"><br>
+		<input type="date" name="publishDay" placeholder="出版日"><br>
+		
+    	</table>
+    	<button class="searchbutton">検索</button>
     </form>
     <a href="/user/childrenSearch">キッズメニューへ</a>
 </body>
-
+<footer></footer>
 </html>
 
 

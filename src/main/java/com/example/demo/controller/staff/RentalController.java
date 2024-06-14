@@ -16,11 +16,13 @@ import com.example.demo.entity.Book;
 import com.example.demo.entity.Lending;
 import com.example.demo.entity.LibraryStaff;
 import com.example.demo.entity.Reservation;
+import com.example.demo.entity.Status;
 import com.example.demo.entity.User;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.LendingRepository;
 import com.example.demo.repository.LibraryStaffRepository;
 import com.example.demo.repository.ReservationRepository;
+import com.example.demo.repository.StatusRepository;
 import com.example.demo.repository.UserRepository;
 
 @Controller
@@ -40,12 +42,15 @@ public class RentalController {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	StatusRepository statusRepository;
 
 	@GetMapping("/staff/materialMg/rentalList")
 	public String index(
 			Model model) {
-		
-		List<Lending> lendingList = lendingRepository.findAll();
+
+		List<Lending> lendingList = lendingRepository.findByReturnedDateIsNull();
 
 		if (lendingList.size() == 0) {
 			model.addAttribute("error", "貸し出している本がありません");
@@ -61,6 +66,17 @@ public class RentalController {
 		LocalDate limitDate = rentalDate.plusWeeks(1);
 		model.addAttribute("rentalDate", rentalDate);
 		model.addAttribute("limitDate", limitDate);
+		return "/staff/rentalAdd";
+	}
+
+	@GetMapping("/staff/materialMg/{bookId}/rentalAdd")
+	public String detailCreate(
+			@PathVariable("bookId") Integer id, Model model) {
+		LocalDate rentalDate = LocalDate.now();
+		LocalDate limitDate = rentalDate.plusWeeks(1);
+		model.addAttribute("rentalDate", rentalDate);
+		model.addAttribute("limitDate", limitDate);
+		model.addAttribute("bookId", id);
 		return "/staff/rentalAdd";
 	}
 
@@ -155,6 +171,9 @@ public class RentalController {
 			Reservation reservation = reservationRepository.findById(reservationId).orElseThrow();
 			Lending lending = new Lending(user, book, rentalDate, limitDate, reservation, staff);
 			lendingRepository.save(lending);
+			Status status=statusRepository.findById(3).get();
+			reservation.setStatus(status);
+			reservationRepository.save(reservation);
 			return "redirect:/staff/materialMg/rentalList";
 
 		} catch (IndexOutOfBoundsException e) {
