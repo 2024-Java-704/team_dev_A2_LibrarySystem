@@ -44,12 +44,14 @@
 		<th>
 			状況
 		</th>
-		
 		<th>
-			
+			変更
 		</th>
 		<th>
-			
+			削除
+		</th>
+		<th>
+			貸出
 		</th>
 		</tr>
 	<tr th:each="reservation : ${reservationList}">
@@ -76,6 +78,11 @@
 		<td>
 			<form th:action="@{/staff/materialMg/{reservationId}/delete(reservationId=${reservation.id})}"  method="post" class="deleteForm">
 				<button class="deleteButton">削除</button>
+			</form>
+		</td>
+		<td>
+			<form th:action="@{/staff/materialMg/{reservationId}/lend(reservationId=${reservation.id})}"  method="get" class="deleteForm">
+				<button>貸出</button>
 			</form>
 		</td>
 				
