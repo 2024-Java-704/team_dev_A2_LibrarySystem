@@ -23,7 +23,7 @@ INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,li
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(2, '哲学用語図鑑', 'てつがくようごずかん' ,'田中正人','プレジデント社', '2015/02/26','2020/04/01',1,1, 200);
 
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(3, '眠れなくなるほど面白い 図解 孫氏の兵法', 'ねむれなくなるほどおもしろい ずかい そんしのへいほう' ,'島崎晋','日本文芸社', '2019/02/22','2020/04/01',1,1, 330);
-INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(3, '眠れなくなるほど面白い 図解 論語', 'ねむれなくなるほどおもしろい ずかい ろんご' ,'山口謡司','日本文芸社', '2019/02/22','2020/04/01',1,2, 330);
+INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(3, '眠れなくなるほど面白い 図解 論語', 'ねむれなくなるほどおもしろい ずかい ろんご' ,'山口謡司','日本文芸社', '2019/02/22','2020/04/01',1,2, 330,'/img/book10.jpg');
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(3, '眠れなくなるほど面白い 図解 神道', 'ねむれなくなるほどおもしろい ずかい しんどう' ,'渋谷申博','日本文芸社', '2020/04/22','2020/07/01',1,1, 330);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(3, '眠れなくなるほど面白い 図解 ギリシャ神話', 'ねむれなくなるほどおもしろい ずかい ぎりしゃしんわ' ,'島崎晋','日本文芸社', '2020/08/19','2021/04/01',1,1, 330);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(3, '眠れなくなるほど面白い 図解 仏教', 'ねむれなくなるほどおもしろい ずかい ぶっきょう' ,'渋谷申博','日本文芸社', '2019/07/24','2020/04/01',1,1, 330);
@@ -72,11 +72,11 @@ INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,li
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, '世界で活躍する子の英語力の育て方', 'せかいでかつやくするこのえいごりょくのそだてかた' ,'船津徹','大和書房', '2019/06/20','2021/07/30',1,1, 235);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, '傲慢と善良', 'ごうまんとぜんりょう' ,'辻村深月','朝日新聞出版', '2022/09/07','2022/10/30',1,1, 320);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, 'コンビニ人間', 'こんびににんげん' ,'村田沙耶香','文藝春秋', '2018/09/04','2021/07/30',1,1,340);
-INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',1,1, 360);
+INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',1,1, 360,'/img/book48.jpg');
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, 'コンビニ人間', 'こんびににんげん' ,'村田沙耶香','文藝春秋', '2018/09/04','2021/07/30',2,1,340);
 INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, '傲慢と善良', 'ごうまんとぜんりょう' ,'辻村深月','朝日新聞出版', '2022/09/07','2022/10/30',3,1, 320);
-INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',2,1, 3);
-INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt) VALUES(10, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 3);
+INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',2,1, 3,'/img/book48.jpg');
+INSERT INTO book(category_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 3,'/img/book48.jpg');
 
 --図書館テーブルデータ
 INSERT INTO library(name,address,tel) VALUES('港区図書館','東京都港区','03-1111-2222');
