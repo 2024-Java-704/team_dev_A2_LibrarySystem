@@ -11,10 +11,13 @@
 	<header>
 		<h1>利用者管理メニュー</h1>
 	</header>
-	<a href="/staff/userMg/userList">利用者一覧</a>
-	<br>
-	<a href="/staff/userMg/delinquentList">延滞者一覧</a>
-	<br>
+	<form action="/staff/userMg/userList" method="get">
+		<button class="topbutton">利用者一覧</button>
+	</form>
+	<form action="/staff/userMg/delinquentList" method="get">
+		<button class="topbutton">延滞者一覧</button>
+	</form>
+
 	<a href="/staff/staffTop">Topメニューに戻る</a>
 </body>
 <footer></footer>

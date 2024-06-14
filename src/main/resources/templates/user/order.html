@@ -9,14 +9,12 @@
 
 <body>
 	<header>
-	<h1>予約・注文</h1>
+		<h1>予約・注文</h1>
 	</header>
-	<a>以下の資料を予約・注文しますか？</a>
-	<a th:if="${error}">
-		<ul th:each="error:${error}" th:text="${error}"></ul>
-	</a>
+	<div class="ordertext">以下の資料を予約・注文しますか？</div>
+
 	<th:block th:if="${bookOrder}">
-		<table border="1">
+		<table border="1" class="ordertable">
 			<tr>
 				<th>ID</th>
 				<td th:text="${bookOrder.id}"></td>
@@ -54,21 +52,26 @@
 		</table>
 	</th:block>
 	<form th:action="@{/user/{bookId}/order(bookId=${bookOrder.id})}" method="post">
-		受け取り図書館を選択してください
+		<div class="ordertext">受け取り図書館を選択してください</div>
 		<br>
-		<select name="library">
+		<select name="library" class="orderoption">
 			<option th:each="library:${library}" th:value="${library.id}">[[${library.name}]]</option>
 		</select>
 		<br>
-		<p>利用者ID・パスワードを入力してください</p>
-		<p>（利用者ID・パスワードをお持ちでない方はカウンターまでお越しください）</p>
-		<input type="text" name="userId" placeholder="利用者ID"><br>
-		<input type="text" name="userPassword" placeholder="パスワード"><br>
-		<button>予約・注文</button>
+		<a th:if="${error}">
+			<ul th:each="error:${error}" th:text="${error}" class="ordererror"></ul>
+		</a>
+		<br>
+		<p class="ordertext">利用者ID・パスワードを入力してください</p>
+		<p class="ordertext">（利用者ID・パスワードをお持ちでない方はカウンターまでお越しください）</p>
+		<input type="text" name="userId" placeholder="利用者ID" class="orderinput"><br>
+		<input type="text" name="userPassword" placeholder="パスワード" class="orderinput"><br>
+		<button class="orderbutton">予約・注文</button>
 	</form>
-	
+
 	<br>
 	<a th:href="@{/user/{id}/bookDetail(id=${bookOrder.id})}">戻る</a>
 </body>
 <footer></footer>
+
 </html>

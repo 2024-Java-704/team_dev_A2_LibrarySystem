@@ -12,7 +12,7 @@
 	<h1>以下の内容で予約・注文が完了しました</h1>
 	</header>
 	<th:block th:if="${reservation}">
-		<table border="1">
+		<table border="1" class="ordertable">
 			<tr>
 				<th>予約・注文ID</th>
 				<td th:text="${reservation.id}"></td>
