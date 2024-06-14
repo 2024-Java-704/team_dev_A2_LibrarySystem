@@ -11,13 +11,16 @@ public class Account {
 	private Integer id;
 
 	private String name;
+	
+	private Integer libraryId;
 
 	public Account() {
 	}
 
-	public Account(Integer id, String name) {
+	public Account(Integer id, String name, Integer libraryId) {
 		this.id = id;
 		this.name = name;
+		this.libraryId=libraryId;
 	}
 
 	public Integer getId() {
@@ -34,5 +37,13 @@ public class Account {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Integer getLibraryId() {
+		return libraryId;
+	}
+
+	public void setLibraryId(Integer libraryId) {
+		this.libraryId = libraryId;
 	}
 }
