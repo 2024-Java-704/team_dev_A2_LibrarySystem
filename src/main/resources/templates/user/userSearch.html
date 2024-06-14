@@ -12,17 +12,19 @@
 	<header>
 		<h1>本一覧</h1>
 	</header>
-<form th:action="@{/user/userDetailSearch?sort=jporder}" method="Post">
-	<button>50音順</button>
-</form>
+	<div class="sortbutton">
+	<form th:action="@{/user/userDetailSearch?sort=jporder}" method="Post">
+		<button>50音順</button>
+	</form>
 	<form th:action="@{/user/userDetailSearch?sort=ranking}" method="Post">
 
-	<button>人気順</button>
+		<button>人気順</button>
 	</form>
 	<form th:action="@{/user/userDetailSearch?sort=pubYear}" method="Post">
 
-	<button>出版年順</button>
+		<button>出版年順</button>
 	</form>
+	</div>
 
 	<table border="1" class="booklist">
 		<tr>

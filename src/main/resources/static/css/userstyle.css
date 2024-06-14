@@ -130,6 +130,14 @@ body {
 	margin: 0 auto;
 }
 
+.sortbutton {
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	margin-right: 5px;
+	column-gap: 5px;
+}
+
 input {
 	display: block;
 	margin: 0 auto;
