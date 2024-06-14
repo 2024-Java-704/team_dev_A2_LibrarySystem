@@ -24,14 +24,13 @@ public class StaffMgController {
 	private LibraryRepository libraryRepository;
 	@Autowired
 	Account account;
-	
 
 	@GetMapping("/staff/staffMg")
 	public String index(
 			@RequestParam(value = "library", defaultValue = "") Integer library,
 			Model model) {
-		//		List<LibraryStaff> staffList = libraryStaffRepository.findByLibraryId(library);
-		List<LibraryStaff> staffList = libraryStaffRepository.findAll();
+
+		List<LibraryStaff> staffList = libraryStaffRepository.findByLibraryId(account.getLibraryId());
 		model.addAttribute("staffList", staffList);
 
 		return "/staff/staffList";
@@ -39,7 +38,7 @@ public class StaffMgController {
 
 	@GetMapping("/staff/staffMg/staffAdd")
 	public String add(Model model) {
-		Library library=libraryRepository.findById(account.getLibraryId()).get();
+		Library library = libraryRepository.findById(account.getLibraryId()).get();
 		model.addAttribute("library", library);
 		return "/staff/staffAdd";
 	}
@@ -70,11 +69,10 @@ public class StaffMgController {
 	public String handleEdit(
 			@PathVariable("id") Integer id,
 			@RequestParam(value = "name", defaultValue = "") String name,
-			@RequestParam(value = "libraryId", defaultValue = "") Integer libraryid,
 			@RequestParam(value = "email", defaultValue = "") String email,
 			@RequestParam(value = "password", defaultValue = "") String password,
 			Model model) {
-		Library library = libraryRepository.findById(libraryid).get();
+		Library library = libraryRepository.findById(account.getLibraryId()).get();
 		LibraryStaff staff = new LibraryStaff(id, library, name, email, password);
 
 		libraryStaffRepository.save(staff);
