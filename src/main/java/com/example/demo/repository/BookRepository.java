@@ -53,4 +53,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
 	List<Book> findByLibraryId(Integer libraryId);
 
+	List<Book> deleteByLibraryId(Integer Id);
+
 }
