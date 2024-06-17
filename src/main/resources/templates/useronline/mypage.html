@@ -9,7 +9,7 @@
 
 <body>
 	<header>
-		<h1>マイページ</h1>
+		<h1 th:text="${user.library.name}+'マイページ'"></h1>
 	</header>
 	<table border="1">
 		<tr>
@@ -25,7 +25,7 @@
 			<td th:text="${user.email}"></td>
 		</tr>
 	</table>
-	貸出状況
+	貸出中
 	<table border="1">
 		<tr>
 			<th>貸出ID</th>
@@ -33,17 +33,51 @@
 			<th>タイトル</th>
 			<th>貸出日</th>
 			<th>返却予定日</th>
-			<th>返却日</th>
 		</tr>
-		<tr th:each="lending:${lending}">
-			<td th:text="${lending.id}"></td>
-			<td th:text="${lending.book.id}"></td>
-			<td th:text="${lending.book.title}"></td>
-			<td th:text="${lending.lendDate}"></td>
-			<td th:text="${lending.limitDate}"></td>
-			<td th:if="${lending.returnedDate}" th:text="${lending.returnedDate}"></td>
+		<tr th:each="notreturn:${notreturn}">
+			<td th:text="${notreturn.id}"></td>
+			<td th:text="${notreturn.book.id}"></td>
+			<td th:text="${notreturn.book.title}"></td>
+			<td th:text="${notreturn.lendDate}"></td>
+			<td th:text="${notreturn.limitDate}"></td>
+			<td th:if="${notreturn.returnedDate}" th:text="${notreturn.returnedDate}"></td>
 		</tr>
 	</table>
+	予約・注文状況
+	<table border="1">
+		<tr>
+			<th>本ID</th>
+			<th>タイトル</th>
+			<th>予約日</th>
+			<th>予定日</th>
+			<th>状況</th>
+		</tr>
+		<tr th:each="reservation:${reservation}">
+			<td th:text="${reservation.book.id}"></td>
+			<td th:text="${reservation.book.title}"></td>
+			<td th:text="${reservation.reservationDate}"></td>
+			<td th:text="${reservation.scheduledDate}"></td>
+			<td th:text="${reservation.status.name}"></td>
+		</tr>
+	</table>
+	貸出履歴
+	<table border="1">
+		<tr>
+			<th>貸出ID</th>
+			<th>本ID</th>
+			<th>タイトル</th>
+			<th>貸出日</th>
+			<th>返却日</th>
+		</tr>
+		<tr th:each="returned:${returned}">
+			<td th:text="${returned.id}"></td>
+			<td th:text="${returned.book.id}"></td>
+			<td th:text="${returned.book.title}"></td>
+			<td th:text="${returned.lendDate}"></td>
+			<td th:if="${returned.returnedDate}" th:text="${returned.returnedDate}"></td>
+		</tr>
+	</table>
+
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 package com.example.demo.controller.useronline;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Lending;
+import com.example.demo.entity.Reservation;
 import com.example.demo.entity.User;
 import com.example.demo.model.Account;
 import com.example.demo.repository.LendingRepository;
+import com.example.demo.repository.ReservationRepository;
 import com.example.demo.repository.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,6 +32,9 @@ public class UserOnlineController {
 	
 	@Autowired
 	LendingRepository lendingRepository;
+	
+	@Autowired
+	ReservationRepository reservationRepository;
 	
 	@Autowired
 	Account account;
@@ -83,8 +89,14 @@ public class UserOnlineController {
 
 		User user = userRepository.findById(account.getId()).get();
 		List<Lending> lending = lendingRepository.findByUserId(user.getId());
+		List<Reservation> reservation = reservationRepository.findByUserId(user.getId());
+		List<Lending> notreturn = lendingRepository.findByUserIdAndLimitDateBeforeAndReturnedDateIsNull(user.getId(), LocalDate.now());
+		List<Lending> returned = lendingRepository.findByUserIdAndLimitDateBeforeAndReturnedDateIsNotNull(user.getId(), LocalDate.now());
 		model.addAttribute("user", user);
 		model.addAttribute("lending", lending);
+		model.addAttribute("reservation", reservation);
+		model.addAttribute("notreturn", notreturn);
+		model.addAttribute("returned", returned);
 		return "/useronline/mypage";
 	}
 }
