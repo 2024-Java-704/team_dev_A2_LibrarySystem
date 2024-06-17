@@ -8,13 +8,15 @@
 </head>
 
 <body>
-	<header>
-		<h1>図書館リスト</h1>
+	<header th:replace="admin/adminheader">
+
+
 	</header>
-	<a href="/admin/adminTop">管理者TOPに戻る<a />
+	<a href="/admin/adminTop">管理者TOPに戻る</a>
 		<a href="/admin/libraryAdd">追加</a>
 		<table border="1">
-			<tr><th>Id</th>
+			<tr>
+				<th>Id</th>
 				<th>図書館</th>
 				<th>住所</th>
 				<th>電話番号</th>
@@ -24,7 +26,9 @@
 			<tr>
 			<tr th:each="library : ${libraryList}">
 				<td th:text="${library.id}"></td>
-				<td th:text="${library.name}"></td>
+				<td>
+					<a th:href="@{/staff/staffTop(libraryId=${library.id}, librayName=${library.name})}" th:text="${library.name}"></a>
+				</td>
 				<td th:text="${library.address}"></td>
 				<td th:text="${library.tel}"></td>
 

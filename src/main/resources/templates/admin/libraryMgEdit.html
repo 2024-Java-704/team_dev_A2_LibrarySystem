@@ -6,8 +6,9 @@
 <title>管理者更新</title>
 </head>
 <body>
-	<header>
-		<h1>管理者情報変更画面</h1>
+	<header th:replace="admin/adminheader">
+		
+		
 	</header>
 	<a href="/admin/libraryMg">前画面に戻る</a>
 	<form th:action="@{/admin/libraryMg/{libraryMgId}/edit(libraryMgId=${librarymg.id})}" method="post">
