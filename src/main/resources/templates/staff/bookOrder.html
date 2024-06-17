@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<header></header>
+	<header th:replace="header"></header>
 	<a>以下の資料を予約・注文しますか？</a>
 	<a th:if="${error}">
 		<ul th:each="error:${error}" th:text="${error}"></ul>

@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<header>
+	<header th:replace="header">
 	<h1>資料の更新</h1>
 	</header>
 	<form th:action="@{/staff/materialMg/{id}/edit(id=${book.id})}" method="post">
