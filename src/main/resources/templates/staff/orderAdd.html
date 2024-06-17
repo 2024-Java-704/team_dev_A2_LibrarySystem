@@ -12,8 +12,12 @@
 		<h1>注文追加画面</h1>
 	</header>
 	<a href="/staff/materialMg/order">前画面に戻る</a>
+	<a th:if="${error}">
+		<ul th:each="error:${error}" th:text="${error}"></ul>
+	</a>
 	<form action="/staff/materialMg/orderAdd" method="post">
 		<table border="1">
+			
 			<tr>
 				<th>利用者ID</th>
 				<td><input type="number" name="user" required></td>
@@ -31,12 +35,8 @@
 				<td><input type="date" name="scheduledDate" th:value="${scheduledDate}" required></td>
 			</tr>
 			<tr>
-				<th>注文図書館ID</th>
-				<td><input type="number" name="liburary" required></td>
-			</tr>
-			<tr>
-				<th>状態</th>
-				<td><input type="number" name="status" required></td>
+				<th>受け取り図書館</th>
+				<td th:text="${library.name}"></td>
 			</tr>
 		</table>
 		<button>注文追加</button>
