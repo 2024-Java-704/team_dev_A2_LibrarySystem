@@ -4,12 +4,12 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<meta charset="UTF-8">
-	<title>利用者詳細</title>
+	<title>マイページ</title>
 </head>
 
 <body>
 	<header>
-	<h1>利用者詳細</h1>
+		<h1>マイページ</h1>
 	</header>
 	<table border="1">
 		<tr>
@@ -24,18 +24,6 @@
 			<th>メールアドレス</th>
 			<td th:text="${user.email}"></td>
 		</tr>
-		<tr>
-			<th>住所</th>
-			<td th:text="${user.address}"></td>
-		</tr>
-		<tr>
-			<th>電話番号</th>
-			<td th:text="${user.tel}"></td>
-		</tr>
-		<tr>
-			<th>パスワード</th>
-			<td th:text="${user.password}"></td>
-		</tr>
 	</table>
 	貸出状況
 	<table border="1">
@@ -47,23 +35,15 @@
 			<th>返却予定日</th>
 			<th>返却日</th>
 		</tr>
-		<tr th:each="lending:${lendingList}">
+		<tr th:each="lending:${lending}">
 			<td th:text="${lending.id}"></td>
 			<td th:text="${lending.book.id}"></td>
 			<td th:text="${lending.book.title}"></td>
 			<td th:text="${lending.lendDate}"></td>
-			<td>
-				<span th:if="${lending.limitDate}" th:text="${lending.limitDate}">
-				</span>
-				<span th:if="${limit}" th:text="${limit}" style="color: red;">
-				</span>
-			</td>
+			<td th:text="${lending.limitDate}"></td>
 			<td th:if="${lending.returnedDate}" th:text="${lending.returnedDate}"></td>
 		</tr>
 	</table>
-	<a href="/staff/userMg/userList">利用者一覧</a>
-	<br>
-	<a href="/staff/userMg/delinquentList">延滞者一覧</a>
 </body>
-<footer></footer>
+
 </html>
