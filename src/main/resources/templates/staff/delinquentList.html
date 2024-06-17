@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<header>
+	<header th:replace="header">
 		<h1>延滞者一覧</h1>
 	</header>
 	<th:block th:if="${error}">
