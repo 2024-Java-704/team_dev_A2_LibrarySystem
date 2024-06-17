@@ -54,7 +54,8 @@ CREATE TABLE users
    email TEXT,
    address TEXT,
    tel TEXT,
-   password TEXT
+   password TEXT,
+   library_id INTEGER
 );
 CREATE TABLE library_staff
 (
