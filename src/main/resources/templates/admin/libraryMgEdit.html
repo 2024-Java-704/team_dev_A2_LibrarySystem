@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>管理者更新</title>
+</head>
+<body>
+	<header>
+		<h1>管理者情報変更画面</h1>
+	</header>
+	<a href="/admin/libraryMg">前画面に戻る</a>
+	<form th:action="@{/admin/libraryMg/{libraryMgId}/edit(libraryMgId=${librarymg.id})}" method="post">
+		<table border="1">
+			<tr>
+				<th>ID</th>
+				<td th:text="${librarymg.id}"></td>
+			</tr>
+			<tr>
+				<th>名前</th>
+				<td><input type="text" name="name" th:value="${librarymg.name}" required></td>
+			</tr>
+			<tr>
+				<th>メールアドレス</th>
+				<td><input type="text" name="email" th:value="${librarymg.email}" required></td>
+			</tr>
+			<tr>
+				<th>パスワード</th>
+				<td><input type="text" name="password" th:value="${librarymg.password}" required></td>
+			</tr>
+		</table>
+		<button>管理者情報更新</button>
+	</form>
+</body>
+</html>

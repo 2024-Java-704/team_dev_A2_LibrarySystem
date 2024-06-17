@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>管理者追加</title>
+</head>
+
+<body>
+	<header>
+		<h1>管理者追加画面</h1>
+	</header>
+	<a href="/admin/libraryMg">前画面に戻る</a>
+	<form action="/admin/libraryMg/libraryMgAdd" method="post">
+		<table border="1">
+			<tr>
+				<th>名前</th>
+				<td><input type="text" name="name" required></td>
+			</tr>
+			<tr>
+				<th>メールアドレス</th>
+				<td><input type="text" name="email" required></td>
+			</tr>
+			<tr>
+				<th>パスワード</th>
+				<td><input type="text" name="password" required></td>
+			</tr>
+		</table>
+		<button>管理者追加</button>
+	</form>
+</body>
+
+</html>
