@@ -2,7 +2,9 @@ package com.example.demo.controller.staff;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.entity.Book;
 import com.example.demo.entity.Lending;
 import com.example.demo.entity.Library;
 import com.example.demo.entity.User;
@@ -33,7 +34,7 @@ public class UserController {
 
 	@Autowired
 	BookRepository bookRepository;
-	
+
 	@Autowired
 	LibraryRepository libraryRepository;
 
@@ -52,19 +53,18 @@ public class UserController {
 			Model model) {
 
 		List<User> userList = null;
-		User user = null;
 
 		if (!(userId == null || userName.equals(""))) {//IDと名前で検索
-			userList = userRepository.findByIdAndName(userId, userName);
+			userList = userRepository.findByIdAndLibraryIdAndNameContaining(userId, account.getLibraryId(), userName);
 			model.addAttribute("userList", userList);
 		} else if (userId == null && !(userName.equals(""))) {//名前で検索
-			userList = userRepository.findByName(userName);
+			userList = userRepository.findByLibraryIdAndNameContaining(account.getLibraryId(), userName);
 			model.addAttribute("userList", userList);
 		} else if (userName.equals("") && !(userId == null)) {//IDで検索
-			user = userRepository.findById(userId).get();
-			model.addAttribute("userList", user);
+			userList = userRepository.findByIdAndLibraryId(userId, account.getLibraryId());
+			model.addAttribute("userList", userList);
 		} else {
-			Library library =libraryRepository.findById(account.getLibraryId()).get();
+			Library library = libraryRepository.findById(account.getLibraryId()).get();
 			userList = userRepository.findByLibrary(library);//全検索
 			model.addAttribute("userList", userList);
 		}
@@ -121,8 +121,8 @@ public class UserController {
 			model.addAttribute("password", password);
 			return "/staff/userAdd";
 		} else {
-			Library library=libraryRepository.findById(account.getLibraryId()).get();
-			User user = new User(name, address, email, tel, password,library);
+			Library library = libraryRepository.findById(account.getLibraryId()).get();
+			User user = new User(name, address, email, tel, password, library);
 			userRepository.save(user);
 			return "redirect:/staff/userMg/userList";
 		}
@@ -172,8 +172,8 @@ public class UserController {
 			model.addAttribute("user", user);
 			return "/staff/userEdit";
 		} else {
-			Library library=libraryRepository.findById(account.getLibraryId()).get();
-			User user = new User(userId, name, address, email, tel, password,library);
+			Library library = libraryRepository.findById(account.getLibraryId()).get();
+			User user = new User(userId, name, address, email, tel, password, library);
 			userRepository.save(user);
 			return "redirect:/staff/userMg/userList";
 		}
@@ -190,19 +190,25 @@ public class UserController {
 	public String show(Model model) {
 
 		LocalDate today = LocalDate.now();
-		List<Book> books = bookRepository.findByLibraryId(account.getLibraryId());
-		List<Integer> bookIdList = new ArrayList<>();
-		for (Book book : books) {
-			bookIdList.add(book.getId());
+		Library library = libraryRepository.findById(account.getLibraryId()).get();
+		List<User> users = userRepository.findByLibrary(library);
+		List<Integer> userIdList = new ArrayList<>();
+		for (User user : users) {
+			userIdList.add(user.getId());
 		}
 		List<Lending> delayList = new ArrayList<>();
-		for (Integer bookId : bookIdList) {
-			delayList.addAll(lendingRepository.findByBookIdAndLimitDateBeforeAndReturnedDateIsNull(bookId, today));
+		for (Integer userId : userIdList) {
+			delayList.addAll(lendingRepository.findByUserIdAndLimitDateBeforeAndReturnedDateIsNull(userId, today));
 		}
 		if (delayList.size() == 0) {
 			model.addAttribute("error", "延滞者はいません");
 		} else {
-			model.addAttribute("delayList", delayList);
+			Set<Integer> idList = new HashSet<Integer>();
+			for (Lending lending : delayList) {
+				idList.add(lending.getUser().getId());
+			}
+			List<User> delayList2 = userRepository.findAllById(idList);
+			model.addAttribute("delayList", delayList2);
 		}
 		return "/staff/delinquentList";
 	}
