@@ -11,8 +11,10 @@ public class Account {
 	private Integer id;
 
 	private String name;
-	
+
 	private Integer libraryId;
+
+	private String libraryName;
 
 	public Account() {
 	}
@@ -20,7 +22,14 @@ public class Account {
 	public Account(Integer id, String name, Integer libraryId) {
 		this.id = id;
 		this.name = name;
-		this.libraryId=libraryId;
+		this.libraryId = libraryId;
+	}
+
+	public Account(Integer id, String name, Integer libraryId, String libraryName) {
+		this.id = id;
+		this.name = name;
+		this.libraryId = libraryId;
+		this.libraryName = libraryName;
 	}
 
 	public Integer getId() {
@@ -46,4 +55,13 @@ public class Account {
 	public void setLibraryId(Integer libraryId) {
 		this.libraryId = libraryId;
 	}
+
+	public String getLibraryName() {
+		return libraryName;
+	}
+
+	public void setLibraryName(String libraryName) {
+		this.libraryName = libraryName;
+	}
+
 }

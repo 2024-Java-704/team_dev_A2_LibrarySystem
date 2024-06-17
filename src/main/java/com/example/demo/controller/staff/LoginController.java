@@ -61,6 +61,7 @@ public class LoginController {
 				account.setName(libraryStaff.getName());
 				account.setId(libraryStaff.getId());//名前とユーザーIDをセッション管理
 				account.setLibraryId(libraryStaff.getLibrary().getId());
+				account.setLibraryName(libraryStaff.getLibrary().getName());
 			}
 		}
 
