@@ -6,9 +6,10 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 </head>
-<header>
-	<h1>図書館編集フォーム</h1>
-</header>
+<header th:replace="admin/adminheader">
+		
+		
+	</header>
 
 <body>
 	<form th:action="@{/admin/adminList/{libraryId}/libraryEdit(libraryId=${library.id})}" method="post">
