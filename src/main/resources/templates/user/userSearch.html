@@ -13,16 +13,19 @@
 		<h1>本一覧</h1>
 	</header>
 	<div class="sortbutton">
-	<form th:action="@{/user/userDetailSearch?sort=jporder}" method="Post">
-		<button>50音順</button>
+	<form action="/user/userDetailSearch/jporder" method="get">
+	    <input type="hidden" name="bookIds" th:value="${bookIds}">
+	    <button type="submit">50音昇順</button>
 	</form>
-	<form th:action="@{/user/userDetailSearch?sort=ranking}" method="Post">
-
-		<button>人気順</button>
+	
+	<form action="/user/userDetailSearch/popularity" method="get">
+	    <input type="hidden" name="bookIds" th:value="${bookIds}">
+	    <button type="submit">人気順</button>
 	</form>
-	<form th:action="@{/user/userDetailSearch?sort=pubYear}" method="Post">
-
-		<button>出版年順</button>
+	
+	<form action="/user/userDetailSearch/pubYear" method="get">
+	    <input type="hidden" name="bookIds" th:value="${bookIds}">
+	    <button type="submit">出版年順</button>
 	</form>
 	</div>
 
