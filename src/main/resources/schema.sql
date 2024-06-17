@@ -19,6 +19,7 @@ CREATE TABLE book
 (
    id SERIAL PRIMARY KEY,
    category_id INTEGER,
+   title_id INTEGER,
    title TEXT,
    hurigana TEXT,
    author TEXT,
