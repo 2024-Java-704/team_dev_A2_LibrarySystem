@@ -12,4 +12,6 @@ public interface LibraryStaffRepository extends JpaRepository<LibraryStaff, Inte
 
 	List<LibraryStaff> findByEmailAndPassword(String email, String password);
 
+	List<LibraryStaff> deleteByLibraryId(Integer Id);
+
 }

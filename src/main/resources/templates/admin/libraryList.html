@@ -14,7 +14,7 @@
 	<a href="/admin/adminTop">管理者TOPに戻る<a />
 		<a href="/admin/libraryAdd">追加</a>
 		<table border="1">
-			<tr>
+			<tr><th>Id</th>
 				<th>図書館</th>
 				<th>住所</th>
 				<th>電話番号</th>
@@ -22,22 +22,24 @@
 				<th>削除</th>
 			</tr>
 			<tr>
-				<tr th:each="library : ${libraryList}">
-					<td th:text="${library.name}"></td>
-					<td th:text="${library.address}"></td>
-					<td th:text="${library.tel}"></td>
-					
-						<form th:action="@{/admin/adminList/{libraryId}/libraryEdit(libraryId=${library.id})}" method="Get">
-							<td><button>変更</button> 
-						</form>	
-					</td>
-					<td>
-						<form th:action="@{/admin/adminList/{libraryId}/libraryDelete(libraryId=${library.id})}"
-					class="deleteForm" method="Post">
-					<button class="deleteButton">削除</button>
-						</form>
-					</td>
-					</table>
+			<tr th:each="library : ${libraryList}">
+				<td th:text="${library.id}"></td>
+				<td th:text="${library.name}"></td>
+				<td th:text="${library.address}"></td>
+				<td th:text="${library.tel}"></td>
+
+				<form th:action="@{/admin/adminList/{libraryId}/libraryEdit(libraryId=${library.id})}" method="Get">
+					<td><button>変更</button>
+				</form>
+				</td>
+				<td>
+					<form th:action="@{/admin/adminList/{libraryId}/libraryDelete(libraryId=${library.id})}"
+						class="deleteForm" method="Post">
+						<button class="deleteButton">削除</button>
+					</form>
+				</td>
+			</tr>
+		</table>
 </body>
 
 </html>
