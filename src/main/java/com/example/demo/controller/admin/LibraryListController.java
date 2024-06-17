@@ -10,14 +10,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.entity.Book;
 import com.example.demo.entity.Library;
+import com.example.demo.entity.LibraryStaff;
+import com.example.demo.entity.Reservation;
+import com.example.demo.entity.User;
+import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.LibraryRepository;
+import com.example.demo.repository.LibraryStaffRepository;
+import com.example.demo.repository.ReservationRepository;
+import com.example.demo.repository.UserRepository;
 
 @Controller
 public class LibraryListController {
 
 	@Autowired
 	private LibraryRepository libraryRepository;
+
+	@Autowired
+	private BookRepository bookRepository;
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private ReservationRepository reservationRepository;
+
+	@Autowired
+	private LibraryStaffRepository libraryStaffRepository;
 
 	@GetMapping("/admin/libraryList")
 	public String index(
@@ -69,10 +89,32 @@ public class LibraryListController {
 		return "redirect:/admin/libraryList";
 	}
 
-	@PostMapping("/admin/adminList/{id}/libraryDelete")
+	@PostMapping("/admin/adminList/{libraryId}/libraryDelete")
 	public String libraryDelete(
-			@PathVariable("id") Integer id) {
-		libraryRepository.deleteById(id);
+			@PathVariable("libraryId") Integer id) {
+
+		Library library = libraryRepository.findById(id).get();
+		libraryRepository.delete(library);
+
+		List<Book> bookList = bookRepository.findByLibraryId(id);
+		for (Book book : bookList) {
+			bookRepository.delete(book);
+		}
+
+		List<User> userList = userRepository.findByLibrary(library);
+		for (User user : userList) {
+			userRepository.delete(user);
+		}
+
+		List<LibraryStaff> staffList = libraryStaffRepository.findByLibraryId(id);
+		for (LibraryStaff staff : staffList) {
+			libraryStaffRepository.delete(staff);
+		}
+
+		List<Reservation> reservationList = reservationRepository.findByLibraryId(id);
+		for (Reservation reservation : reservationList) {
+			reservationRepository.delete(reservation);
+		}
 		return "redirect:/admin/libraryList";
 	}
 
