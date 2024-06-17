@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Book;
+import com.example.demo.entity.Condition;
 import com.example.demo.entity.Lending;
 import com.example.demo.entity.LibraryStaff;
 import com.example.demo.entity.Reservation;
@@ -21,6 +22,7 @@ import com.example.demo.entity.Status;
 import com.example.demo.entity.User;
 import com.example.demo.model.Account;
 import com.example.demo.repository.BookRepository;
+import com.example.demo.repository.ConditionRepository;
 import com.example.demo.repository.LendingRepository;
 import com.example.demo.repository.LibraryRepository;
 import com.example.demo.repository.LibraryStaffRepository;
@@ -51,6 +53,9 @@ public class RentalController {
 
 	@Autowired
 	LibraryRepository libraryRepository;
+	
+	@Autowired
+	ConditionRepository conditionRepository;
 
 	@Autowired
 	Account account;
@@ -82,6 +87,7 @@ public class RentalController {
 		LocalDate limitDate = rentalDate.plusWeeks(1);
 		model.addAttribute("rentalDate", rentalDate);
 		model.addAttribute("limitDate", limitDate);
+		model.addAttribute("staffId",account.getId());
 		return "/staff/rentalAdd";
 	}
 
@@ -92,9 +98,26 @@ public class RentalController {
 		LocalDate limitDate = rentalDate.plusWeeks(1);
 		model.addAttribute("rentalDate", rentalDate);
 		model.addAttribute("limitDate", limitDate);
+		model.addAttribute("staffId",account.getId());
 		model.addAttribute("bookId", id);
 		return "/staff/rentalAdd";
 	}
+	
+	@GetMapping("/staff/materialMg/{id}/rentalAddRes")
+	public String resCreate(
+			@PathVariable("id") Integer id, Model model) {
+		LocalDate rentalDate = LocalDate.now();
+		LocalDate limitDate = rentalDate.plusWeeks(1);
+		model.addAttribute("rentalDate", rentalDate);
+		model.addAttribute("limitDate", limitDate);
+		Reservation reservation= reservationRepository.findById(id).get();
+		model.addAttribute("bookId", reservation.getBook().getId());
+		model.addAttribute("staffId", account.getId());
+		model.addAttribute("userId", reservation.getUser().getId());
+		model.addAttribute("reservationId",id);
+		return "/staff/rentalAdd";
+	}
+
 
 	@PostMapping("/staff/materialMg/rentalAdd")
 	public String add(
@@ -121,6 +144,7 @@ public class RentalController {
 			return "/staff/rentalAdd";
 		}
 
+		
 		try {
 			libraryStaffRepository.findById(staffId).orElseThrow();
 		} catch (NoSuchElementException e) {
@@ -151,6 +175,9 @@ public class RentalController {
 			if (reservationId == null) {
 				User user = userRepository.findByIdAndPassword(userId, password).get(0);
 				Book book = bookRepository.findById(bookId).orElseThrow();
+				Condition condition =conditionRepository.findById(2).get();
+				book.setCondition(condition);
+				bookRepository.save(book);
 				LibraryStaff staff = libraryStaffRepository.findById(staffId).orElseThrow();
 				Lending lending = new Lending(user, book, rentalDate, limitDate, staff);
 				lendingRepository.save(lending);
@@ -183,6 +210,9 @@ public class RentalController {
 		try {
 			User user = userRepository.findByIdAndPassword(userId, password).get(0);
 			Book book = bookRepository.findById(bookId).orElseThrow();
+			Condition condition =conditionRepository.findById(2).get();
+			book.setCondition(condition);
+			bookRepository.save(book);
 			LibraryStaff staff = libraryStaffRepository.findById(staffId).orElseThrow();
 			Reservation reservation = reservationRepository.findById(reservationId).orElseThrow();
 			Lending lending = new Lending(user, book, rentalDate, limitDate, reservation, staff);
