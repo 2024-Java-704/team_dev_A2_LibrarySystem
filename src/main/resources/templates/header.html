@@ -1,4 +1,7 @@
 <header>
-	<span th:text="${@account.name}+' さんがログイン中'"></span>
-	<a href="/logout">ログアウト</a>
+	<span th:text="${@account.libraryName}+' 職員用ページ'"></span>
+	<br>
+	<span th:text="${@account.name}+'さんがログイン中'"></span>
+	<br>
+	<a href="/staff/logout">ログアウト</a>
 </header>
