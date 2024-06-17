@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Book;
 import com.example.demo.entity.Lending;
+import com.example.demo.entity.Library;
 import com.example.demo.entity.User;
 import com.example.demo.model.Account;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.LendingRepository;
+import com.example.demo.repository.LibraryRepository;
 import com.example.demo.repository.UserRepository;
 
 @Controller
@@ -31,6 +33,9 @@ public class UserController {
 
 	@Autowired
 	BookRepository bookRepository;
+	
+	@Autowired
+	LibraryRepository libraryRepository;
 
 	@Autowired
 	Account account;
@@ -59,7 +64,8 @@ public class UserController {
 			user = userRepository.findById(userId).get();
 			model.addAttribute("userList", user);
 		} else {
-			userList = userRepository.findAll();//全検索
+			Library library =libraryRepository.findById(account.getLibraryId()).get();
+			userList = userRepository.findByLibrary(library);//全検索
 			model.addAttribute("userList", userList);
 		}
 
@@ -115,7 +121,8 @@ public class UserController {
 			model.addAttribute("password", password);
 			return "/staff/userAdd";
 		} else {
-			User user = new User(name, address, email, tel, password);
+			Library library=libraryRepository.findById(account.getLibraryId()).get();
+			User user = new User(name, address, email, tel, password,library);
 			userRepository.save(user);
 			return "redirect:/staff/userMg/userList";
 		}
@@ -165,7 +172,8 @@ public class UserController {
 			model.addAttribute("user", user);
 			return "/staff/userEdit";
 		} else {
-			User user = new User(userId, name, address, email, tel, password);
+			Library library=libraryRepository.findById(account.getLibraryId()).get();
+			User user = new User(userId, name, address, email, tel, password,library);
 			userRepository.save(user);
 			return "redirect:/staff/userMg/userList";
 		}

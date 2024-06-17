@@ -39,7 +39,7 @@
 			貸出予定日
 		</th>
 		<th>
-			予約図書館
+			受け取り図書館
 		</th>
 		<th>
 			状況
@@ -81,7 +81,7 @@
 			</form>
 		</td>
 		<td>
-			<form th:action="@{/staff/materialMg/{reservationId}/lend(reservationId=${reservation.id})}"  method="get" class="deleteForm">
+			<form th:action="@{/staff/materialMg/{id}/rentalAddRes(id=${reservation.id})}"  method="get" class="deleteForm">
 				<button>貸出</button>
 			</form>
 		</td>
