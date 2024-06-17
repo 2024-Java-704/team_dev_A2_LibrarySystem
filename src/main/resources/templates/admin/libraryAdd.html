@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<header>
+	<h1>図書館追加フォーム</h1>
+</header>
+
+<body>
+	<form th:action="@{/admin/libraryAdd}" method="post">
+	<table border="1">
+		<tr>
+			<th>図書館名</th>
+			
+			<td><input type="text" name="name" required></td>
+		</tr>
+		<tr>
+			<th>住所</th>
+			<td><input type="text" name="address"  required></td>
+		</tr>
+		<tr>
+			<th>電話番号</th>
+			<td><input type="text" name="tel" required></td>
+		</tr>
+	</table>
+	<button>更新</button>
+</form>
+<a href="/admin/libraryList">戻る</a>
+</body>
+<footer></footer>
+</html>
