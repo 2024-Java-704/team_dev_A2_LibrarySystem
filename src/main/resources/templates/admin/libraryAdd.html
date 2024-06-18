@@ -4,7 +4,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>図書館追加画面</title>
 </head>
 <header th:replace="admin/adminheader">
 		
@@ -13,7 +13,7 @@
 
 <body>
 	<form th:action="@{/admin/libraryAdd}" method="post">
-	<table border="1">
+	<table border="1" class="admintable">
 		<tr>
 			<th>図書館名</th>
 			
@@ -28,7 +28,7 @@
 			<td><input type="text" name="tel" required></td>
 		</tr>
 	</table>
-	<button>更新</button>
+	<button>追加</button>
 </form>
 <a href="/admin/libraryList">戻る</a>
 </body>

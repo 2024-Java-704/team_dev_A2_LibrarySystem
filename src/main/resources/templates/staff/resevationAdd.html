@@ -1,55 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>予約追加</title>
+	<meta charset="UTF-8">
+	<title>予約追加</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	
 </head>
+
 <body>
-	<header th:replace="header">
-	<h1>予約追加</h1>
+	<header>
+		<h1>予約追加</h1>
+		<br th:text="${@account.libraryName}+' 職員用ページ'">
+		<a th:text="${@account.name}+'さんがログイン中'"></a>
+		<br><a href="/staff/logout">ログアウト</a>
 	</header>
 	<a href="/staff/materialMg/reservationList">戻る</a>
-<form action="/staff/materialMg/reservationAdd" method="post">
-	<table action="1">
-		
-		<tr>
-			<th>利用者ID</th>
-			<td>
-				<input type="number" name="user"required>
-			</td>
-		</tr>
-		<tr>
-			<th>本ID</th>
-			<td>
-				<input type="number" name="book"required>
-			</td>
-		</tr>
-		<tr>
-			<th>予約日</th>
-			<td>
-				<input type="date" name="reservationDate" th:value="${reservationDate}"required>
-			</td>
-		</tr>
-		<tr>
-			<th>貸出予定日</th>
-			<td>
-				<input type="date" name="scheduledDate" th:value="${scheduledDate}"required>
-			</td>
-		</tr>
-		<!--<tr>
+	<form action="/staff/materialMg/reservationAdd" method="post">
+		<table action="1">
+
+			<tr>
+				<th>利用者ID</th>
+				<td>
+					<input type="number" name="user" required>
+				</td>
+			</tr>
+			<tr>
+				<th>本ID</th>
+				<td>
+					<input type="number" name="book" required>
+				</td>
+			</tr>
+			<tr>
+				<th>予約日</th>
+				<td>
+					<input type="date" name="reservationDate" th:value="${reservationDate}" required>
+				</td>
+			</tr>
+			<tr>
+				<th>貸出予定日</th>
+				<td>
+					<input type="date" name="scheduledDate" th:value="${scheduledDate}" required>
+				</td>
+			</tr>
+			<!--<tr>
 			<th>受け取り図書館ID</th>
 			<td>
 				<input type="number" name="library"required>
 			</td>
 		</tr>-->
-		<input type="hidden" value="1" name="status"required>
+			<input type="hidden" value="1" name="status" required>
 		</table>
 		<button>追加</button>
-		</form>
-				
+	</form>
+
 </body>
 <footer></footer>
+
 </html>

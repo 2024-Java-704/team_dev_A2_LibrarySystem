@@ -79,7 +79,10 @@ public class UserController {
 
 		User user = userRepository.findById(userId).get();
 		List<Lending> lendingList = lendingRepository.findByUserId(userId);
-
+		List<LocalDate> limitDatesList = new ArrayList<>();
+		for (Lending lending : lendingList) {
+			limitDatesList.add(lending.getLimitDate());
+		}
 		model.addAttribute("user", user);
 		model.addAttribute("lendingList", lendingList);
 		return "/staff/userDetail";

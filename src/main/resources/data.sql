@@ -300,12 +300,12 @@ INSERT INTO lending(user_id,book_id,lend_date,limit_date,staff_id) VALUES(1,40,'
 
 
 --予約テーブルデータ
-INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(1,16,'2024/05/07','2024/05/12',1,1); --図書館1→1
-INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(1,49,'2024/05/25','2024/06/01',1,3); --図書館1→2
-INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(1,50,'2024/05/25','2024/06/01',1,3); --図書館1→3
-INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(2,25,'2024/05/25','2024/06/01',2,3); --図書館2→1
-INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(2,49,'2024/05/25','2024/06/01',2,1); --図書館2→2
-INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(2,50,'2024/06/10','2024/06/12',2,3); --図書館2→3
-INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(3,30,'2024/04/11','2024/04/13',3,3); --図書館3→1
-INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(3,49,'2024/05/25','2024/06/01',3,3); --図書館3→2
-INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(3,50,'2024/05/25','2024/06/01',3,1); --図書館3→3
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(1,83,'2024/05/07','2024/05/12',1,1); --図書館1→1
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(1,167,'2024/05/25','2024/06/01',1,3); --図書館1→2
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(1,173,'2024/05/25','2024/06/01',1,3); --図書館1→3
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(2,83,'2024/05/25','2024/06/01',2,3); --図書館2→1
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(2,167,'2024/05/25','2024/06/01',2,1); --図書館2→2
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(2,173.,'2024/06/10','2024/06/12',2,3); --図書館2→3
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(3,83,'2024/04/11','2024/04/13',3,3); --図書館3→1
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(3,167,'2024/05/25','2024/06/01',3,3); --図書館3→2
+INSERT INTO reservation(user_id,book_id,reservation_date,scheduled_date,library_id,status_id) VALUES(3,173,'2024/05/25','2024/06/01',3,1); --図書館3→3

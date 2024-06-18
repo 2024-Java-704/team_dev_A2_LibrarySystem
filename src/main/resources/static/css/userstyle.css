@@ -259,3 +259,10 @@ button:hover {
 	background: rgb(11, 213, 0);
 	color: white;
 }
+
+.kidsmenu {
+	width: 400px;
+	display: block;
+	margin: 0 auto;
+	margin-top: 10px;
+}

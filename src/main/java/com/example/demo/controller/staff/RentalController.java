@@ -64,15 +64,16 @@ public class RentalController {
 	public String index(
 			Model model) {
 
-		List<Book> books = bookRepository.findByLibraryId(account.getLibraryId());
-		List<Integer> bookIdList = new ArrayList<>();
-		for (Book book : books) {
-			bookIdList.add(book.getId());
+		List<User> users = userRepository.findByLibraryId(account.getLibraryId());
+		List<Integer> userIdList = new ArrayList<>();
+		for (User user : users) {
+			userIdList.add(user.getId());
 		}
 		List<Lending> lendingList = new ArrayList<>();
-		for (Integer bookId : bookIdList) {
-			lendingList.addAll(lendingRepository.findByBookIdAndReturnedDateIsNull(bookId));
+		for (Integer userId : userIdList) {
+			lendingList.addAll(lendingRepository.findByUserIdAndReturnedDateIsNull(userId));
 		}
+
 		if (lendingList.size() == 0) {
 			model.addAttribute("error", "貸し出している本がありません");
 		} else {
@@ -111,6 +112,9 @@ public class RentalController {
 		model.addAttribute("rentalDate", rentalDate);
 		model.addAttribute("limitDate", limitDate);
 		Reservation reservation = reservationRepository.findById(id).get();
+		//		Status status = statusRepository.findById(6).get();
+		//		reservation.setStatus(status);
+		//		reservationRepository.save(reservation);
 		model.addAttribute("bookId", reservation.getBook().getId());
 		model.addAttribute("staffId", account.getId());
 		model.addAttribute("userId", reservation.getUser().getId());
@@ -215,7 +219,7 @@ public class RentalController {
 			Reservation reservation = reservationRepository.findById(reservationId).orElseThrow();
 			Lending lending = new Lending(user, book, rentalDate, limitDate, reservation, staff);
 			lendingRepository.save(lending);
-			Status status = statusRepository.findById(3).get();
+			Status status = statusRepository.findById(6).get();
 			reservation.setStatus(status);
 			reservationRepository.save(reservation);
 			return "redirect:/staff/materialMg/rentalList";

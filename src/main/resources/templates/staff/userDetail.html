@@ -8,8 +8,11 @@
 </head>
 
 <body>
-	<header th:replace="header">
-	<h1>利用者詳細</h1>
+	<header>
+		<h1>利用者詳細</h1>
+		<br th:text="${@account.libraryName}+' 職員用ページ'">
+		<a th:text="${@account.name}+'さんがログイン中'"></a>
+		<br><a href="/staff/logout">ログアウト</a>
 	</header>
 	<table border="1">
 		<tr>
@@ -53,10 +56,11 @@
 			<td th:text="${lending.book.title}"></td>
 			<td th:text="${lending.lendDate}"></td>
 			<td>
-				<span th:if="${lending.limitDate}" th:text="${lending.limitDate}">
+				<span th:if="${!lending.overLimit}" th:text="${lending.limitDate}">
 				</span>
-				<span th:if="${limit}" th:text="${limit}" style="color: red;">
+				<span th:if="${lending.overLimit}" th:text="${lending.limitDate}"  style="color: red;">
 				</span>
+				
 			</td>
 			<td th:if="${lending.returnedDate}" th:text="${lending.returnedDate}"></td>
 		</tr>
@@ -66,4 +70,5 @@
 	<a href="/staff/userMg/delinquentList">延滞者一覧</a>
 </body>
 <footer></footer>
+
 </html>

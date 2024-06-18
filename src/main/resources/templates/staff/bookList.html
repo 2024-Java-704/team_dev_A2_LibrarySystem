@@ -7,11 +7,15 @@
 	<title>資料一覧</title>
 </head>
 
-<body>
-	<header th:replace="header">
+<body
+	<header>
 		<a href="/staff/materialMg/bookList">
 			<h1>資料一覧</h1>
 		</a>
+		<br th:text="${@account.libraryName}+' 職員用ページ'">
+		<a th:text="${@account.name}+'さんがログイン中'"></a>
+		<br><a href="/staff/logout">ログアウト</a>
+
 	</header>
 	<div class="sortbutton">
 		<form action="/staff/staffDetailSearch/jporder" method="get">

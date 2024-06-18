@@ -8,8 +8,11 @@
 </head>
 
 <body>
-	<header th:replace="header">
+	<header>
 		<h1>返却処理</h1>
+		<br th:text="${@account.libraryName}+' 職員用ページ'">
+		<a th:text="${@account.name}+'さんがログイン中'"></a>
+		<br><a href="/staff/logout">ログアウト</a>
 	</header>
 	以下の貸出中の資料を返却にしますか？
 	<form th:action="@{/staff/materialMg/{id}/return(id=${lending.id})}" method="post">

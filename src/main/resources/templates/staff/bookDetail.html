@@ -4,11 +4,16 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<meta charset="UTF-8">
-	<title>本詳細</title>
+	<title>資料詳細</title>
 </head>
 
 <body>
-	<header th:replace="header"></header>
+	<header>
+		<h1>資料詳細</h1>
+		<br th:text="${@account.libraryName}+' 職員用ページ'">
+		<a th:text="${@account.name}+'さんがログイン中'"></a>
+		<br><a href="/staff/logout">ログアウト</a>
+	</header>
 		<table border="1">
 			<tr>
 				<th>ID</th>

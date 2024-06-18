@@ -3,7 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 <meta charset="UTF-8">
-<title>管理者更新</title>
+<title>図書館管理者更新</title>
 </head>
 <body>
 	<header th:replace="admin/adminheader">
@@ -12,7 +12,7 @@
 	</header>
 	<a href="/admin/libraryMg">前画面に戻る</a>
 	<form th:action="@{/admin/libraryMg/{libraryMgId}/edit(libraryMgId=${librarymg.id})}" method="post">
-		<table border="1">
+		<table border="1" class="admintable">
 			<tr>
 				<th>ID</th>
 				<td th:text="${librarymg.id}"></td>

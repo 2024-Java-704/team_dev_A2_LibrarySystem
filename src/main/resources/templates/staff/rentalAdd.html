@@ -8,11 +8,14 @@
 </head>
 
 <body>
-	<header th:replace="header">
-	<h1>貸出追加</h1>
+	<header>
+		<h1>貸出追加</h1>
+		<br th:text="${@account.libraryName}+' 職員用ページ'">
+		<a th:text="${@account.name}+'さんがログイン中'"></a>
+		<br><a href="/staff/logout">ログアウト</a>
 	</header>
 
-    <span th:text="${error}" style="color:red;"></span>
+	<span th:text="${error}" style="color:red;"></span>
 	<form action="/staff/materialMg/rentalAdd" method="post">
 		<table border="1">
 			<tr>
@@ -62,4 +65,5 @@
 	<a href="/staff/materialMg/rentalList">戻る</a>
 </body>
 <footer></footer>
+
 </html>
