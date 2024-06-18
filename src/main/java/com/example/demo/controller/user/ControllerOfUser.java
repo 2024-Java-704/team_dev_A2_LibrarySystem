@@ -135,7 +135,7 @@ public class ControllerOfUser {
 			String[] titles = title.split("　");
 
 			for (String tai : titles) {
-				bookList.addAll(bookRepository.findByTitleContaining(tai));
+				bookList.addAll(bookRepository.findByLibraryIdAndTitleContaining(account.getLibraryId(),tai));
 			}
 			List<Book> booktitles = new ArrayList<>(new HashSet<>(bookList)); //タイトルの検索結果
 
@@ -146,91 +146,23 @@ public class ControllerOfUser {
 			String[] titles = title.split("\s");
 
 			for (String tai : titles) {
-				bookList.addAll(bookRepository.findByTitleContaining(tai));
+				bookList.addAll(bookRepository.findByLibraryIdAndTitleContaining(account.getLibraryId(),tai));
 			}
 			List<Book> booktitles = new ArrayList<>(new HashSet<>(bookList));
 			model.addAttribute("books", booktitles);
 			return "/user/userSearch";
 		}
 		if (!(title.equals(""))) {//タイトル条件ひとつ
-			bookList.addAll(bookRepository.findByTitleContaining(title));
+			bookList.addAll(bookRepository.findByLibraryIdAndTitleContaining(account.getLibraryId(),title));
 
 			if (categoryId != null) {
-				//				Category category = categoryRepository.findByCategoryNum(categoryId);
-				//				List<Book> findByCategory = bookRepository.findByCategory(category);
-				//				bookList.addAll(findByCategory);
+				
 			}
 		}
 		return "/user/userSearch";
 
 	}
-	//		List<Book> bookList = new ArrayList<>();
-	//		if (title.contains("　")) {//タイトル全角条件複数
-	//			String[] titles = title.split("　");
-	//
-	//			for (String tai : titles) {
-	//				bookList.addAll(bookRepository.findByTitleContaining(tai));
-	//			}
-	//			List<Book> booktitles = new ArrayList<>(new HashSet<>(bookList)); //タイトルの検索結果
-	//
-	//			List<Integer> bookIds = new ArrayList<>();//本のIDだけを入れるリストを作成
-	//			for (Book book : booktitles) {
-	//				bookIds.add(book.getId());
-	//			}
-	//
-	//			//booktitlesに対して絞り込み
-	//
-	//			if (categoryId != null) {//分類番号があったら
-	//				for (Integer bookId : bookIds) {
-	//					List<Book> findByCategory = bookRepository.findByIdAndCategoryId(bookId, categoryId);
-	//
-	//				}
-	//			}
-	//
-	//			model.addAttribute("books", booktitles);
-	//			return "/user/userSearch";
-	//		}
-	//		if (title.contains("\s")) {//タイトル半角条件複数
-	//			String[] titles = title.split("\s");
-	//
-	//			for (String tai : titles) {
-	//				bookList.addAll(bookRepository.findByTitleContaining(tai));
-	//			}
-	//			List<Book> booktitles = new ArrayList<>(new HashSet<>(bookList));
-	//			model.addAttribute("books", booktitles);
-	//			return "/user/userSearch";
-	//		}
-
-	//=======================================================
-
-	//		if (!(title.equals(""))) {//タイトル条件ひとつ
-	//			bookList.addAll(bookRepository.findByTitleContaining(title));
-	//
-	//			if (categoryId != null) {
-	//				Category category = categoryRepository.findByCategoryNum(categoryId);
-	//				List<Book> findByCategory = bookRepository.findByCategory(category);
-	//				bookList.addAll(findByCategory);
-	//			}
-	//		}
-	//		if (categoryId != null) {
-	//			Category category = categoryRepository.findByCategoryNum(categoryId);
-	//			List<Book> findByCategory = bookRepository.findByCategory(category);
-	//			bookList.addAll(findByCategory);
-	//		}
-	//
-	//		if (!(author.equals(""))) {
-	//			bookList.addAll(bookRepository.findByAuthorContaining(author));
-	//		}
-	//
-	//		if (!(publisher.equals(""))) {//出版社条件ひとつ
-	//			bookList.addAll(bookRepository.findByPublisherContaining(publisher));
-	//		}
-	//
-	//		if (!(Objects.isNull(publishDay))) {
-	//			bookList.addAll(bookRepository.findByPubYear(publishDay));
-	//		}
-
-	//	}
+	
 
 	@GetMapping("/user/{id}/bookDetail") //詳細表示
 	public String userBookDetail(
@@ -238,7 +170,7 @@ public class ControllerOfUser {
 			Model model) {
 		Book book = bookRepository.findById(id).get();
 		model.addAttribute("bookDetail", book);
-		List<Book> findByTitle = bookRepository.findByTitleContaining(book.getTitle());
+		List<Book> findByTitle = bookRepository.findByTitleIdOrderByLibraryId(book.getTitleId());
 		model.addAttribute("bookList", findByTitle);
 		return "/user/userDetail";
 	}

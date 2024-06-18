@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Book;
 import com.example.demo.entity.Category;
+import com.example.demo.model.Account;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.CategoryRepository;
 
@@ -29,6 +31,9 @@ public class SearchBookController {
 
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@Autowired
+	Account account;
 
 	@PostMapping("/user/userDetailSearch") //検索処理・検索結果表示
 	public String search(
@@ -55,15 +60,15 @@ public class SearchBookController {
 			}
 
 			for (String key : keywords) {
-				bookList.addAll(bookRepository.findByTitleContaining(key));
+				bookList.addAll(bookRepository.findByLibraryIdAndTitleContaining(account.getLibraryId(),key));
 			}
 		} else {
 			// タイトルがない場合、全件取得
 			if (sort.equals("jporder")) {
-				bookList.addAll(bookRepository.findAllByOrderByHurigana());
+				bookList.addAll(bookRepository.findByLibraryIdOrderByHurigana(account.getLibraryId()));
 
 			} else {
-				bookList.addAll(bookRepository.findAll());
+				bookList.addAll(bookRepository.showBook(account.getLibraryId()));
 			}
 
 		}
@@ -94,8 +99,17 @@ public class SearchBookController {
 		}
 
 		// 重複を削除
-		List<Book> bookTitles = new ArrayList<>(new HashSet<>(bookList));
-
+		Set <Integer> titleIds=new HashSet<Integer>();
+		for(Book book:bookList) {
+			titleIds.add(book.getTitleId());
+		}
+		List<Book> bookTitles=new ArrayList<>();
+		for(Integer titleId:titleIds) {
+			bookTitles.add(bookRepository.findByTitleId(titleId).get(0));
+		}
+		
+		/*List<Book> bookTitles = new ArrayList<>(new HashSet<>(books));*/
+		
 		// 検索結果をセッションに保存
 		session.setAttribute("searchResults", bookTitles);
 

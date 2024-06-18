@@ -7,7 +7,7 @@
 	<title>資料一覧</title>
 </head>
 
-<body>
+<body
 	<header>
 		<a href="/staff/materialMg/bookList">
 			<h1>資料一覧</h1>
@@ -15,16 +15,36 @@
 		<br th:text="${@account.libraryName}+' 職員用ページ'">
 		<a th:text="${@account.name}+'さんがログイン中'"></a>
 		<br><a href="/staff/logout">ログアウト</a>
+
 	</header>
-	<form action="/staff/materialMg/bookList/jporder">
-		<button>50音順</button>
+	<div class="sortbutton">
+		<form action="/staff/staffDetailSearch/jporder" method="get">
+			<input type="hidden" name="bookIds" th:value="${bookIds}">
+			<button type="submit">50音昇順</button>
+		</form>
+
+		<form action="/staff/staffDetailSearch/popularity" method="get">
+			<input type="hidden" name="bookIds" th:value="${bookIds}">
+			<button type="submit">人気順</button>
+		</form>
+
+		<form action="/staff/staffDetailSearch/pubYear" method="get">
+			<input type="hidden" name="bookIds" th:value="${bookIds}">
+			<button type="submit">出版年順</button>
+		</form>
+	</div>
+
+	<form action="/staff/staffDetailSearch" method="post">
+		<div class="searchtable">
+			<input type="text" name="title" placeholder="タイトル">
+			<input type="text" name="category" placeholder="分類番号">
+			<input type="text" name="author" placeholder="著者">
+			<input type="text" name="publisher" placeholder="出版社">
+			<input type="date" name="publishDay" placeholder="出版日">
+		<button class="searchbutton">検索</button>
+		</div>
 	</form>
-	<form action="/staff/materialMg/bookList/ranking">
-		<button>人気順</button>
-	</form>
-	<form action="/staff/materialMg/bookList/pubYear">
-		<button>出版年順</button>
-	</form>
+
 	<a href="/staff/materialMg/create">資料登録</a>
 	<a href="/staff/materialMg">戻る</a>
 
@@ -32,7 +52,6 @@
 	<table border="1">
 		<tr>
 			<th>ID</th>
-			<th>タイトルID</th>
 			<th>分類番号</th>
 			<th>タイトル</th>
 			<th>著者</th>
@@ -42,7 +61,6 @@
 		</tr>
 		<tr th:each="book:${bookList}">
 			<td th:text="${book.id}"></td>
-			<td th:text="${book.titleId}"></td>
 			<td th:text="${book.category.categoryNum}"></td>
 			<td>
 				<a th:href="@{/staff/{id}/bookdetail(id=${book.id})}" th:text="${book.title}">
