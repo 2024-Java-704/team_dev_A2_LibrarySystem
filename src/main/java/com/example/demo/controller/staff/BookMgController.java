@@ -44,8 +44,8 @@ public class BookMgController {
 
 	@GetMapping("/staff/materialMg/bookList")
 	public String index(Model model) {
-		List<Book> bookList = bookRepository.findByLibraryId(account.getLibraryId());
-		model.addAttribute("bookList", bookList);
+		List<Book> bookList = bookRepository.showBook(account.getLibraryId());
+		model.addAttribute("bookList",bookList);
 		return "/staff/bookList";
 	}
 
@@ -70,7 +70,10 @@ public class BookMgController {
 		model.addAttribute("bookList", bookList);
 		return "/staff/bookList";
 	}
-
+	
+	
+	
+	
 	@PostMapping("/staff/materialMg/add")
 	public String materialAdd(@RequestParam("category") Integer categoryId,
 			@RequestParam("title") String title,

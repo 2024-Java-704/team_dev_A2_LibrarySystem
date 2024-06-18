@@ -1,6 +1,5 @@
 package com.example.demo.controller.useronline;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,37 +12,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Lending;
 import com.example.demo.entity.Reservation;
+import com.example.demo.entity.Status;
 import com.example.demo.entity.User;
 import com.example.demo.model.Account;
 import com.example.demo.repository.LendingRepository;
 import com.example.demo.repository.ReservationRepository;
+import com.example.demo.repository.StatusRepository;
 import com.example.demo.repository.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserOnlineController {
-	
+
 	@Autowired
 	HttpSession session;
-	
+
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	LendingRepository lendingRepository;
-	
+
 	@Autowired
 	ReservationRepository reservationRepository;
-	
+
+	@Autowired
+	StatusRepository statusRepository;
+
 	@Autowired
 	Account account;
-	
-	@GetMapping({"/user/login", "/user/logout" })
+
+	@GetMapping({ "/user/login", "/user/logout" })
 	public String index() {
 		session.invalidate();
 		return "/useronline/login";
 	}
+
 	@PostMapping("/user/login")
 	public String login(
 			@RequestParam(name = "userid", defaultValue = "") Integer userid,
@@ -82,16 +87,17 @@ public class UserOnlineController {
 			return "redirect:/user/mypage";
 		}
 	}
-	
+
 	@GetMapping("/user/mypage") //更新画面表示
 	public String userMypage(
 			Model model) {
 
 		User user = userRepository.findById(account.getId()).get();
 		List<Lending> lending = lendingRepository.findByUserId(user.getId());
-		List<Reservation> reservation = reservationRepository.findByUserId(user.getId());
-		List<Lending> notreturn = lendingRepository.findByUserIdAndLimitDateBeforeAndReturnedDateIsNull(user.getId(), LocalDate.now());
-		List<Lending> returned = lendingRepository.findByUserIdAndLimitDateBeforeAndReturnedDateIsNotNull(user.getId(), LocalDate.now());
+		Status status = statusRepository.findById(6).get();
+		List<Reservation> reservation = reservationRepository.findByUserIdAndStatusNot(user.getId(), status);
+		List<Lending> notreturn = lendingRepository.findByUserIdAndReturnedDateIsNull(user.getId());
+		List<Lending> returned = lendingRepository.findByUserIdAndReturnedDateIsNotNull(user.getId());
 		model.addAttribute("user", user);
 		model.addAttribute("lending", lending);
 		model.addAttribute("reservation", reservation);

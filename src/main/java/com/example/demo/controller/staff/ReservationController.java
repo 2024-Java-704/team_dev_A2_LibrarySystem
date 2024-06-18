@@ -75,8 +75,8 @@ public class ReservationController {
 
 	@GetMapping("/staff/materialMg/rental")
 	public String rentalList(Model model) {
-		Status status = statusRepository.findById(3).get();
-		List<Reservation> rentalList = reservationRepository.findByStatus(status);
+		Status status = statusRepository.findById(6).get();
+		List<Reservation> rentalList = reservationRepository.findByLibraryIdAndStatus(account.getLibraryId(), status);
 		model.addAttribute("reservationList", rentalList);
 		return "/staff/resevationList";
 	}
@@ -84,7 +84,7 @@ public class ReservationController {
 	@GetMapping("/staff/materialMg/cancel")
 	public String cancelList(Model model) {
 		Status status = statusRepository.findById(2).get();
-		List<Reservation> cancelList = reservationRepository.findByStatus(status);
+		List<Reservation> cancelList = reservationRepository.findByLibraryIdAndStatus(account.getLibraryId(), status);
 		model.addAttribute("reservationList", cancelList);
 		return "/staff/resevationList";
 	}

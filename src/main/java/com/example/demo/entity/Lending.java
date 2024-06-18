@@ -78,8 +78,6 @@ public class Lending {
 		this.staff = staff;
 
 	}
-	
-	
 
 	public Lending(Integer id, User user, Book book, LocalDate lendDate, LocalDate limitDate, LibraryStaff staff) {
 		this.id = id;
@@ -153,5 +151,11 @@ public class Lending {
 
 	public LibraryStaff getStaff() {
 		return staff;
+	}
+
+	// 返却期限を超えているかどうかを返す
+	public boolean getOverLimit() {
+		LocalDate nowDate = LocalDate.now();
+		return nowDate.compareTo(limitDate) > 0 && returnedDate == null;
 	}
 }

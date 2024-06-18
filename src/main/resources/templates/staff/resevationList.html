@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<title>予約一覧</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<meta charset="UTF-8">
+
 </head>
 
 <body>
@@ -24,76 +24,75 @@
 	<a href="/staff/materialMg">資料管理に戻る</a>
 
 
-	<table border="1">
-		<tr>
-			<th>
-				予約ID
-			</th>
-			<th>
-				利用者ID
-			</th>
-			<th>
-				本ID
-			</th>
-			<th>
-				予約日
-			</th>
-			<th>
-				貸出予定日
-			</th>
-			<th>
-				受け取り図書館
-			</th>
-			<th>
-				状況
-			</th>
-			<th>
-				変更
-			</th>
-			<th>
-				削除
-			</th>
-			<th>
-				貸出
-			</th>
-		</tr>
-		<tr th:each="reservation : ${reservationList}">
-			<td th:text="${reservation.id}"></td>
-			<td>
-				<a th:href="@{/staff/userMg/{userId}/userDetail(userId=${reservation.user.id})}"
-					th:text="${reservation.user.id}">
-				</a>
-			</td>
-			<td>
-				<a th:href="@{/staff/{id}/bookdetail(id=${reservation.book.id})}" th:text="${reservation.book.id}">
-				</a>
-			</td>
-			<td th:text="${reservation.reservationDate}"></td>
-			<td th:text="${reservation.scheduledDate}"></td>
-			<td th:text="${reservation.library.name}"></td>
-			<td th:text="${reservation.status.name}"></td>
 
-			<td>
-				<form th:action="@{/staff/materialMg/{reservationId}/reservationEdit(reservationId=${reservation.id})}"
-					method="get">
-					<button>変更</button>
-				</form>
-			</td>
-			<td>
-				<form th:action="@{/staff/materialMg/{reservationId}/delete(reservationId=${reservation.id})}"
-					method="post" class="deleteForm">
-					<button class="deleteButton">削除</button>
-				</form>
-			</td>
-			<td>
-				<form th:action="@{/staff/materialMg/{id}/rentalAddRes(id=${reservation.id})}" method="get"
-					class="deleteForm">
-					<button>貸出</button>
-				</form>
-			</td>
-
+<table border="1">
+	<tr>
+		<th>
+			予約ID
+		</th>
+		<th>
+			利用者ID
+		</th>
+		<th>
+			資料ID
+		</th>
+		<th>
+			予約日
+		</th>
+		<th>
+			貸出予定日
+		</th>
+		<th>
+			受け取り図書館
+		</th>
+		<th>
+			状況
+		</th>
+		<th>
+			変更
+		</th>
+		<th>
+			削除
+		</th>
+		<th>
+			貸出
+		</th>
 		</tr>
-	</table>
+	<tr th:each="reservation : ${reservationList}">
+		<td th:text="${reservation.id}"></td>
+		<td>
+			<a th:href="@{/staff/userMg/{userId}/userDetail(userId=${reservation.user.id})}" th:text="${reservation.user.id}"> 
+			</a>
+		</td>
+		<td>
+			<a th:href="@{/staff/{id}/bookdetail(id=${reservation.book.id})}" th:text="${reservation.book.id}">
+			</a>	
+		</td>
+		<td th:text="${reservation.reservationDate}"></td>
+		<td th:text="${reservation.scheduledDate}"></td>
+		<td th:text="${reservation.library.name}"></td>
+		<td th:text="${reservation.status.name}"></td>
+		
+		<td>
+			<form th:action="@{/staff/materialMg/{reservationId}/reservationEdit(reservationId=${reservation.id})}"
+				method="get">
+			<button>変更</button>
+			</form>
+		</td>
+		<td>
+			<form th:action="@{/staff/materialMg/{id}/delete(id=${reservation.id})}"  method="post" class="deleteForm">
+				<button class="deleteButton">削除</button>
+			</form>
+		</td>
+		<td>
+			<form th:action="@{/staff/materialMg/{id}/rentalAddRes(id=${reservation.id})}"  method="get" class="deleteForm">
+				<button>貸出</button>
+			</form>
+		</td>
+				
+	</tr>
+</table>
+
 </body>
 <footer></footer>
 <script type="text/javascript">

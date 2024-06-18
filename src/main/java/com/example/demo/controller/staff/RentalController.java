@@ -53,26 +53,27 @@ public class RentalController {
 
 	@Autowired
 	LibraryRepository libraryRepository;
-	
+
 	@Autowired
 	ConditionRepository conditionRepository;
 
 	@Autowired
 	Account account;
 
-	@GetMapping("/staff/materialMg/rentalList")
+	@GetMapping("/staff/materialMg/rentalList") //貸出一覧表示
 	public String index(
 			Model model) {
 
-		List<Book> books = bookRepository.findByLibraryId(account.getLibraryId());
-		List<Integer> bookIdList = new ArrayList<>();
-		for (Book book : books) {
-			bookIdList.add(book.getId());
+		List<User> users = userRepository.findByLibraryId(account.getLibraryId());
+		List<Integer> userIdList = new ArrayList<>();
+		for (User user : users) {
+			userIdList.add(user.getId());
 		}
 		List<Lending> lendingList = new ArrayList<>();
-		for (Integer bookId : bookIdList) {
-			lendingList.addAll(lendingRepository.findByBookIdAndReturnedDateIsNull(bookId));
+		for (Integer userId : userIdList) {
+			lendingList.addAll(lendingRepository.findByUserIdAndReturnedDateIsNull(userId));
 		}
+
 		if (lendingList.size() == 0) {
 			model.addAttribute("error", "貸し出している本がありません");
 		} else {
@@ -81,45 +82,47 @@ public class RentalController {
 		return "/staff/rentalList";
 	}
 
-	@GetMapping("/staff/materialMg/rentalAdd")
+	@GetMapping("/staff/materialMg/rentalAdd") //新規貸出画面へ
 	public String create(Model model) {
 		LocalDate rentalDate = LocalDate.now();
 		LocalDate limitDate = rentalDate.plusWeeks(1);
 		model.addAttribute("rentalDate", rentalDate);
 		model.addAttribute("limitDate", limitDate);
-		model.addAttribute("staffId",account.getId());
+		model.addAttribute("staffId", account.getId());
 		return "/staff/rentalAdd";
 	}
 
-	@GetMapping("/staff/materialMg/{bookId}/rentalAdd")
+	@GetMapping("/staff/materialMg/{bookId}/rentalAdd") //資料詳細から貸出処理
 	public String detailCreate(
 			@PathVariable("bookId") Integer id, Model model) {
 		LocalDate rentalDate = LocalDate.now();
 		LocalDate limitDate = rentalDate.plusWeeks(1);
 		model.addAttribute("rentalDate", rentalDate);
 		model.addAttribute("limitDate", limitDate);
-		model.addAttribute("staffId",account.getId());
+		model.addAttribute("staffId", account.getId());
 		model.addAttribute("bookId", id);
 		return "/staff/rentalAdd";
 	}
-	
-	@GetMapping("/staff/materialMg/{id}/rentalAddRes")
+
+	@GetMapping("/staff/materialMg/{id}/rentalAddRes") //予約・注文から貸出処理
 	public String resCreate(
 			@PathVariable("id") Integer id, Model model) {
 		LocalDate rentalDate = LocalDate.now();
 		LocalDate limitDate = rentalDate.plusWeeks(1);
 		model.addAttribute("rentalDate", rentalDate);
 		model.addAttribute("limitDate", limitDate);
-		Reservation reservation= reservationRepository.findById(id).get();
+		Reservation reservation = reservationRepository.findById(id).get();
+		//		Status status = statusRepository.findById(6).get();
+		//		reservation.setStatus(status);
+		//		reservationRepository.save(reservation);
 		model.addAttribute("bookId", reservation.getBook().getId());
 		model.addAttribute("staffId", account.getId());
 		model.addAttribute("userId", reservation.getUser().getId());
-		model.addAttribute("reservationId",id);
+		model.addAttribute("reservationId", id);
 		return "/staff/rentalAdd";
 	}
 
-
-	@PostMapping("/staff/materialMg/rentalAdd")
+	@PostMapping("/staff/materialMg/rentalAdd") //貸出（lending）テーブルに追加
 	public String add(
 			@RequestParam(value = "bookId", defaultValue = "") Integer bookId,
 			@RequestParam(value = "rentalDate", defaultValue = "") LocalDate rentalDate,
@@ -144,7 +147,6 @@ public class RentalController {
 			return "/staff/rentalAdd";
 		}
 
-		
 		try {
 			libraryStaffRepository.findById(staffId).orElseThrow();
 		} catch (NoSuchElementException e) {
@@ -175,7 +177,7 @@ public class RentalController {
 			if (reservationId == null) {
 				User user = userRepository.findByIdAndPassword(userId, password).get(0);
 				Book book = bookRepository.findById(bookId).orElseThrow();
-				Condition condition =conditionRepository.findById(2).get();
+				Condition condition = conditionRepository.findById(2).get();
 				book.setCondition(condition);
 				bookRepository.save(book);
 				LibraryStaff staff = libraryStaffRepository.findById(staffId).orElseThrow();
@@ -210,14 +212,14 @@ public class RentalController {
 		try {
 			User user = userRepository.findByIdAndPassword(userId, password).get(0);
 			Book book = bookRepository.findById(bookId).orElseThrow();
-			Condition condition =conditionRepository.findById(2).get();
+			Condition condition = conditionRepository.findById(2).get();
 			book.setCondition(condition);
 			bookRepository.save(book);
 			LibraryStaff staff = libraryStaffRepository.findById(staffId).orElseThrow();
 			Reservation reservation = reservationRepository.findById(reservationId).orElseThrow();
 			Lending lending = new Lending(user, book, rentalDate, limitDate, reservation, staff);
 			lendingRepository.save(lending);
-			Status status = statusRepository.findById(3).get();
+			Status status = statusRepository.findById(6).get();
 			reservation.setStatus(status);
 			reservationRepository.save(reservation);
 			return "redirect:/staff/materialMg/rentalList";
@@ -235,7 +237,7 @@ public class RentalController {
 
 	}
 
-	@GetMapping("/staff/materialMg/{id}/rentalEdit")
+	@GetMapping("/staff/materialMg/{id}/rentalEdit") //貸出情報の編集画面表示
 	public String edit(
 			@PathVariable("id") Integer id,
 			Model model) {
@@ -252,7 +254,7 @@ public class RentalController {
 		return "/staff/rentalEdit";
 	}
 
-	@PostMapping("/staff/materialMg/{id}/rentalEdit")
+	@PostMapping("/staff/materialMg/{id}/rentalEdit") //編集処理
 	public String update(
 			@PathVariable("id") Integer id,
 			@RequestParam(value = "bookId", defaultValue = "") Integer bookId,
@@ -337,7 +339,7 @@ public class RentalController {
 		}
 	}
 
-	@PostMapping("/staff/materialMg/{id}/rentalDelete")
+	@PostMapping("/staff/materialMg/{id}/rentalDelete") //貸出情報の削除
 	public String delete(
 			@PathVariable("id") Integer id,
 			Model model) {

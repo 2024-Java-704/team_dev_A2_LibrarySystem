@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Account;
 
@@ -16,11 +15,7 @@ public class SelectController {
 
 	@GetMapping("/staff/staffTop")
 	public String index(
-			@RequestParam(name = "libraryId", defaultValue = "") Integer libraryId,
-			@RequestParam(name = "libraryName", defaultValue = "") String libraryName,
 			Model model) {
-		/*	acount.setLibraryId(libraryId);
-			acount.setLibraryName(libraryName);*/
 		return "/staff/staffTop";
 	}
 

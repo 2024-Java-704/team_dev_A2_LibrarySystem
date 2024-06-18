@@ -4,7 +4,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<meta charset="UTF-8">
-	<title>発注注文画面</title>
+	<title>予約・注文完了</title>
 </head>
 
 <body>
@@ -31,19 +31,19 @@
 			<th>資料ID</th>
 			<td th:text="${reservation.book.id}"></td>
 			<tr>
-				<td>タイトル</td>
+				<th>タイトル</th>
 				<td th:text="${reservation.book.title}"></td>
 			</tr>
 			<tr>
-				<td>予約・注文日</td>
+				<th>予約・注文日</th>
 				<td th:text="${reservation.reservationDate}"></td>
 			</tr>
 			<tr>
-				<td>受け取り予定日</td>
+				<th>受け取り予定日</th>
 				<td th:text="${reservation.scheduledDate}"></td>
 			</tr>
 			<tr>
-				<td>受け取り図書館</td>
+				<th>受け取り図書館</th>
 				<td th:text="${reservation.library.name}"></td>
 			</tr>
 		</table>

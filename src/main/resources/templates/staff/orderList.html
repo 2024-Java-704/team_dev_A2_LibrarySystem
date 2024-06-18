@@ -4,7 +4,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>注文一覧</title>
 </head>
 
 <body>
@@ -16,12 +16,12 @@
 	</header>
 	<a href="/staff/materialMg">資料管理に戻る</a>
 	<a href="/staff/materialMg/orderAdd">追加</a>
-	<h2>受注一覧</h2>
+	<h2>発注一覧</h2>
 	<table border="1">
 		<tr>
 			<th>注文ID</th>
 			<th>利用者ID</th>
-			<th>本ID</th>
+			<th>資料ID</th>
 			<th>注文日時</th>
 			<th>貸出予定日</th>
 			<th>受け取り図書館</th>
@@ -50,19 +50,27 @@
 				</form>
 			</td>
 			<td>
+				<th:block th:if="${send.status.id}==4">
 				<form th:action="@{/staff/materialMg/{reservationId}/lendFromOrder(reservationId=${send.id})}"
 						method="get">
-					<button>発送済み</button>
+					<button>到着済み</button>
 				</form>
+				</th:block>
+				<th:block th:if="${send.status.id}==5">
+				<form th:action="@{/staff/materialMg/{id}/rentalAddRes(id=${send.id})}"
+						method="get">
+					<button>貸出</button>
+				</form>
+				</th:block>
 			</td>
 		</tr>
 	</table>
-	<h2>発注一覧</h2>
+	<h2>受注一覧</h2>
 		<table border="1">
 		<tr>
 			<th>注文ID</th>
 			<th>利用者ID</th>
-			<th>本ID</th>
+			<th>資料ID</th>
 			<th>注文日時</th>
 			<th>貸出予定日</th>
 			<th>受け取り図書館</th>
@@ -91,9 +99,12 @@
 				</form>
 			</td>
 			<td>
+				<th:block th:if="${accept.status.id}==3">
 				<form th:action="@{/staff/materialMg/{reservationId}/lendFromOrder(reservationId=${accept.id})}"
 						method="get">
-					<button>到着済み</button>
+					<button>発送済み</button>
+				</form>
+				</th:block>
 				</form>
 			</td>
 		</tr>
