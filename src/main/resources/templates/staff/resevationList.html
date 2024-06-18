@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>予約一覧</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<meta charset="UTF-8">
+
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 			利用者ID
 		</th>
 		<th>
-			本ID
+			資料ID
 		</th>
 		<th>
 			予約日
@@ -76,7 +76,7 @@
 			</form>
 		</td>
 		<td>
-			<form th:action="@{/staff/materialMg/{reservationId}/delete(reservationId=${reservation.id})}"  method="post" class="deleteForm">
+			<form th:action="@{/staff/materialMg/{id}/delete(id=${reservation.id})}"  method="post" class="deleteForm">
 				<button class="deleteButton">削除</button>
 			</form>
 		</td>
