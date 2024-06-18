@@ -14,10 +14,12 @@ import com.example.demo.entity.Category;
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
 	// タイトルあいまい検索
-	List<Book> findByTitleContaining(String title);
-
+	List<Book> findByTitleIdOrderByLibraryId(Integer titleId);
+	
 	List<Book> findByCategory(Category category);
-
+	
+	List<Book> findByLibraryIdAndTitleContaining(Integer libraryId,String title);
+	
 	List<Book> findByAuthorContaining(String author);
 
 	List<Book> findByPublisherContaining(String publisher);
@@ -57,7 +59,10 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
 	List<Book> deleteByLibraryId(Integer Id);
 	
+	List<Book> findByTitleId(Integer titleId);
+	
 	@Query(value="select distinct on (title_id) * from book where library_id = :libraryId", nativeQuery=true)
 	List<Book> showBook(@Param("libraryId")Integer libraryId);
+	
 
 }

@@ -31,7 +31,6 @@
 
 	<table border="1" class="booklist">
 		<tr>
-			<th class="numtable">資料ID</th>
 			<th class="numtable">分類番号</th>
 			<th class="titletable">タイトル</th>
 			<th>著者</th>
@@ -40,7 +39,6 @@
 
 		</tr>
 		<tr th:each="book:${books}">
-			<td th:text="${book.id}"></td>
 			<td th:text="${book.category.categoryNum}"></td>
 			<td><a th:href="@{/user/{id}/bookDetail(id=${book.id})}" th:text="${book.title}">
 				</a></td>

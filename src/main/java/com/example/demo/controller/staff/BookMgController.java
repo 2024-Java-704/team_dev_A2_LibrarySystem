@@ -1,7 +1,11 @@
 package com.example.demo.controller.staff;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +25,8 @@ import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ConditionRepository;
 import com.example.demo.repository.LibraryRepository;
 import com.example.demo.repository.ReservationRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class BookMgController {
@@ -49,25 +55,143 @@ public class BookMgController {
 		return "/staff/bookList";
 	}
 
-	@GetMapping("/staff/materialMg/bookList/ranking")
-	public String ranking(Model model) {
-		List<Book> bookList = bookRepository.findByLibraryIdOrderByCntDesc(account.getLibraryId());
-		model.addAttribute("bookList", bookList);
+	@PostMapping("/staff/staffDetailSearch") //検索処理・検索結果表示
+	public String searchBook(
+			@RequestParam(name = "title", defaultValue = "") String title,
+			@RequestParam(name = "category", defaultValue = "") String categoryNum,
+			@RequestParam(name = "author", defaultValue = "") String author,
+			@RequestParam(name = "publisher", defaultValue = "") String publisher,
+			@RequestParam(name = "publishDay", defaultValue = "") LocalDate publishDay,
+			@RequestParam(name = "sort", defaultValue = "") String sort,
+			Model model,
+			HttpSession session) {
+
+		List<Book> bookList = new ArrayList<>();
+
+		// タイトルがある場合
+		if (!title.isEmpty()) {
+			String[] keywords;
+			if (title.contains("\s")) { // 半角スペース対応
+				keywords = title.split("\s");
+			} else if (title.contains("　")) { // 全角スペース対応
+				keywords = title.split("　");
+			} else { // スペースがない場合
+				keywords = new String[] { title }; // 配列にタイトルを入れる
+			}
+
+			for (String key : keywords) {
+				bookList.addAll(bookRepository.findByLibraryIdAndTitleContaining(account.getLibraryId(),key));
+			}
+		} else {
+			// タイトルがない場合、全件取得
+			if (sort.equals("jporder")) {
+				bookList.addAll(bookRepository.findByLibraryIdOrderByHurigana(account.getLibraryId()));
+
+			} else {
+				bookList.addAll(bookRepository.findByLibraryId(account.getLibraryId()));
+			}
+
+		}
+		// タイトル以外の条件で絞り込み
+		if (!categoryNum.isEmpty()) {
+			Category category = categoryRepository.findByCategoryNum(categoryNum);
+			if (category != null) {
+				bookList = bookList.stream()
+						.filter(book -> book.getCategory().equals(category))
+						.collect(Collectors.toList());
+			}
+		}
+		if (!author.isEmpty()) {
+			bookList = bookList.stream()
+					.filter(book -> book.getAuthor().contains(author))
+					.collect(Collectors.toList());
+		}
+
+		if (!publisher.isEmpty()) {
+			bookList = bookList.stream()
+					.filter(book -> book.getPublisher().contains(publisher))
+					.collect(Collectors.toList());
+		}
+		if (publishDay != null) {
+			bookList = bookList.stream()
+					.filter(book -> book.getPubYear().equals(publishDay))
+					.collect(Collectors.toList());
+		}
+
+		// 重複を削除
+		List<Book> bookTitles = new ArrayList<>(new HashSet<>(bookList));
+
+		// 検索結果をセッションに保存
+		session.setAttribute("searchResults", bookTitles);
+
+		// 書籍IDリストをカンマ区切りの文字列に変換してモデルに追加
+		String bookIds = bookTitles.stream()
+				.map(book -> book.getId().toString())
+				.collect(Collectors.joining(","));
+		model.addAttribute("bookIds", bookIds);
+
+		model.addAttribute("bookList", bookTitles);
 		return "/staff/bookList";
 	}
 
-	@GetMapping("/staff/materialMg/bookList/pubYear")
-	public String pubYear(Model model) {
-		List<Book> bookList = bookRepository.findByLibraryIdOrderByPubYear(account.getLibraryId());
-		model.addAttribute("bookList", bookList);
+	// 50音順に並べ替え
+	@GetMapping("/staff/staffDetailSearch/jporder")
+	public String jporderBook(HttpSession session, Model model) {
+		// セッションから検索結果を取得
+		@SuppressWarnings("unchecked")
+		List<Book> bookTitles = (List<Book>) session.getAttribute("searchResults");
+
+		if (bookTitles == null || bookTitles.isEmpty()) {
+			model.addAttribute("bookList", new ArrayList<Book>());
+			return "/staff/bookList";
+		}
+
+		bookTitles = bookTitles.stream()
+				.sorted(Comparator.comparing(Book::getHurigana))
+				.collect(Collectors.toList());
+
+		model.addAttribute("bookList", bookTitles);
+		return "/staff/bookList";
+
+	}
+
+	// 人気順に並べ替え
+	@GetMapping("/staff/staffDetailSearch/popularity")
+	public String popularityBook(HttpSession session, Model model) {
+		// セッションから検索結果を取得
+		@SuppressWarnings("unchecked")
+		List<Book> bookTitles = (List<Book>) session.getAttribute("searchResults");
+
+		if (bookTitles == null || bookTitles.isEmpty()) {
+			model.addAttribute("bookList", new ArrayList<Book>());
+			return "/staff/bookList";
+		}
+
+		bookTitles = bookTitles.stream()
+				.sorted(Comparator.comparing(Book::getCnt).reversed())
+				.collect(Collectors.toList());
+
+		model.addAttribute("bookList", bookTitles);
 		return "/staff/bookList";
 	}
 
-	@GetMapping("/staff/materialMg/bookList/jporder")
-	public String jporder(Model model) {
-		List<Book> bookList = bookRepository.findByLibraryIdOrderByHurigana(account.getLibraryId());
+	// 出版日順に並べ替え
+	@GetMapping("/staff/staffDetailSearch/pubYear")
+	public String pubYearBook(HttpSession session, Model model) {
+		// セッションから検索結果を取得
+		@SuppressWarnings("unchecked")
+		List<Book> bookTitles = (List<Book>) session.getAttribute("searchResults");
 
-		model.addAttribute("bookList", bookList);
+		if (bookTitles == null || bookTitles.isEmpty()) {
+			model.addAttribute("bookList", new ArrayList<Book>());
+			return "/staff/bookList";
+		}
+
+		bookTitles = bookTitles.stream()
+				.sorted(Comparator.comparing(Book::getPubYear))
+				.collect(Collectors.toList());
+
+		model.addAttribute("bookList", bookTitles);
 		return "/staff/bookList";
 	}
 	
