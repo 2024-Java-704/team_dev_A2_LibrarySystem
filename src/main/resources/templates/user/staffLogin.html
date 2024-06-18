@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/userstyle.css">
+	<meta charset="UTF-8">
+	<title>利用者用サイト</title>
+</head>
+
+<body>
+	<h1>[[${library.name}]]利用者用サイトログインページ</h1>
+	<a th:if="${error}">
+		<ul th:each="error:${error}" th:text="${error}"></ul>
+	</a>
+	<form th:action="@{/user/{id}/staffLogin(id=${library.id})}" method="post">
+	
+				<input type="text" name="email" placeholder="メールアドレス">
+			
+				<input type="password" name="password" placeholder="パスワード">
+			
+		<button>ログイン</button>
+	</table>
+	</form>
+</body>
+<footer></footer>
+
+</html>

@@ -132,36 +132,36 @@ public class OrderController {//reservation
 		}
 
 	}
-
-	@GetMapping("/staff/materialMg/{id}/orderEdit")
-	public String edit(
-			@PathVariable("id") Integer id,
-			Model model) {
-		model.addAttribute("id", id);
-		Reservation reservation = reservationRepository.findById(id).get();
-		model.addAttribute("reservation", reservation);
-		return "/staff/orderEdit";
-
-	}
-
-	@PostMapping("/staff/materialMg/{id}/orderEdit")
-	public String edits(
-			@PathVariable("id") Integer id,
-			@RequestParam(value = "user", defaultValue = "") Integer user_id,
-			@RequestParam(value = "book", defaultValue = "") Integer book_id,
-			@RequestParam(value = "reservationDate", defaultValue = "") LocalDate reservationDate,
-			@RequestParam(value = "scheduledDate", defaultValue = "") LocalDate scheduledDate,
-			@RequestParam(value = "liburary", defaultValue = "") Integer library_id,
-			@RequestParam(value = "status", defaultValue = "") Integer status_id,
-			Model model) {
-		User user = userRepository.findById(user_id).get();
-		Book book = bookRepository.findById(book_id).get();
-		Library library = libraryRepository.findById(library_id).get();
-		Status status = statusRepository.findById(status_id).get();
-		Reservation orderReservation = new Reservation(id, user, book, reservationDate, scheduledDate, library, status);
-		reservationRepository.save(orderReservation);
-		return "redirect:/staff/materialMg/order";
-	}
+	//
+	//	@GetMapping("/staff/materialMg/{id}/orderEdit")
+	//	public String edit(
+	//			@PathVariable("id") Integer id,
+	//			Model model) {
+	//		model.addAttribute("id", id);
+	//		Reservation reservation = reservationRepository.findById(id).get();
+	//		model.addAttribute("reservation", reservation);
+	//		return "/staff/orderEdit";
+	//
+	//	}
+	//
+	//	@PostMapping("/staff/materialMg/{id}/orderEdit")
+	//	public String edits(
+	//			@PathVariable("id") Integer id,
+	//			@RequestParam(value = "user", defaultValue = "") Integer user_id,
+	//			@RequestParam(value = "book", defaultValue = "") Integer book_id,
+	//			@RequestParam(value = "reservationDate", defaultValue = "") LocalDate reservationDate,
+	//			@RequestParam(value = "scheduledDate", defaultValue = "") LocalDate scheduledDate,
+	//			@RequestParam(value = "liburary", defaultValue = "") Integer library_id,
+	//			@RequestParam(value = "status", defaultValue = "") Integer status_id,
+	//			Model model) {
+	//		User user = userRepository.findById(user_id).get();
+	//		Book book = bookRepository.findById(book_id).get();
+	//		Library library = libraryRepository.findById(library_id).get();
+	//		Status status = statusRepository.findById(status_id).get();
+	//		Reservation orderReservation = new Reservation(id, user, book, reservationDate, scheduledDate, library, status);
+	//		reservationRepository.save(orderReservation);
+	//		return "redirect:/staff/materialMg/order";
+	//	}
 
 	@PostMapping("/staff/materialMg/{id}/orderDelete")
 	public String delete(
