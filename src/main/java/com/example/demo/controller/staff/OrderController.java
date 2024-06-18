@@ -52,24 +52,24 @@ public class OrderController {//reservation
 		for (Book book : books) {
 			bookIdList.add(book.getId());
 		}
-		List<Reservation> orderSendList = new ArrayList<>(); //発注用
-		for (Integer bookId : bookIdList) {
-			orderSendList.addAll(reservationRepository.findByBookIdAndLibraryIdNot(
-					bookId,
-					account.getLibraryId()));
-		}
-		for (Integer bookId : bookIdList) {
-			orderSendList.removeAll(reservationRepository.findByBookIdAndLibraryId(bookId, account.getId()));
-		}
-
 		List<Reservation> orderAcceptList = new ArrayList<>(); //受注用
 		for (Integer bookId : bookIdList) {
-			orderAcceptList.addAll(reservationRepository.findByBookIdNotAndLibraryId(
+			orderAcceptList.addAll(reservationRepository.findByBookIdAndLibraryIdNot(
 					bookId,
 					account.getLibraryId()));
 		}
 		for (Integer bookId : bookIdList) {
 			orderAcceptList.removeAll(reservationRepository.findByBookIdAndLibraryId(bookId, account.getId()));
+		}
+
+		List<Reservation> orderSendList = new ArrayList<>(); //受注用
+		for (Integer bookId : bookIdList) {
+			orderSendList.addAll(reservationRepository.findByBookIdNotAndLibraryId(
+					bookId,
+					account.getLibraryId()));
+		}
+		for (Integer bookId : bookIdList) {
+			orderSendList.removeAll(reservationRepository.findByBookIdAndLibraryId(bookId, account.getId()));
 		}
 
 		List<Reservation> order1List = new ArrayList<>(

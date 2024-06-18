@@ -64,15 +64,16 @@ public class RentalController {
 	public String index(
 			Model model) {
 
-		List<Book> books = bookRepository.findByLibraryId(account.getLibraryId());
-		List<Integer> bookIdList = new ArrayList<>();
-		for (Book book : books) {
-			bookIdList.add(book.getId());
+		List<User> users = userRepository.findByLibraryId(account.getLibraryId());
+		List<Integer> userIdList = new ArrayList<>();
+		for (User user : users) {
+			userIdList.add(user.getId());
 		}
 		List<Lending> lendingList = new ArrayList<>();
-		for (Integer bookId : bookIdList) {
-			lendingList.addAll(lendingRepository.findByBookIdAndReturnedDateIsNull(bookId));
+		for (Integer userId : userIdList) {
+			lendingList.addAll(lendingRepository.findByUserIdAndReturnedDateIsNull(userId));
 		}
+
 		if (lendingList.size() == 0) {
 			model.addAttribute("error", "貸し出している本がありません");
 		} else {

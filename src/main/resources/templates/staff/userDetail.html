@@ -53,10 +53,11 @@
 			<td th:text="${lending.book.title}"></td>
 			<td th:text="${lending.lendDate}"></td>
 			<td>
-				<span th:if="${lending.limitDate}" th:text="${lending.limitDate}">
+				<span th:if="${!lending.overLimit}" th:text="${lending.limitDate}">
 				</span>
-				<span th:if="${limit}" th:text="${limit}" style="color: red;">
+				<span th:if="${lending.overLimit}" th:text="${lending.limitDate}"  style="color: red;">
 				</span>
+				
 			</td>
 			<td th:if="${lending.returnedDate}" th:text="${lending.returnedDate}"></td>
 		</tr>
