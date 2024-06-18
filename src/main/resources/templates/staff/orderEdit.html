@@ -8,8 +8,11 @@
 </head>
 
 <body>
-	<header th:replace="header">
+	<header>
 		<h1>注文変更画面</h1>
+		<br th:text="${@account.libraryName}+' 職員用ページ'">
+		<a th:text="${@account.name}+'さんがログイン中'"></a>
+		<br><a href="/staff/logout">ログアウト</a>
 	</header>
 	<a href="/staff/materialMg/order">前画面に戻る</a>
 	<form th:action="@{/staff/materialMg/{reservationId}/orderEdit(reservationId=${reservation.id})}" method="post">

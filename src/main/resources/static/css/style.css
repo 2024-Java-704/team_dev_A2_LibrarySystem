@@ -12,6 +12,7 @@ body {
 header,
 nav,
 footer {
+	margin: auto;
 	background-color: #45496a;
 	/* 背景色 */
 	color: #ffffff;
@@ -21,7 +22,32 @@ footer {
 	padding-bottom: 5px;
 	/* 内側余白(下) */
 }
-
+.mypageheader {
+	margin: auto;
+	background-color: rgb(0, 64, 0);
+	/* 背景色 */
+	color: #ffffff;
+	/* 文字色 */
+	padding-top: 5px;
+	/* 内側余白(上) */
+	padding-bottom: 5px;
+	/* 内側余白(下) */
+}
+.mypagetable th {
+	background: rgb(0, 87, 0);
+	border: 1px solid rgb(0, 87, 0);
+}
+.headertext {
+	position: absolute;
+	right: 10px;
+}
+.adminheader {
+	background-color:#d2301e;
+}
+.admintable th {
+	background: rgb(226, 126, 52);
+	border:rgb(226, 126, 52);
+}
 footer {
 	position: fixed;
 	left: 0;
@@ -34,12 +60,11 @@ footer {
 header a,
 nav a {
 	color: #ffffff;
+	
 }
 
-/* ヘッダー内見出し */
-header h1 {
-	font-size: 20pt;
-	margin: 10px auto;
+h1 {
+	margin: auto;
 }
 
 /* 仕切り線 */

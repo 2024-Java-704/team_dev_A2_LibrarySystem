@@ -8,8 +8,11 @@
 </head>
 
 <body>
-	<header th:replace="header">
+	<header>
 	<h1>予約</h1>
+	<br th:text="${@account.libraryName}+' 職員用ページ'">
+		<a th:text="${@account.name}+'さんがログイン中'"></a>
+		<br><a href="/staff/logout">ログアウト</a>
 	</header>
 	<form action="/" method="post">
 		<input type.txt="" value="利用者ID"><br>

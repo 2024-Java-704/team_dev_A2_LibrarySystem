@@ -7,12 +7,15 @@
 	<title>貸出情報更新</title>
 </head>
 
-<body>	
-	<header th:replace="header">
-    <h1>貸出情報更新</h1>
+<body>
+	<header>
+		<h1>貸出情報更新</h1>
+		<br th:text="${@account.libraryName}+' 職員用ページ'">
+		<a th:text="${@account.name}+'さんがログイン中'"></a>
+		<br><a href="/staff/logout">ログアウト</a>
 	</header>
-    <span th:text="${error}" style="color:red;"></span>
-    <form th:action="@{/staff/materialMg/{id}/rentalEdit(id=${lending.id})}" method="post">
+	<span th:text="${error}" style="color:red;"></span>
+	<form th:action="@{/staff/materialMg/{id}/rentalEdit(id=${lending.id})}" method="post">
 		<table border="1">
 			<tr>
 				<th>貸出ID</th>
@@ -23,7 +26,7 @@
 			<tr>
 				<th>本</th>
 				<td>
-					<input type="text"  name="bookId" th:value="${lending.book.id}" required>
+					<input type="text" name="bookId" th:value="${lending.book.id}" required>
 				</td>
 			</tr>
 			<tr>
@@ -41,7 +44,7 @@
 			<tr>
 				<th>返却日時</th>
 				<td>
-					<input type="date" name="returnedDate"  th:value="${lending.returnedDate}">
+					<input type="date" name="returnedDate" th:value="${lending.returnedDate}">
 				</td>
 			</tr>
 			<tr>
