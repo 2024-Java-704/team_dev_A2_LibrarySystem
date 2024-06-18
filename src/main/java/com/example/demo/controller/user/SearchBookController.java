@@ -2,6 +2,7 @@ package com.example.demo.controller.user;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,6 +18,8 @@ import com.example.demo.entity.Book;
 import com.example.demo.entity.Category;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.CategoryRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class SearchBookController {
@@ -34,7 +38,8 @@ public class SearchBookController {
 			@RequestParam(name = "publisher", defaultValue = "") String publisher,
 			@RequestParam(name = "publishDay", defaultValue = "") LocalDate publishDay,
 			@RequestParam(name = "sort", defaultValue = "") String sort,
-			Model model) {
+			Model model,
+			HttpSession session) {
 
 		List<Book> bookList = new ArrayList<>();
 
@@ -90,11 +95,77 @@ public class SearchBookController {
 
 		// 重複を削除
 		List<Book> bookTitles = new ArrayList<>(new HashSet<>(bookList));
-		model.addAttribute("taitle", title);
-		model.addAttribute("categoryNum", categoryNum);
-		model.addAttribute("author", author);
-		model.addAttribute("publisher", publisher);
-		model.addAttribute("publishDay", publishDay);
+
+		// 検索結果をセッションに保存
+		session.setAttribute("searchResults", bookTitles);
+
+		// 書籍IDリストをカンマ区切りの文字列に変換してモデルに追加
+		String bookIds = bookTitles.stream()
+				.map(book -> book.getId().toString())
+				.collect(Collectors.joining(","));
+		model.addAttribute("bookIds", bookIds);
+
+		model.addAttribute("books", bookTitles);
+		return "/user/userSearch";
+	}
+
+	// 50音順に並べ替え
+	@GetMapping("/user/userDetailSearch/jporder")
+	public String jporder(HttpSession session, Model model) {
+		// セッションから検索結果を取得
+		@SuppressWarnings("unchecked")
+		List<Book> bookTitles = (List<Book>) session.getAttribute("searchResults");
+
+		if (bookTitles == null || bookTitles.isEmpty()) {
+			model.addAttribute("books", new ArrayList<Book>());
+			return "/user/userSearch";
+		}
+
+		bookTitles = bookTitles.stream()
+				.sorted(Comparator.comparing(Book::getHurigana))
+				.collect(Collectors.toList());
+
+		model.addAttribute("books", bookTitles);
+		return "/user/userSearch";
+
+	}
+
+	// 人気順に並べ替え
+	@GetMapping("/user/userDetailSearch/popularity")
+	public String popularity(HttpSession session, Model model) {
+		// セッションから検索結果を取得
+		@SuppressWarnings("unchecked")
+		List<Book> bookTitles = (List<Book>) session.getAttribute("searchResults");
+
+		if (bookTitles == null || bookTitles.isEmpty()) {
+			model.addAttribute("books", new ArrayList<Book>());
+			return "/user/userSearch";
+		}
+
+		bookTitles = bookTitles.stream()
+				.sorted(Comparator.comparing(Book::getCnt).reversed())
+				.collect(Collectors.toList());
+
+		model.addAttribute("books", bookTitles);
+		return "/user/userSearch";
+	}
+
+	// 出版日順に並べ替え
+	@GetMapping("/user/userDetailSearch/pubYear")
+	public String pubYear(HttpSession session, Model model) {
+		// セッションから検索結果を取得
+		@SuppressWarnings("unchecked")
+		List<Book> bookTitles = (List<Book>) session.getAttribute("searchResults");
+
+		if (bookTitles == null || bookTitles.isEmpty()) {
+			model.addAttribute("books", new ArrayList<Book>());
+			return "/user/userSearch";
+		}
+
+		bookTitles = bookTitles.stream()
+				.sorted(Comparator.comparing(Book::getPubYear))
+				.collect(Collectors.toList());
+
 		model.addAttribute("books", bookTitles);
 		return "/user/userSearch";
 	}

@@ -28,12 +28,13 @@ public class User {
 	public User() {
 	}
 
-	public User(String name, String address, String email, String tel, String password) {
+	public User(String name, String address, String email, String tel, String password,Library library) {
 		this.name = name;
 		this.address = address;
 		this.email = email;
 		this.tel = tel;
 		this.password = password;
+		this.library=library;
 	}
 
 	public User(Integer id, String name, String address, String email, String tel, String password) {

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>マイページ</title>
+</head>
+
+<body>
+	<header>
+		<h1 th:text="${user.library.name}+'マイページ'"></h1>
+	</header>
+	<table border="1">
+		<tr>
+			<th>利用者ID</th>
+			<td th:text="${user.id}"></td>
+		</tr>
+		<tr>
+			<th>名前</th>
+			<td th:text="${user.name}"></td>
+		</tr>
+		<tr>
+			<th>メールアドレス</th>
+			<td th:text="${user.email}"></td>
+		</tr>
+	</table>
+	貸出中
+	<table border="1">
+		<tr>
+			<th>貸出ID</th>
+			<th>本ID</th>
+			<th>タイトル</th>
+			<th>貸出日</th>
+			<th>返却予定日</th>
+		</tr>
+		<tr th:each="notreturn:${notreturn}">
+			<td th:text="${notreturn.id}"></td>
+			<td th:text="${notreturn.book.id}"></td>
+			<td th:text="${notreturn.book.title}"></td>
+			<td th:text="${notreturn.lendDate}"></td>
+			<td th:text="${notreturn.limitDate}"></td>
+			<td th:if="${notreturn.returnedDate}" th:text="${notreturn.returnedDate}"></td>
+		</tr>
+	</table>
+	予約・注文状況
+	<table border="1">
+		<tr>
+			<th>本ID</th>
+			<th>タイトル</th>
+			<th>予約日</th>
+			<th>予定日</th>
+			<th>状況</th>
+		</tr>
+		<tr th:each="reservation:${reservation}">
+			<td th:text="${reservation.book.id}"></td>
+			<td th:text="${reservation.book.title}"></td>
+			<td th:text="${reservation.reservationDate}"></td>
+			<td th:text="${reservation.scheduledDate}"></td>
+			<td th:text="${reservation.status.name}"></td>
+		</tr>
+	</table>
+	貸出履歴
+	<table border="1">
+		<tr>
+			<th>貸出ID</th>
+			<th>本ID</th>
+			<th>タイトル</th>
+			<th>貸出日</th>
+			<th>返却日</th>
+		</tr>
+		<tr th:each="returned:${returned}">
+			<td th:text="${returned.id}"></td>
+			<td th:text="${returned.book.id}"></td>
+			<td th:text="${returned.book.title}"></td>
+			<td th:text="${returned.lendDate}"></td>
+			<td th:if="${returned.returnedDate}" th:text="${returned.returnedDate}"></td>
+		</tr>
+	</table>
+
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<header th:replace="admin/adminheader">
+
+
+	</header>
+	<a href="/admin/adminTop">管理者TOPに戻る</a>
+		<a href="/admin/libraryAdd">追加</a>
+		<table border="1">
+			<tr>
+				<th>Id</th>
+				<th>図書館</th>
+				<th>住所</th>
+				<th>電話番号</th>
+				<th>変更</th>
+				<th>削除</th>
+			</tr>
+			<tr>
+			<tr th:each="library : ${libraryList}">
+				<td th:text="${library.id}"></td>
+				<td>
+					<a th:href="@{/manager/staff/login(libraryId=${library.id}, librayName=${library.name})}" th:text="${library.name}"></a>
+				</td>
+				<td th:text="${library.address}"></td>
+				<td th:text="${library.tel}"></td>
+
+				<form th:action="@{/admin/adminList/{libraryId}/libraryEdit(libraryId=${library.id})}" method="Get">
+					<td><button>変更</button>
+				</form>
+				</td>
+				<td>
+					<form th:action="@{/admin/adminList/{libraryId}/libraryDelete(libraryId=${library.id})}"
+						class="deleteForm" method="Post">
+						<button class="deleteButton">削除</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+</body>
+
+</html>

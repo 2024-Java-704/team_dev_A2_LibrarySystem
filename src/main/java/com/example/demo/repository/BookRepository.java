@@ -24,14 +24,19 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
 	List<Book> findAllByOrderByCnt();
 
+	List<Book> findByLibraryIdOrderByCntDesc(Integer libraryId);
+
 	List<Book> findAllByOrderByPubYear();
 
+	List<Book> findByLibraryIdOrderByPubYear(Integer libraryId);
+
 	List<Book> findAllByOrderByHurigana();
+
+	List<Book> findByLibraryIdOrderByHurigana(Integer libraryId);
 
 	List<Book> findByCategory(Optional<Category> findById);
 
 	List<Book> findByHuriganaContaining(String keyword);
-
 
 	List<Book> findByIdAndCategoryId(Integer bookId, Integer categoryId);
 
@@ -45,6 +50,9 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 	List<Book> findByCategoryNotIn(List<Category> categories); // 修正点
 
 	List<Book> findByPubYearNotIn(List<LocalDate> pubYears);
-  
+
 	List<Book> findByLibraryId(Integer libraryId);
+
+	List<Book> deleteByLibraryId(Integer Id);
+
 }

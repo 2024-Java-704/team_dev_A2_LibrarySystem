@@ -68,10 +68,8 @@ public class ReservationController {
 
 		LocalDate today = LocalDate.now();
 		LocalDate scheduledDate = today.plusWeeks(1);
-
 		model.addAttribute("reservationDate", today);
 		model.addAttribute("scheduledDate", scheduledDate);
-
 		return "/staff/resevationAdd";
 	}
 
@@ -96,15 +94,13 @@ public class ReservationController {
 			@RequestParam(value = "book", defaultValue = "") Integer book_id,
 			@RequestParam(value = "reservationDate", defaultValue = "") LocalDate reservationDate,
 			@RequestParam(value = "scheduledDate", defaultValue = "") LocalDate scheduledDate,
-			@RequestParam(value = "library", defaultValue = "") Integer library_id,
 			@RequestParam(value = "status", defaultValue = "") Integer status_id,
 			Model model) {
 
 		User user = userRepository.findById(user_id).get();
 		Book book = bookRepository.findById(book_id).get();
-		Library library = libraryRepository.findById(library_id).get();
+		Library library = libraryRepository.findById(account.getId()).get();
 		Status status = statusRepository.findById(status_id).get();
-
 		Reservation orderReservation = new Reservation(user, book, reservationDate, scheduledDate, library, status);
 		reservationRepository.save(orderReservation);
 		return "redirect:/staff/materialMg/reservationList";

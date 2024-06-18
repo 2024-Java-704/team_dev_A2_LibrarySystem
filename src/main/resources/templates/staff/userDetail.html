@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<header>
+	<header th:replace="header">
 	<h1>利用者詳細</h1>
 	</header>
 	<table border="1">
@@ -52,7 +52,12 @@
 			<td th:text="${lending.book.id}"></td>
 			<td th:text="${lending.book.title}"></td>
 			<td th:text="${lending.lendDate}"></td>
-			<td th:text="${lending.limitDate}"></td>
+			<td>
+				<span th:if="${lending.limitDate}" th:text="${lending.limitDate}">
+				</span>
+				<span th:if="${limit}" th:text="${limit}" style="color: red;">
+				</span>
+			</td>
 			<td th:if="${lending.returnedDate}" th:text="${lending.returnedDate}"></td>
 		</tr>
 	</table>

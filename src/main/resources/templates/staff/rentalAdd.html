@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<header>
+	<header th:replace="header">
 	<h1>貸出追加</h1>
 	</header>
 
@@ -36,8 +36,6 @@
 				<th>予約ID</th>
 				<td>
 					<input type="text" name="reservationId" th:value="${reservationId}">
-					
-
 				</td>
 			</tr>
 			<tr>

@@ -15,6 +15,7 @@ import com.example.demo.entity.Book;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Condition;
 import com.example.demo.entity.Library;
+import com.example.demo.model.Account;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ConditionRepository;
@@ -38,31 +39,35 @@ public class BookMgController {
 	@Autowired
 	ConditionRepository conditionRepository;
 
+	@Autowired
+	Account account;
+
 	@GetMapping("/staff/materialMg/bookList")
 	public String index(Model model) {
-		List<Book> bookList = bookRepository.findAll();
+		List<Book> bookList = bookRepository.findByLibraryId(account.getLibraryId());
 		model.addAttribute("bookList", bookList);
 		return "/staff/bookList";
 	}
-	
+
 	@GetMapping("/staff/materialMg/bookList/ranking")
 	public String ranking(Model model) {
-		List<Book> bookList=bookRepository.findAllByOrderByCnt();
-		model.addAttribute("bookList",bookList);
+		List<Book> bookList = bookRepository.findByLibraryIdOrderByCntDesc(account.getLibraryId());
+		model.addAttribute("bookList", bookList);
 		return "/staff/bookList";
 	}
-	
+
 	@GetMapping("/staff/materialMg/bookList/pubYear")
 	public String pubYear(Model model) {
-		List<Book> bookList=bookRepository.findAllByOrderByPubYear();
-		model.addAttribute("bookList",bookList);
+		List<Book> bookList = bookRepository.findByLibraryIdOrderByPubYear(account.getLibraryId());
+		model.addAttribute("bookList", bookList);
 		return "/staff/bookList";
 	}
-	
+
 	@GetMapping("/staff/materialMg/bookList/jporder")
 	public String jporder(Model model) {
-		List<Book> bookList=bookRepository.findAllByOrderByHurigana();
-		model.addAttribute("bookList",bookList);
+		List<Book> bookList = bookRepository.findByLibraryIdOrderByHurigana(account.getLibraryId());
+
+		model.addAttribute("bookList", bookList);
 		return "/staff/bookList";
 	}
 
@@ -73,53 +78,61 @@ public class BookMgController {
 			@RequestParam("author") String author,
 			@RequestParam("publisher") String publisher,
 			@RequestParam("pubYear") LocalDate pubYear,
-			@RequestParam("library") Integer libraryId,
 			@RequestParam("img") String img,
 			Model model) {
 
 		Category category = categoryRepository.findById(categoryId).get();
-		Library library = libraryRepository.findById(libraryId).get();
+		Library library = libraryRepository.findById(account.getLibraryId()).get();
 		Condition condition = conditionRepository.findById(1).get();
+		Integer cnt = 0;
 
-		Book book = new Book(category, title, hurigana, author, publisher, pubYear, library, condition, img);
+		Book book = new Book(category, title, hurigana, author, publisher, pubYear, library, condition, cnt,
+				img);
 		bookRepository.save(book);
-		return "redirect:/staff/bookList";
+		return "redirect:/staff/materialMg/bookList";
 	}
 
 	@GetMapping("/staff/materialMg/create")
-	public String create() {
+	public String create(Model model) {
+		Library library = libraryRepository.findById(account.getLibraryId()).get();
+		List<Category> category = categoryRepository.findAll();
+		model.addAttribute("library", library);
+		model.addAttribute("category", category);
 		return "/staff/bookAdd";
 	}
 
 	@GetMapping("/staff/materialMg/{id}/edit")
 	public String edit(@PathVariable("id") Integer id, Model model) {
 		Book book = bookRepository.findById(id).get();
+		List<Category> category = categoryRepository.findAll();
+		List<Condition> condition = conditionRepository.findAll();
 		model.addAttribute("book", book);
+		model.addAttribute("category", category);
+		model.addAttribute("condition", condition);
 		return "/staff/bookEdit";
 	}
 
 	@PostMapping("/staff/materialMg/{id}/edit")
 	public String update(
 			@PathVariable("id") Integer id,
-			@RequestParam("categoryNum") String categoryNum,
+			@RequestParam("category") Integer categoryId,
 			@RequestParam("title") String title,
 			@RequestParam("hurigana") String hurigana,
 			@RequestParam("author") String author,
 			@RequestParam("publisher") String publisher,
 			@RequestParam("pubYear") LocalDate pubYear,
 			@RequestParam("regDay") LocalDate regDay,
-			@RequestParam("library") Integer libraryId,
 			@RequestParam("condition") Integer conditionId,
 			@RequestParam("cnt") Integer cnt,
 			@RequestParam(name = "img", defaultValue = "") String img,
 			Model model) {
 
-		Category category = categoryRepository.findByCategoryNum(categoryNum);
-		Library library = libraryRepository.findById(libraryId).get();
-		Condition condition = conditionRepository.findById(1).get();
+		Category category = categoryRepository.findById(categoryId).get();
+		Library library = libraryRepository.findById(account.getLibraryId()).get();
+		Condition condition = conditionRepository.findById(conditionId).get();
 
-		Book book = new Book(id, category, title, hurigana, author, publisher, pubYear, regDay, condition, library,
-				img);
+		Book book = new Book(id, category, title, hurigana, author, publisher, pubYear, regDay, library, condition,
+				cnt, img);
 		bookRepository.save(book);
 		return "redirect:/staff/materialMg/bookList";
 

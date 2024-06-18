@@ -8,20 +8,12 @@
 </head>
 
 <body>
-	<header>
+	<header th:replace="header">
 		<h1>注文一覧</h1>
 	</header>
 	<a href="/staff/materialMg">資料管理に戻る</a>
 	<a href="/staff/materialMg/orderAdd">追加</a>
-	<form action="/staff/materialMg/order" method="get">
-		<input type="hidden" name="accept" value="juchu">
-		<button>受注一覧</button>
-	</form>
-	<form action="/staff/materialMg/order" method="get">
-		<input type="hidden" name="send" value="hacchu">
-		<button>発注一覧</button>
-	</form>
-
+	<h2>受注一覧</h2>
 	<table border="1">
 		<tr>
 			<th>注文ID</th>
@@ -31,47 +23,78 @@
 			<th>貸出予定日</th>
 			<th>受け取り図書館</th>
 			<th>状況</th>
-			<th>変更</th>
 			<th>削除</th>
-
+			<th>変更</th>
 		</tr>
-		<tr th:each="reservation : ${reservationList}">
-			<td th:text="${reservation.id}"></td>
+		<tr th:each="send : ${orderSendList}">
+			<td th:text="${send.id}"></td>
 			<td>
-				<a th:href="@{/staff/userMg/{userId}/userDetail(userId=${reservation.user.id})}" th:text="${reservation.user.id}"> 
+				<a th:href="@{/staff/userMg/{userId}/userDetail(userId=${send.user.id})}" th:text="${send.user.id}"> 
 				</a>
 			</td>
 			<td>
-				<a th:href="@{/staff/{id}/bookdetail(id=${reservation.book.id})}" th:text="${reservation.book.id}">
+				<a th:href="@{/staff/{id}/bookdetail(id=${send.book.id})}" th:text="${send.book.id}">
 				</a>	
 			</td>
-			<td th:text="${reservation.reservationDate}"></td>
-			<td th:text="${reservation.scheduledDate}"></td>
-			<td th:text="${reservation.library.name}"></td>
-			<td th:text="${reservation.status.name}"></td>
+			<td th:text="${send.reservationDate}"></td>
+			<td th:text="${send.scheduledDate}"></td>
+			<td th:text="${send.library.name}"></td>
+			<td th:text="${send.status.name}"></td>
 			<td>
-				<form th:action="@{/staff/materialMg/{reservationId}/orderEdit(reservationId=${reservation.id})}"
-					method="Get">
-					<button>変更</button>
-				</form>
-			</td>
-
-			<td>
-				<form th:action="@{/staff/materialMg/{reservationId}/orderDelete(reservationId=${reservation.id})}"
+				<form th:action="@{/staff/materialMg/{reservationId}/orderDelete(reservationId=${send.id})}"
 					class="deleteForm" method="Post">
 					<button class="deleteButton">削除</button>
 				</form>
 			</td>
 			<td>
-				<form th:action="@{/staff/materialMg/{reservationId}/lendFromOrder(reservationId=${reservation.id})}"
-					method="get">
-					<button>貸出</button>
+				<form th:action="@{/staff/materialMg/{reservationId}/lendFromOrder(reservationId=${send.id})}"
+						method="get">
+					<button>発送済み</button>
 				</form>
 			</td>
 		</tr>
 	</table>
-
-
+	<h2>発注一覧</h2>
+		<table border="1">
+		<tr>
+			<th>注文ID</th>
+			<th>利用者ID</th>
+			<th>本ID</th>
+			<th>注文日時</th>
+			<th>貸出予定日</th>
+			<th>受け取り図書館</th>
+			<th>状況</th>
+			<th>削除</th>
+			<th>変更</th>
+		</tr>
+		<tr th:each="accept : ${orderAcceptList}">
+			<td th:text="${accept.id}"></td>
+			<td>
+				<a th:href="@{/staff/userMg/{userId}/userDetail(userId=${accept.user.id})}" th:text="${accept.user.id}"> 
+				</a>
+			</td>
+			<td>
+				<a th:href="@{/staff/{id}/bookdetail(id=${accept.book.id})}" th:text="${accept.book.id}">
+				</a>	
+			</td>
+			<td th:text="${accept.reservationDate}"></td>
+			<td th:text="${accept.scheduledDate}"></td>
+			<td th:text="${accept.library.name}"></td>
+			<td th:text="${accept.status.name}"></td>
+			<td>
+				<form th:action="@{/staff/materialMg/{reservationId}/orderDelete(reservationId=${accept.id})}"
+					class="deleteForm" method="Post">
+					<button class="deleteButton">削除</button>
+				</form>
+			</td>
+			<td>
+				<form th:action="@{/staff/materialMg/{reservationId}/lendFromOrder(reservationId=${accept.id})}"
+						method="get">
+					<button>到着済み</button>
+				</form>
+			</td>
+		</tr>
+	</table>
 </body>
 <footer></footer>
 <script type="text/javascript">

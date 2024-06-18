@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<header>
+	<header th:replace="header">
 		<h1>延滞者一覧</h1>
 	</header>
 	<th:block th:if="${error}">
@@ -18,24 +18,15 @@
 	<th:block th:if="${delayList}">
 		<table border="1">
 			<tr>
-				<th>貸出ID</th>
 				<th>利用者ID</th>
 				<th>利用者名</th>
-				<th>タイトル</th>
-				<th>返却予定日</th>
-				<th>詳細</th>
 			</tr>
 			<tr th:each="delays:${delayList}">
-				<td th:text="${delays.id}"></td>
-				<td th:text="${delays.user.id}"></td>
-				<td th:text="${delays.user.name}"></td>
-				<td th:text="${delays.book.title}"></td>
-				<td th:text="${delays.limitDate}"></td>
 				<td>
-					<form th:action="@{/staff/userMg/{userId}/userDetail(userId=${delays.user.id})}" method="get">
-						<button>詳細</button>
-					</form>
+					<a th:href="@{/staff/userMg/{userId}/userDetail(userId=${delays.id})}" th:text="${delays.id}">
+					</a>	
 				</td>
+				<td th:text="${delays.name}"></td>
 			</tr>
 		</table>
 	</th:block>

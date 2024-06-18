@@ -22,4 +22,13 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 	List<Reservation> findByBookIdAndLibraryIdNot(Integer bookId, Integer libraryId);
 
 	List<Reservation> findByBookIdOrLibraryId(Integer bookId, Integer libraryId);
+
+	
+	List<Reservation> findByUserId(Integer userId);
+
+
+	List<Reservation> deleteByLibraryId(Integer Id);
+
+	List<Reservation> findByLibraryId(Integer libraryId);
+
 }
