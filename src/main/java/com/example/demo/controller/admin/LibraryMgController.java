@@ -78,4 +78,16 @@ public class LibraryMgController {
 		libraryManagerRepository.deleteById(id);
 		return "redirect:/admin/libraryMg";
 	}
+	
+	
+	@GetMapping("/manager/staff/login")
+	public String login(
+			@RequestParam(name = "libraryId", defaultValue = "") Integer libraryId,
+			@RequestParam(name = "libraryName", defaultValue = "") String libraryName,
+			Model model) {
+		account.setLibraryId(libraryId);
+		account.setLibraryName(libraryName);
+		return "redirect:/staff/staffTop";
+		
+	}
 }

@@ -16,11 +16,11 @@ public class SelectController {
 
 	@GetMapping("/staff/staffTop")
 	public String index(
-			@RequestParam(name = "librayId", defaultValue = "") Integer libraryId,
-			@RequestParam(name = "librayName", defaultValue = "") String libraryName,
+			@RequestParam(name = "libraryId", defaultValue = "") Integer libraryId,
+			@RequestParam(name = "libraryName", defaultValue = "") String libraryName,
 			Model model) {
-		acount.setLibraryId(libraryId);
-		acount.setLibraryName(libraryName);
+		/*	acount.setLibraryId(libraryId);
+			acount.setLibraryName(libraryName);*/
 		return "/staff/staffTop";
 	}
 
