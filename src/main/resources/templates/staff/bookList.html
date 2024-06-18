@@ -27,6 +27,7 @@
 	<table border="1">
 		<tr>
 			<th>ID</th>
+			<th>タイトルID</th>
 			<th>分類番号</th>
 			<th>タイトル</th>
 			<th>著者</th>
@@ -36,6 +37,7 @@
 		</tr>
 		<tr th:each="book:${bookList}">
 			<td th:text="${book.id}"></td>
+			<td th:text="${book.titleId}"></td>
 			<td th:text="${book.category.categoryNum}"></td>
 			<td>
 				<a th:href="@{/staff/{id}/bookdetail(id=${book.id})}" th:text="${book.title}">
