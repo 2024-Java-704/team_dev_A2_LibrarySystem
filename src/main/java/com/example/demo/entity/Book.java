@@ -20,6 +20,7 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
+	private Integer titleId;
 	private String title;
 	private String hurigana;
 	private String author;
@@ -101,21 +102,6 @@ public class Book {
 		this.cnt = cnt;
 		this.img = img;
 	}
-
-	//	public Book(Category category, String title, String hurigana, String author, String publisher, LocalDate pubYear,
-	//			Library library, Condition condition, Integer cnt, String img) {
-	//		this.category = category;
-	//		this.title = title;
-	//		this.hurigana = hurigana;
-	//		this.author = author;
-	//		this.publisher = publisher;
-	//		this.pubYear = pubYear;
-	//		this.regDay = LocalDate.now();
-	//		this.library = library;
-	//		this.condition = condition;
-	//		this.cnt = cnt;
-	//		this.img = img;
-	//	}
 
 	public Integer getId() {
 		return id;
@@ -211,6 +197,14 @@ public class Book {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+
+	public Integer getTitleId() {
+		return titleId;
+	}
+
+	public void setTitleId(Integer titleId) {
+		this.titleId = titleId;
 	}
 
 }

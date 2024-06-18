@@ -27,7 +27,7 @@
 			<tr th:each="library : ${libraryList}">
 				<td th:text="${library.id}"></td>
 				<td>
-					<a th:href="@{/staff/staffTop(libraryId=${library.id}, librayName=${library.name})}" th:text="${library.name}"></a>
+					<a th:href="@{/manager/staff/login(libraryId=${library.id}, librayName=${library.name})}" th:text="${library.name}"></a>
 				</td>
 				<td th:text="${library.address}"></td>
 				<td th:text="${library.tel}"></td>
