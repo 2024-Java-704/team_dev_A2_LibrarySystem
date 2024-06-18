@@ -184,6 +184,27 @@ INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,r
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,47, 'はじめて受けるTOEIC L&Rテスト 全パート完全攻略', 'はじめてうけるTOEIC L&Rてすと ぜんぱーとかんぜんこうりゃく' ,'小石裕子','アルク', '2018/03/07','2021/07/30',3,1, 1028,'/img/book47.jpg');
 
 
+
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,48, '東大発！1万人の子供が変わった ハマるおうち読書', 'とうだいはつ！1まんにんのこどもがかわった はまるおうちどくしょ' ,'笹沼颯太','ディスカバー・トゥエンティワン', '2024/05/24','2024/06/01',1,1, 880,'/img/book52.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,48, '東大発！1万人の子供が変わった ハマるおうち読書', 'とうだいはつ！1まんにんのこどもがかわった はまるおうちどくしょ' ,'笹沼颯太','ディスカバー・トゥエンティワン', '2024/05/24','2024/06/01',1,1, 563,'/img/book52.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,48, '東大発！1万人の子供が変わった ハマるおうち読書', 'とうだいはつ！1まんにんのこどもがかわった はまるおうちどくしょ' ,'笹沼颯太','ディスカバー・トゥエンティワン', '2024/05/24','2024/06/01',1,1, 730,'/img/book52.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,48, '東大発！1万人の子供が変わった ハマるおうち読書', 'とうだいはつ！1まんにんのこどもがかわった はまるおうちどくしょ' ,'笹沼颯太','ディスカバー・トゥエンティワン', '2024/05/24','2024/06/01',2,1, 580,'/img/book52.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,48, '東大発！1万人の子供が変わった ハマるおうち読書', 'とうだいはつ！1まんにんのこどもがかわった はまるおうちどくしょ' ,'笹沼颯太','ディスカバー・トゥエンティワン', '2024/05/24','2024/06/01',3,1, 280,'/img/book52.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,49, '世界で活躍する子の英語力の育て方', 'せかいでかつやくするこのえいごりょくのそだてかた' ,'船津徹','大和書房', '2019/06/20','2021/07/30',1,1, 625,'/img/book49.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,49, '世界で活躍する子の英語力の育て方', 'せかいでかつやくするこのえいごりょくのそだてかた' ,'船津徹','大和書房', '2019/06/20','2021/07/30',1,1, 523,'/img/book49.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,49, '世界で活躍する子の英語力の育て方', 'せかいでかつやくするこのえいごりょくのそだてかた' ,'船津徹','大和書房', '2019/06/20','2021/07/30',2,1, 358,'/img/book49.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,49, '世界で活躍する子の英語力の育て方', 'せかいでかつやくするこのえいごりょくのそだてかた' ,'船津徹','大和書房', '2019/06/20','2021/07/30',3,1, 235,'/img/book49.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,50, '傲慢と善良', 'ごうまんとぜんりょう' ,'辻村深月','朝日新聞出版', '2022/09/07','2022/10/30',1,1, 120,'/img/book50.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,50, '傲慢と善良', 'ごうまんとぜんりょう' ,'辻村深月','朝日新聞出版', '2022/09/07','2022/10/30',3,1, 320,'/img/book50.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,51, 'コンビニ人間', 'こんびににんげん' ,'村田沙耶香','文藝春秋', '2018/09/04','2021/07/30',1,1,242,'/img/book51.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,51,'コンビニ人間', 'こんびににんげん' ,'村田沙耶香','文藝春秋', '2018/09/04','2021/07/30',2,1,211,'/img/book51.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,51,'コンビニ人間', 'こんびににんげん' ,'村田沙耶香','文藝春秋', '2018/09/04','2021/07/30',2,1,136,'/img/book51.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',1,1, 320,'/img/book48.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',2,1, 233,'/img/book48.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 126,'/img/book48.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 360,'/img/book48.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 255,'/img/book48.jpg');
+
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,48, '東大発！1万人の子供が変わった ハマるおうち読書', 'とうだいはつ！1まんにんのこどもがかわった はまるおうちどくしょ' ,'笹沼颯太','ディスカバー・トゥエンティワン', '2024/05/24','2024/06/01',1,1, 880,'/img/book48.jpg');
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,48, '東大発！1万人の子供が変わった ハマるおうち読書', 'とうだいはつ！1まんにんのこどもがかわった はまるおうちどくしょ' ,'笹沼颯太','ディスカバー・トゥエンティワン', '2024/05/24','2024/06/01',1,1, 563,'/img/book48.jpg');
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,48, '東大発！1万人の子供が変わった ハマるおうち読書', 'とうだいはつ！1まんにんのこどもがかわった はまるおうちどくしょ' ,'笹沼颯太','ディスカバー・トゥエンティワン', '2024/05/24','2024/06/01',1,1, 730,'/img/book48.jpg');
@@ -203,6 +224,7 @@ INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,r
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 126,'/img/book52.jpg');
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 360,'/img/book52.jpg');
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 255,'/img/book52.jpg');
+
 
 
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(11,53, '鬼滅の刃 10巻', 'きめつのやいば 10かん' ,'吾峠呼世晴','集英社', '2018/03/02','2020/04/01',1,1, 355,'/img/book53.jpg');
