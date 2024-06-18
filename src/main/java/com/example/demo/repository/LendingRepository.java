@@ -27,6 +27,8 @@ public interface LendingRepository extends JpaRepository<Lending, Integer> {
 
 	List<Lending> findByUserIdAndReturnedDateIsNull(Integer userId);
 
+	List<Lending> findByUserIdAndReturnedDateIsNotNull(Integer userId);
+
 	//	@Query(value = "SELECT * FROM lending "
 	//			+ "WHERE returned_date IS NULL", nativeQuery = true)
 	//	List<Integer> findByReturnedDateIsNull;

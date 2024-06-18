@@ -25,7 +25,7 @@
 			<td th:text="${user.email}"></td>
 		</tr>
 	</table>
-	貸出中
+	<h2>貸出中</h2>
 	<table border="1">
 		<tr>
 			<th>貸出ID</th>
@@ -43,7 +43,7 @@
 			<td th:if="${notreturn.returnedDate}" th:text="${notreturn.returnedDate}"></td>
 		</tr>
 	</table>
-	予約・注文状況
+	<h2>予約・注文状況</h2>
 	<table border="1">
 		<tr>
 			<th>本ID</th>
@@ -60,7 +60,7 @@
 			<td th:text="${reservation.status.name}"></td>
 		</tr>
 	</table>
-	貸出履歴
+	<h2>貸出履歴</h2>
 	<table border="1">
 		<tr>
 			<th>貸出ID</th>

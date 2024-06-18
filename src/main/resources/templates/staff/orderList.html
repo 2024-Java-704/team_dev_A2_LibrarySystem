@@ -4,7 +4,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>注文一覧</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
 		<tr>
 			<th>注文ID</th>
 			<th>利用者ID</th>
-			<th>本ID</th>
+			<th>資料ID</th>
 			<th>注文日時</th>
 			<th>貸出予定日</th>
 			<th>受け取り図書館</th>
@@ -47,7 +47,7 @@
 				</form>
 			</td>
 			<td>
-				<th:block th:if="${send.status.id}==3">
+				<th:block th:if="${send.status.id}==4">
 				<form th:action="@{/staff/materialMg/{reservationId}/lendFromOrder(reservationId=${send.id})}"
 						method="get">
 					<button>到着済み</button>
@@ -67,7 +67,7 @@
 		<tr>
 			<th>注文ID</th>
 			<th>利用者ID</th>
-			<th>本ID</th>
+			<th>資料ID</th>
 			<th>注文日時</th>
 			<th>貸出予定日</th>
 			<th>受け取り図書館</th>
