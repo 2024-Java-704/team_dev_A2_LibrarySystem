@@ -9,6 +9,7 @@ table {
 	/* セルの境界線を分離 */
 	border-spacing: 8px;
 	/* 行間隔を設定 */
+	background-color: #ffffff;
 }
 
 td,
@@ -22,15 +23,19 @@ th {
 }
 
 button {
-	background-color: white;
-	border: 0px;
-	padding: 15px 25px;
-	/* ボタンの余白を設定 */
-	font-size: 20px;
-	/* ボタンの文字サイズを設定 */
+	height: 70px;
+	min-width: 70px;
+	margin: 0px 0px;
+	background: #EDEDED;
+	border-radius: 10px;
+	box-shadow: 2px 3px 0px 0px rgba(0, 0, 0, 0.3);
+	color: #808080;
+	font: bold 18px arial;
+	text-align: center;
+	line-height: 41px;
+	display: inline-block;
 
 }
-
 td input[type="text"] {
 	width: 100%;
 	/* テキストボックスの幅を親セルに合わせる */
@@ -56,4 +61,12 @@ button.a{
 	font-size: 60px;
 	margin-left: 30px;
 }
-
+body {
+	background-image: url("/css/gazou/kidsbook.png");
+	background-repeat: repeat;
+	background-position: 100% 100%;
+	background-size: 20%;
+}
+image {
+	opacity: 0.5;
+}

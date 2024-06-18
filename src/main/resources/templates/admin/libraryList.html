@@ -14,7 +14,7 @@
 	</header>
 	<a href="/admin/adminTop">管理者TOPに戻る</a>
 		<a href="/admin/libraryAdd">追加</a>
-		<table border="1">
+		<table border="1" class="admintable">
 			<tr>
 				<th>ID</th>
 				<th>図書館</th>
@@ -45,5 +45,28 @@
 			</tr>
 		</table>
 </body>
+<script type="text/javascript">
 
+	let deleteButtons = document.querySelectorAll(".deleteButton");
+	let deleteForms = document.querySelectorAll(".deleteForm");
+
+	deleteButtons.forEach(function (deleteButton, i) {
+
+		deleteButton.addEventListener("click", (event) => {
+			event.preventDefault();
+
+			console.log(deleteForms);
+
+			// 「OK」時の処理開始 ＋ 確認ダイアログの表示
+			if (window.confirm('本当に削除しますか？')) {
+				deleteForms[i].submit();
+			}
+
+			else {// 「キャンセル」時の処理開始
+				window.alert('キャンセルされました'); // 警告ダイアログを表示
+			}
+		});
+	});
+
+</script>
 </html>

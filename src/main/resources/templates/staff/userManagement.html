@@ -8,8 +8,11 @@
 </head>
 
 <body>
-	<header th:replace="header">
+	<header>
 		<h1>利用者管理メニュー</h1>
+		<br th:text="${@account.libraryName}+' 職員用ページ'">
+		<a th:text="${@account.name}+'さんがログイン中'"></a>
+		<br><a href="/staff/logout">ログアウト</a>
 	</header>
 	<form action="/staff/userMg/userList" method="get">
 		<button class="topbutton">利用者一覧</button>

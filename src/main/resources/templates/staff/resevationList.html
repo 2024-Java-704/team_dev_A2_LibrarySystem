@@ -2,23 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<title>予約一覧</title>
+	<meta charset="UTF-8">
+	<title>予約一覧</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 
 </head>
 
 <body>
-<header th:replace="header">
-<h1>予約一覧</h1>
-  </header>
- <form action="/staff/materialMg/reservationAdd">
-	 <button>新規追加</button>
- </form>
- <a href="/staff/materialMg/reservationList">予約リスト</a>
- <a href="/staff/materialMg/cancel">キャンセルリスト</a>
- <a href="/staff/materialMg/rental">貸出済みリスト</a>
-<a href="/staff/materialMg">資料管理に戻る</a>
+	<header>
+		<h1>予約一覧</h1>
+		<br th:text="${@account.libraryName}+' 職員用ページ'">
+		<a th:text="${@account.name}+'さんがログイン中'"></a>
+		<br><a href="/staff/logout">ログアウト</a>
+	</header>
+	<form action="/staff/materialMg/reservationAdd">
+		<button>新規追加</button>
+	</form>
+	<a href="/staff/materialMg/reservationList">予約リスト</a>
+	<a href="/staff/materialMg/cancel">キャンセルリスト</a>
+	<a href="/staff/materialMg/rental">貸出済みリスト</a>
+	<a href="/staff/materialMg">資料管理に戻る</a>
+
 
 
 <table border="1">
@@ -88,25 +92,26 @@
 				
 	</tr>
 </table>
+
 </body>
 <footer></footer>
 <script type="text/javascript">
-	
+
 	let deleteButtons = document.querySelectorAll(".deleteButton");
 	let deleteForms = document.querySelectorAll(".deleteForm");
-	
-	deleteButtons.forEach(function(deleteButton, i){
-		
+
+	deleteButtons.forEach(function (deleteButton, i) {
+
 		deleteButton.addEventListener("click", (event) => {
 			event.preventDefault();
-			
+
 			console.log(deleteForms);
-			
+
 			// 「OK」時の処理開始 ＋ 確認ダイアログの表示
 			if (window.confirm('本当に削除しますか？')) {
 				deleteForms[i].submit();
 			}
-	
+
 			else {// 「キャンセル」時の処理開始
 				window.alert('キャンセルされました'); // 警告ダイアログを表示
 			}
@@ -114,4 +119,5 @@
 	});
 
 </script>
+
 </html>

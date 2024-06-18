@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
 <meta charset="UTF-8">
 <title>予約情報更新</title>
+
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	
 	
 </head>
+
 <body>
-  <header th:replace="header">
-<h1>予約更新</h1>
-  </header>
-<a href="/staff/materialMg/reservationList">戻る</a>
-<form th:action="@{/staff/materialMg/{reservationId}/reservationEdit(reservationId=${reservation.id})}" method="post">
-	<table border="1">
-		<tr>
-			<th>予約ID</th>
-			<td th:text="${reservation.id}"></td>
+	<header>
+		<h1>予約更新</h1>
+		<br th:text="${@account.libraryName}+' 職員用ページ'">
+		<a th:text="${@account.name}+'さんがログイン中'"></a>
+		<br><a href="/staff/logout">ログアウト</a>
+	</header>
+	<a href="/staff/materialMg/reservationList">戻る</a>
+	<form th:action="@{/staff/materialMg/{reservationId}/reservationEdit(reservationId=${reservation.id})}"
+		method="post">
+		<table border="1">
+			<tr>
+				<th>予約ID</th>
+				<td th:text="${reservation.id}"></td>
 			</tr>
-			
+
 			<tr>
 				<th>利用者ID</th>
 				<td>
@@ -37,7 +45,7 @@
 					<input type="date" name="reservationDate" th:value="${reservation.reservationDate}" required>
 				</td>
 			</tr>
-			
+
 			<tr>
 				<th>貸出予定日</th>
 				<td>
@@ -56,9 +64,9 @@
 					<input type="number" name="status" th:value="${reservation.status.id}" required>
 				</td>
 			</tr>
-			</table>
-			<button>予約変更</button>
-			</form>
-			</body>
-			
-			</html>
+		</table>
+		<button>予約変更</button>
+	</form>
+</body>
+
+</html>
