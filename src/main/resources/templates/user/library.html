@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/userstyle.css">
+	<meta charset="UTF-8">
+	<title>利用者用サイト</title>
+</head>
+
+<body>
+	<h1>利用者用サイト</h1>
+	<table border="1">
+		<tr>
+			<th>図書館ID</th>
+			<th>図書館名</th>
+		</tr>
+		<tr th:each="library:${libraries}">
+			<td>
+				<a th:href="@{/user/{id}/staffLogin(id=${library.id})}" th:text="${library.id}">
+				</a>	
+			</td>
+			<td th:text="${library.name}"></td>
+		</tr>
+	</table>
+	
+</body>
+<footer></footer>
+
+</html>

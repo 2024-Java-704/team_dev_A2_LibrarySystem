@@ -296,6 +296,7 @@ INSERT INTO lending(user_id,book_id,lend_date,limit_date,staff_id) VALUES(3,50,'
 INSERT INTO lending(user_id,book_id,lend_date,limit_date,returned_date,staff_id) VALUES(2,48,'2024/05/10','2024/05/17','2024/05/20',1); --延滞あり・返却あり・図書館ID1
 INSERT INTO lending(user_id,book_id,lend_date,limit_date,returned_date,staff_id) VALUES(2,49,'2024/05/10','2024/05/17','2024/05/20',2); --延滞あり・返却あり・図書館ID2
 INSERT INTO lending(user_id,book_id,lend_date,limit_date,returned_date,staff_id) VALUES(2,50,'2024/05/10','2024/05/17','2024/05/20',3); --延滞あり・返却あり・図書館ID3
+INSERT INTO lending(user_id,book_id,lend_date,limit_date,staff_id) VALUES(1,40,'2024/06/14','2024/06/21',1); --貸出中用
 
 
 --予約テーブルデータ

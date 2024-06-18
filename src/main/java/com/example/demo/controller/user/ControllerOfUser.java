@@ -12,17 +12,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Book;
 import com.example.demo.entity.Lending;
 import com.example.demo.entity.Library;
+import com.example.demo.entity.LibraryStaff;
 import com.example.demo.entity.Reservation;
 import com.example.demo.entity.Status;
 import com.example.demo.entity.User;
+import com.example.demo.model.Account;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.LendingRepository;
 import com.example.demo.repository.LibraryRepository;
+import com.example.demo.repository.LibraryStaffRepository;
 import com.example.demo.repository.ReservationRepository;
 import com.example.demo.repository.StatusRepository;
 import com.example.demo.repository.UserRepository;
@@ -50,6 +54,62 @@ public class ControllerOfUser {
 
 	@Autowired
 	ReservationRepository reservationRepository;
+
+	@Autowired
+	LibraryStaffRepository libraryStaffRepository;
+
+	@Autowired
+	Account account;
+
+	@GetMapping("/user/libraryTop")
+	public String libraryTop(Model model) {
+		List<Library> library = libraryRepository.findAll();
+		model.addAttribute("libraries", library);
+		return "/user/library";
+	}
+
+	@GetMapping("/user/{id}/staffLogin")
+	public String userPageStaffLogin(
+			@PathVariable("id") Integer libraryId, Model model) {
+		Library library = libraryRepository.findById(libraryId).get();
+		model.addAttribute("library", library);
+		return "/user/staffLogin";
+	}
+
+	@PostMapping("/user/{id}/staffLogin")
+	public String userPageLogin(
+			@PathVariable("id") Integer libraryId,
+			@RequestParam(name = "email", defaultValue = "") String email,
+			@RequestParam(name = "password", defaultValue = "") String password,
+			RedirectAttributes redirectAttributes,
+			Model model) {
+		List<String> errorList = new ArrayList<>();
+		if (email.equals("")) {
+			errorList.add("メールアドレスを入力してください");
+		}
+		if (password.equals("")) {
+			errorList.add("パスワードを入力してください");
+		}
+		List<LibraryStaff> libraryStaffs = libraryStaffRepository.findByEmailAndPassword(email, password);
+		if (libraryStaffs.size() == 0) {
+			errorList.add("メールアドレスとパスワードが一致しません");
+		} else {
+			LibraryStaff libraryStaff = libraryStaffs.get(0);
+			if (libraryStaff.getLibrary().getId() != libraryId) {
+				errorList.add("本図書館の職員ではありません");
+			}
+		}
+		if (errorList.size() > 0) {
+			redirectAttributes.addAttribute("error", errorList);
+			redirectAttributes.addFlashAttribute("error", errorList);
+			return "redirect:/user/{id}/staffLogin";
+		} else {
+			account.setLibraryId(libraryId);
+			Library library = libraryRepository.findById(libraryId).get();
+			account.setLibraryName(library.getName());
+			return "/user/userTop";
+		}
+	}
 
 	@GetMapping("/user/userTop") //ユーザートップ（検索画面）
 	public String index() {
@@ -197,7 +257,6 @@ public class ControllerOfUser {
 	@PostMapping("/user/{bookId}/order") //注文処理
 	public String userBookReserve(
 			@PathVariable("bookId") Integer id,
-			@RequestParam("library") Integer libraryId,
 			@RequestParam(name = "userId", defaultValue = "") Integer userId,
 			@RequestParam(name = "userPassword", defaultValue = "") String userPassword,
 			Model model) {
@@ -206,15 +265,21 @@ public class ControllerOfUser {
 		if (userId == null) {
 			errorList.add("利用者IDを入力してください");
 		}
-		if (userPassword == "") {
+		if (userPassword.equals("")) {
 			errorList.add("パスワードを入力してください");
 		}
 		List<User> userList = userRepository.findByIdAndPassword(userId, userPassword);
+		User user = new User();
 		if (userList.size() == 0) {
 			errorList.add("利用者IDとパスワードが一致しませんでした");
+		} else {
+			user = userList.get(0);
+			if (user.getLibrary().getId() != account.getLibraryId()) {
+				errorList.add("本図書館では登録されていない利用者です");
+			}
 		}
 		Book book = bookRepository.findById(id).get();
-		if ((book.getLibrary().getId() == libraryId) && (book.getCondition().getId() == 1)) {
+		if ((book.getLibrary().getId() == account.getLibraryId()) && (book.getCondition().getId() == 1)) {
 			errorList.add("こちらの資料は本図書館で貸出可能です");
 		}
 		if (errorList.size() > 0) {
@@ -224,11 +289,10 @@ public class ControllerOfUser {
 			model.addAttribute("library", libraries);
 			return "/user/order";
 		} else {
-			User user = userList.get(0);
+			user = userList.get(0);
 			LocalDate today = LocalDate.now();
 			Library bookLibrary = book.getLibrary();
-			Library library = libraryRepository.findById(libraryId).get();
-			Status status = statusRepository.findById(1).get();
+			Library library = libraryRepository.findById(account.getLibraryId()).get();
 			Integer conditionId = book.getCondition().getId();
 			LocalDate scheduled = null;
 			Lending lending = lendingRepository.findFirstByBookIdOrderByIdDesc(book.getId());
@@ -241,7 +305,13 @@ public class ControllerOfUser {
 			if (conditionId != 1) {
 				scheduled = lending.getLimitDate().plusDays(1);
 			}
-
+			Status status = new Status();
+			if (bookLibrary.getId() == account.getId()) {
+				status = statusRepository.findById(1).get();
+			}
+			if (bookLibrary.getId() != account.getId()) {
+				status = statusRepository.findById(3).get();
+			}
 			Reservation reservation = new Reservation(user, book, today, scheduled, library, status);
 			reservationRepository.save(reservation);
 			Reservation reserved = reservationRepository.findByUserIdAndBookIdOrderByIdDesc(userId, id).get(0);
