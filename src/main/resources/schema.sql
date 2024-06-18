@@ -8,7 +8,6 @@ DROP TABLE IF EXISTS library_staff;
 DROP TABLE IF EXISTS library_manager;
 DROP TABLE IF EXISTS lending;
 DROP TABLE IF EXISTS reservation;
-
 CREATE TABLE categories
 (
    id SERIAL PRIMARY KEY,
@@ -94,5 +93,3 @@ CREATE TABLE reservation
    library_id INTEGER,
    status_id INTEGER
 );
-
-

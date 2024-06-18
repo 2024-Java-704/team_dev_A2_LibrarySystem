@@ -17,6 +17,7 @@ import com.example.demo.entity.Condition;
 import com.example.demo.entity.Library;
 import com.example.demo.model.Account;
 import com.example.demo.repository.BookRepository;
+import com.example.demo.repository.BookViewRepository;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ConditionRepository;
 import com.example.demo.repository.LibraryRepository;
@@ -41,11 +42,14 @@ public class BookMgController {
 
 	@Autowired
 	Account account;
+	
+	@Autowired
+	BookViewRepository bookViewRepository;
 
 	@GetMapping("/staff/materialMg/bookList")
 	public String index(Model model) {
-		List<Book> bookList = bookRepository.findByLibraryId(account.getLibraryId());
-		model.addAttribute("bookList", bookList);
+		List<Book> bookList = bookRepository.showBook(account.getLibraryId());
+		model.addAttribute("bookList",bookList);
 		return "/staff/bookList";
 	}
 
