@@ -16,11 +16,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	List<User> findByLibrary(Library library);
 
-
 	List<User> findByLibraryIdAndNameContaining(Integer libraryId, String name);
 
 	List<User> findByIdAndLibraryId(Integer userId, Integer libraryId);
 
 	List<User> findByIdAndLibraryIdAndNameContaining(Integer id, Integer libraryId, String name);
+
+	List<User> findByLibraryId(Integer libraryId);
 
 }
