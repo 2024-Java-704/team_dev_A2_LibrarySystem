@@ -50,8 +50,6 @@ public class BookMgController {
 
 	@GetMapping("/staff/materialMg/bookList")
 	public String index(Model model) {
-		List<Book> bookList = bookRepository.showBook(account.getLibraryId());
-		model.addAttribute("bookList",bookList);
 		return "/staff/bookList";
 	}
 

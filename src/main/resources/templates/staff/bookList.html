@@ -7,7 +7,7 @@
 	<title>資料一覧</title>
 </head>
 
-<body
+<body>
 	<header>
 		<a href="/staff/materialMg/bookList">
 			<h1>資料一覧</h1>
@@ -15,9 +15,9 @@
 		<br th:text="${@account.libraryName}+' 職員用ページ'">
 		<a th:text="${@account.name}+'さんがログイン中'"></a>
 		<br><a href="/staff/logout">ログアウト</a>
-
 	</header>
-	<div class="sortbutton">
+	
+	<div class="sortbutuon">
 		<form action="/staff/staffDetailSearch/jporder" method="get">
 			<input type="hidden" name="bookIds" th:value="${bookIds}">
 			<button type="submit">50音昇順</button>

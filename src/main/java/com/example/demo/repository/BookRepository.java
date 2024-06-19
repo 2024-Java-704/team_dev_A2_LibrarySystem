@@ -64,5 +64,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 	@Query(value="select distinct on (title_id) * from book where library_id = :libraryId", nativeQuery=true)
 	List<Book> showBook(@Param("libraryId")Integer libraryId);
 	
+	List<Book> findByLibraryIdAndHuriganaContaining(Integer libraryId,String key);
+	
 
 }

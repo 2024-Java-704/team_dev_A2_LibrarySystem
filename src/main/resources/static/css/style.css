@@ -164,3 +164,13 @@ button:hover {
 .errormsg {
 	color: red;
 }
+
+.sortbutuon{
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	margin-right: 5px;
+	column-gap: 5px;
+	justify-content: center;
+	
+}
