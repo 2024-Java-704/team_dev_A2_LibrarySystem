@@ -86,7 +86,7 @@ public class BookMgController {
 				bookList.addAll(bookRepository.findByLibraryIdOrderByHurigana(account.getLibraryId()));
 
 			} else {
-				bookList.addAll(bookRepository.findByLibraryId(account.getLibraryId()));
+				bookList.addAll(bookRepository.findByLibraryIdOrderById(account.getLibraryId()));
 			}
 
 		}
@@ -127,7 +127,6 @@ public class BookMgController {
 				.map(book -> book.getId().toString())
 				.collect(Collectors.joining(","));
 		model.addAttribute("bookIds", bookIds);
-
 		model.addAttribute("bookList", bookTitles);
 		return "/staff/bookList";
 	}

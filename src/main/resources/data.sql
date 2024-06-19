@@ -12,12 +12,12 @@ INSERT INTO categories(categories_num, categories_name) VALUES(90, '文学');
 INSERT INTO categories(categories_num, categories_name) VALUES(100, '漫画');
 
 -- 本テーブルデータ
-INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(1,1, 'FACTFULNESS', 'ふぁくとふるねす' ,'ハンス・ロスリング','日経BP', '2019/01/11','2024/01/01',1,1, 1520,'/img/book1.jpg');
-INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(1,1, 'FACTFULNESS', 'ふぁくとふるねす' ,'ハンス・ロスリング','日経BP', '2019/01/11','2024/01/01',1,1, 882,'/img/book1.jpg');
-INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(1,1, 'FACTFULNESS', 'ふぁくとふるねす' ,'ハンス・ロスリング','日経BP', '2019/01/11','2024/01/01',2,1, 1350,'/img/book1.jpg');
-INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(1,1, 'FACTFULNESS', 'ふぁくとふるねす' ,'ハンス・ロスリング','日経BP', '2019/01/11','2024/01/01',2,1, 1125,'/img/book1.jpg');
-INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(1,1, 'FACTFULNESS', 'ふぁくとふるねす' ,'ハンス・ロスリング','日経BP', '2019/01/11','2024/01/01',3,1, 1228,'/img/book1.jpg');
-INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(1,1, 'FACTFULNESS', 'ふぁくとふるねす' ,'ハンス・ロスリング','日経BP', '2019/01/11','2024/01/01',3,1, 728,'/img/book1.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(1,1, 'FACTFULNESS', 'ふぁくとふるねす' ,'ハンス・ロスリング','日経BP', '2019/01/11','2024/01/01',1,1, 1520,'/img/book1.png');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(1,1, 'FACTFULNESS', 'ふぁくとふるねす' ,'ハンス・ロスリング','日経BP', '2019/01/11','2024/01/01',1,1, 882,'/img/book1.png');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(1,1, 'FACTFULNESS', 'ふぁくとふるねす' ,'ハンス・ロスリング','日経BP', '2019/01/11','2024/01/01',2,1, 1350,'/img/book1.png');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(1,1, 'FACTFULNESS', 'ふぁくとふるねす' ,'ハンス・ロスリング','日経BP', '2019/01/11','2024/01/01',2,1, 1125,'/img/book1.png');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(1,1, 'FACTFULNESS', 'ふぁくとふるねす' ,'ハンス・ロスリング','日経BP', '2019/01/11','2024/01/01',3,1, 1228,'/img/book1.png');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(1,1, 'FACTFULNESS', 'ふぁくとふるねす' ,'ハンス・ロスリング','日経BP', '2019/01/11','2024/01/01',3,1, 728,'/img/book1.png');
 
 
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(2,2, '哲学と宗教全史', 'てつがくとしゅうきょうぜんし' ,'出口治明','ダイヤモンド社', '2019/08/08','2020/04/01',1,1, 108,'/img/book2.jpg');
@@ -199,11 +199,11 @@ INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,r
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,51, 'コンビニ人間', 'こんびににんげん' ,'村田沙耶香','文藝春秋', '2018/09/04','2021/07/30',1,1,242,'/img/book51.jpg');
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,51,'コンビニ人間', 'こんびににんげん' ,'村田沙耶香','文藝春秋', '2018/09/04','2021/07/30',2,1,211,'/img/book51.jpg');
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(9,51,'コンビニ人間', 'こんびににんげん' ,'村田沙耶香','文藝春秋', '2018/09/04','2021/07/30',2,1,136,'/img/book51.jpg');
-INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',1,1, 320,'/img/book48.jpg');
-INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',2,1, 233,'/img/book48.jpg');
-INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 126,'/img/book48.jpg');
-INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 360,'/img/book48.jpg');
-INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 255,'/img/book48.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',1,1, 320,'/img/book52.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',2,1, 233,'/img/book52.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 126,'/img/book52.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 360,'/img/book52.jpg');
+INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,52, 'アリス殺し', 'ありすごろし' ,'小林泰三','東京創元社', '2019/04/24','2021/07/30',3,1, 255,'/img/book52.jpg');
 
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,48, '東大発！1万人の子供が変わった ハマるおうち読書', 'とうだいはつ！1まんにんのこどもがかわった はまるおうちどくしょ' ,'笹沼颯太','ディスカバー・トゥエンティワン', '2024/05/24','2024/06/01',1,1, 880,'/img/book48.jpg');
 INSERT INTO book(category_id,title_id,title,hurigana,author,publisher,pub_year,reg_day,library_id,condition_id,cnt,img) VALUES(10,48, '東大発！1万人の子供が変わった ハマるおうち読書', 'とうだいはつ！1まんにんのこどもがかわった はまるおうちどくしょ' ,'笹沼颯太','ディスカバー・トゥエンティワン', '2024/05/24','2024/06/01',1,1, 563,'/img/book48.jpg');

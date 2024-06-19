@@ -66,5 +66,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 	
 	List<Book> findByLibraryIdAndHuriganaContaining(Integer libraryId,String key);
 	
+	List<Book> findByLibraryIdOrderById (Integer libraryId);
+	
 
 }
